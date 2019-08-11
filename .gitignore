@@ -5,10 +5,6 @@ nbproject
 out
 gen
 
-# Koseven
-application/cache/*
-application/logs/*
-
 # Composer
 /vendor/
 composer.lock
