@@ -1,0 +1,17 @@
+# Project files
+.idea
+nbproject
+*.iml
+out
+gen
+
+# Koseven
+application/cache/*
+application/logs/*
+
+# Composer
+/vendor/
+composer.lock
+
+# Coverage reports etc..
+/build/*
