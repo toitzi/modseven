@@ -15,7 +15,7 @@ namespaces and PSR. As it does not since it needs to be compatible with "Kohana"
 
 ## When should i use this Project instead of Koseven
 
-If you create a new Application and are familiar with Kohana/Koseven or just love how those frameworks work, changes are high
+If you create a new Application and are familiar with Kohana/Koseven or just love how those frameworks work, chances are high
 Modseven will also fit. If you update a legacy Kohana application, Modseven is the wrong choice - use Koseven instead.
 
 But also ask you those questions before choosing:
