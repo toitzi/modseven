@@ -1,9 +1,10 @@
 <p align="center"><b>Mod(ern)(Ko)seven Framework</b></p>
 
-[![Latest Stable Version](https://poser.pugx.org/toitzi/modseven/v/stable)](https://packagist.org/packages/toitzi/modseven)
-[![License](https://poser.pugx.org/toitzi/modseven/license.svg)](https://packagist.org/packages/toitzi/modseven)
-[![Github Issues](https://img.shields.io/github/issues/toitzi/modseven.svg)](https://github.com/toitzi/modseven/issues)
-[![Pending Pull-Requests](http://githubbadges.herokuapp.com/toitzi/modseven/pulls.svg)](https://github.com/toitzi/modseven/pulls)
+<p align="center">
+  <a href="https://packagist.org/packages/toitzi/modseven"><img src="https://poser.pugx.org/toitzi/modseven/v/stable" /></a>
+  <a href="https://packagist.org/packages/toitzi/modseven"><img src="https://poser.pugx.org/toitzi/modseven/license.svg" /></a>
+  <a href="https://github.com/toitzi/modseven/issues"><img src="https://img.shields.io/github/issues/toitzi/modseven.svg" /></a>
+</p>
 
 ## What is this project for?
 
@@ -14,7 +15,7 @@ namespaces and PSR. As it does not since it needs to be compatible with "Kohana"
 
 ## When should i use this Project instead of Koseven
 
-If you create a new Application and are familiar with Kohana/Koseven or just love how those frameworks work, changes are high
+If you create a new Application and are familiar with Kohana/Koseven or just love how those frameworks work, chances are high
 Modseven will also fit. If you update a legacy Kohana application, Modseven is the wrong choice - use Koseven instead.
 
 But also ask you those questions before choosing:
