@@ -3,7 +3,6 @@
 [![Latest Stable Version](https://poser.pugx.org/toitzi/modseven/v/stable)](https://packagist.org/packages/toitzi/modseven)
 [![License](https://poser.pugx.org/toitzi/modseven/license.svg)](https://packagist.org/packages/toitzi/modseven)
 [![Github Issues](https://img.shields.io/github/issues/toitzi/modseven.svg)](https://github.com/toitzi/modseven/issues)
-[![Pending Pull-Requests](http://githubbadges.herokuapp.com/toitzi/modseven/pulls.svg)](https://github.com/toitzi/modseven/pulls)
 
 ## What is this project for?
 
