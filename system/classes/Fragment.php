@@ -16,12 +16,10 @@
  * @copyright  (c) 2007-2016  Kohana Team
  * @copyright  (c) since 2016 Koseven Team
  * @license    https://koseven.ga/LICENSE
- * @uses       KO7::cache
+ * @uses       Core::cache
  */
 
 namespace KO7;
-
-use \KO7;
 
 class Fragment
 {
@@ -58,7 +56,7 @@ class Fragment
         // Get the cache key name
         $cache_key = self::_cache_key($name, $i18n);
 
-        if ($fragment = KO7::cache($cache_key, NULL, $lifetime)) {
+        if ($fragment = Core::cache($cache_key, NULL, $lifetime)) {
             // Display the cached fragment now
             echo $fragment;
 
@@ -116,7 +114,7 @@ class Fragment
             $fragment = ob_get_flush();
 
             // Cache the fragment
-            KO7::cache($cache_key, $fragment);
+            Core::cache($cache_key, $fragment);
         }
     }
 
@@ -130,7 +128,7 @@ class Fragment
     public static function delete(string $name, ?bool $i18n = NULL): void
     {
         // Invalid the cache
-        KO7::cache(self::_cache_key($name, $i18n), NULL, -3600);
+        Core::cache(self::_cache_key($name, $i18n), NULL, -3600);
     }
 
 }

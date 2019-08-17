@@ -38,7 +38,6 @@
 namespace KO7;
 
 use Exception;
-use KO7;
 
 class Route
 {
@@ -214,7 +213,7 @@ class Route
         if ($save === TRUE) {
             try {
                 // Cache all defined routes
-                KO7::cache('Route::cache()', Route::$_routes);
+                Core::cache('Route::cache()', Route::$_routes);
             } catch (Exception $e) {
                 // We most likely have a lambda in a route, which cannot be cached
                 throw new \KO7\Exception('One or more routes could not be cached (:message)', [
@@ -222,7 +221,7 @@ class Route
                 ], 0, $e);
             }
         } else {
-            if ($routes = KO7::cache('Route::cache()')) {
+            if ($routes = Core::cache('Route::cache()')) {
                 if ($append) {
                     // Append cached routes
                     static::$_routes += $routes;

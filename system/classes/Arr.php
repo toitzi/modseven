@@ -52,11 +52,6 @@ class Arr
      */
     public static function get($array, string $key, $default = NULL)
     {
-        if ($array instanceof \ArrayObject) {
-            // This is a workaround for inconsistent implementation of isset between PHP and HHVM
-            // See https://github.com/facebook/hhvm/issues/3437
-            return $array->offsetExists($key) ? $array->offsetGet($key) : $default;
-        }
         return $array[$key] ?? $default;
     }
 

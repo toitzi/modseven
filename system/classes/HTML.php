@@ -13,8 +13,6 @@
 
 namespace KO7;
 
-use \KO7;
-
 class HTML
 {
 
@@ -73,7 +71,7 @@ class HTML
      */
     public static function entities(string $value, bool $double_encode = TRUE): string
     {
-        return htmlentities($value, ENT_QUOTES, KO7::$charset, $double_encode);
+        return htmlentities($value, ENT_QUOTES, Core::$charset, $double_encode);
     }
 
     /**
@@ -180,7 +178,7 @@ class HTML
      */
     public static function chars(string $value, $double_encode = TRUE): string
     {
-        return htmlspecialchars($value, ENT_QUOTES, KO7::$charset, $double_encode);
+        return htmlspecialchars($value, ENT_QUOTES, Core::$charset, $double_encode);
     }
 
     /**

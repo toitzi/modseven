@@ -19,7 +19,7 @@
 
 namespace KO7\Request\Client;
 
-use \KO7;
+use \KO7\Core;
 use \KO7\Arr;
 use \KO7\Profiler;
 use \KO7\Response;
@@ -145,7 +145,7 @@ abstract class External extends \KO7\Request\Client
     public function execute_request(Request $request, Response $response): Response
     {
         //@codeCoverageIgnoreStart
-        if (KO7::$profiling) {
+        if (Core::$profiling) {
             // Set the benchmark name
             $benchmark = '"' . $request->uri() . '"';
 
@@ -167,14 +167,14 @@ abstract class External extends \KO7\Request\Client
         if ($post = $request->post()) {
             $request
                 ->body(http_build_query($post, NULL, '&'))
-                ->headers('content-type', 'application/x-www-form-urlencoded; charset=' . KO7::$charset);
+                ->headers('content-type', 'application/x-www-form-urlencoded; charset=' . Core::$charset);
         }
 
         $request->headers('content-length', (string)$request->content_length());
 
         // If KO7 expose, set the user-agent
-        if (KO7::$expose) {
-            $request->headers('user-agent', KO7::version());
+        if (Core::$expose) {
+            $request->headers('user-agent', Core::version());
         }
 
         try {

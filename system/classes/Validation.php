@@ -216,7 +216,7 @@ class Validation implements ArrayAccess
      */
     public function check(): bool
     {
-        if (\KO7::$profiling === TRUE) {
+        if (Core::$profiling === TRUE) {
             // Start a new benchmark
             $benchmark = Profiler::start('Validation', __FUNCTION__);
         }
@@ -472,13 +472,13 @@ class Validation implements ArrayAccess
                 }
             }
 
-            if ($message = \KO7::message($file, "{$field}.{$error}") AND is_string($message)) {
+            if ($message = Core::message($file, "{$field}.{$error}") AND is_string($message)) {
                 // Found a message for this field and error
-            } elseif ($message = \KO7::message($file, "{$field}.default") AND is_string($message)) {
+            } elseif ($message = Core::message($file, "{$field}.default") AND is_string($message)) {
                 // Found a default message for this field
-            } elseif ($message = \KO7::message($file, $error) AND is_string($message)) {
+            } elseif ($message = Core::message($file, $error) AND is_string($message)) {
                 // Found a default message for this error
-            } elseif ($message = \KO7::message('validation', $error) AND is_string($message)) {
+            } elseif ($message = Core::message('validation', $error) AND is_string($message)) {
                 // Found a default message for this error
             } else {
                 // No message exists, display the path expected

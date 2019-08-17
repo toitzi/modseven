@@ -14,9 +14,6 @@
 
 namespace KO7;
 
-use \KO7;
-use \KO7\Arr;
-use \KO7\Request;
 use Exception;
 
 class URL
@@ -76,7 +73,7 @@ class URL
     public static function base($protocol = NULL, bool $index = FALSE, ?string $subdomain = NULL): string
     {
         // Start with the configured base URL
-        $base_url = KO7::$base_url;
+        $base_url = Core::$base_url;
 
         if ($protocol === TRUE) {
             // Use the initial request to get the protocol
@@ -97,9 +94,9 @@ class URL
             $protocol = parse_url($base_url, PHP_URL_SCHEME);
         }
 
-        if ($index === TRUE AND !empty(KO7::$index_file)) {
+        if ($index === TRUE AND !empty(Core::$index_file)) {
             // Add the index file to the URL
-            $base_url .= KO7::$index_file . '/';
+            $base_url .= Core::$index_file . '/';
         }
 
         if (is_string($protocol)) {
@@ -167,7 +164,7 @@ class URL
     {
         // If list of trusted hosts is not directly provided read from config
         if (empty($trusted_hosts)) {
-            $trusted_hosts = (array)KO7::$config->load('url')->get('trusted_hosts');
+            $trusted_hosts = (array)Core::$config->load('url')->get('trusted_hosts');
         }
 
         // loop through the $trusted_hosts array for a match

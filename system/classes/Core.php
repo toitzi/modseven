@@ -15,15 +15,9 @@
  * @license    https://koseven.ga/LICENSE
  */
 
-use \KO7\Arr;
-use \KO7\Config;
-use \KO7\Cache;
-use \KO7\Debug;
-use \KO7\Exception;
-use \KO7\Log;
-use \KO7\Profiler;
+namespace KO7;
 
-class KO7
+class Core
 {
 
     // Release version and codename
@@ -48,7 +42,7 @@ class KO7
     /**
      * @var  int  Current environment name
      */
-    public static $environment = KO7::DEVELOPMENT;
+    public static $environment = Core::DEVELOPMENT;
 
     /**
      * @var  boolean  True if KO7 is running on windows
@@ -195,7 +189,7 @@ class KO7
             set_exception_handler([Exception::class, 'handler']);
 
             // Enable KO7 error handling, converts all PHP errors to exceptions.
-            set_error_handler(['KO7', 'error_handler']);
+            set_error_handler(['Core', 'error_handler']);
         }
 
         /**
@@ -206,7 +200,7 @@ class KO7
         }
 
         // Enable the KO7 shutdown handler, which catches E_FATAL errors.
-        register_shutdown_function(['KO7', 'shutdown_handler']);
+        register_shutdown_function(['Core', 'shutdown_handler']);
 
         if (isset($settings['expose'])) {
             static::$expose = (bool)$settings['expose'];
@@ -436,8 +430,6 @@ class KO7
     public static function deinit(): void
     {
         if (static::$_init) {
-            // Removed the autoloader
-            spl_autoload_unregister(['KO7', 'auto_load']);
 
             if (static::$errors) {
                 // Go back to the previous error handler

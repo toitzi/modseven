@@ -25,8 +25,6 @@
 
 namespace KO7;
 
-use \KO7;
-
 class UTF8
 {
 
@@ -53,7 +51,7 @@ class UTF8
     {
         if (!$charset) {
             // Use the application character set
-            $charset = KO7::$charset;
+            $charset = Core::$charset;
         }
 
         if (is_array($var) || is_object($var)) {
@@ -132,7 +130,7 @@ class UTF8
     public static function transliterate_to_ascii(string $str, int $case = 0): string
     {
         if (!isset(static::$called[__FUNCTION__])) {
-            require KO7::find_file('utf8', __FUNCTION__);
+            require Core::find_file('utf8', __FUNCTION__);
 
             // Function has been called
             static::$called[__FUNCTION__] = TRUE;
@@ -151,11 +149,11 @@ class UTF8
     public static function strlen(string $str): int
     {
         if (static::$server_utf8) {
-            return mb_strlen($str, KO7::$charset);
+            return mb_strlen($str, Core::$charset);
         }
 
         if (!isset(static::$called[__FUNCTION__])) {
-            require KO7::find_file('utf8', __FUNCTION__);
+            require Core::find_file('utf8', __FUNCTION__);
 
             // Function has been called
             static::$called[__FUNCTION__] = TRUE;
@@ -178,11 +176,11 @@ class UTF8
     public static function strpos(string $str, string $search, int $offset = 0)
     {
         if (static::$server_utf8) {
-            return mb_strpos($str, $search, $offset, KO7::$charset);
+            return mb_strpos($str, $search, $offset, Core::$charset);
         }
 
         if (!isset(static::$called[__FUNCTION__])) {
-            require KO7::find_file('utf8', __FUNCTION__);
+            require Core::find_file('utf8', __FUNCTION__);
 
             // Function has been called
             static::$called[__FUNCTION__] = TRUE;
@@ -205,11 +203,11 @@ class UTF8
     public static function strrpos(string $str, string $search, int $offset = 0)
     {
         if (static::$server_utf8) {
-            return mb_strrpos($str, $search, $offset, KO7::$charset);
+            return mb_strrpos($str, $search, $offset, Core::$charset);
         }
 
         if (!isset(static::$called[__FUNCTION__])) {
-            require KO7::find_file('utf8', __FUNCTION__);
+            require Core::find_file('utf8', __FUNCTION__);
 
             // Function has been called
             static::$called[__FUNCTION__] = TRUE;
@@ -231,12 +229,12 @@ class UTF8
     public static function substr(string $str, int $offset, ?int $length = NULL): string
     {
         if (static::$server_utf8) {
-            return ($length === null) ? mb_substr($str, $offset, mb_strlen($str), KO7::$charset) : mb_substr($str,
-                $offset, $length, KO7::$charset);
+            return ($length === null) ? mb_substr($str, $offset, mb_strlen($str), Core::$charset) : mb_substr($str,
+                $offset, $length, Core::$charset);
         }
 
         if (!isset(static::$called[__FUNCTION__])) {
-            require KO7::find_file('utf8', __FUNCTION__);
+            require Core::find_file('utf8', __FUNCTION__);
 
             // Function has been called
             static::$called[__FUNCTION__] = TRUE;
@@ -259,7 +257,7 @@ class UTF8
     public static function substr_replace(string $str, string $replacement, int $offset, ?int $length = NULL): string
     {
         if (!isset(static::$called[__FUNCTION__])) {
-            require KO7::find_file('utf8', __FUNCTION__);
+            require Core::find_file('utf8', __FUNCTION__);
 
             // Function has been called
             static::$called[__FUNCTION__] = TRUE;
@@ -279,11 +277,11 @@ class UTF8
     public static function strtolower(string $str): string
     {
         if (static::$server_utf8) {
-            return mb_strtolower($str, KO7::$charset);
+            return mb_strtolower($str, Core::$charset);
         }
 
         if (!isset(static::$called[__FUNCTION__])) {
-            require KO7::find_file('utf8', __FUNCTION__);
+            require Core::find_file('utf8', __FUNCTION__);
 
             // Function has been called
             static::$called[__FUNCTION__] = TRUE;
@@ -303,11 +301,11 @@ class UTF8
     public static function strtoupper(string $str): string
     {
         if (static::$server_utf8) {
-            return mb_strtoupper($str, KO7::$charset);
+            return mb_strtoupper($str, Core::$charset);
         }
 
         if (!isset(static::$called[__FUNCTION__])) {
-            require KO7::find_file('utf8', __FUNCTION__);
+            require Core::find_file('utf8', __FUNCTION__);
 
             // Function has been called
             static::$called[__FUNCTION__] = TRUE;
@@ -327,7 +325,7 @@ class UTF8
     public static function ucfirst(string $str): string
     {
         if (!isset(static::$called[__FUNCTION__])) {
-            require KO7::find_file('utf8', __FUNCTION__);
+            require Core::find_file('utf8', __FUNCTION__);
 
             // Function has been called
             static::$called[__FUNCTION__] = TRUE;
@@ -347,7 +345,7 @@ class UTF8
     public static function ucwords(string $str): string
     {
         if (!isset(static::$called[__FUNCTION__])) {
-            require KO7::find_file('utf8', __FUNCTION__);
+            require Core::find_file('utf8', __FUNCTION__);
 
             // Function has been called
             static::$called[__FUNCTION__] = TRUE;
@@ -370,7 +368,7 @@ class UTF8
     public static function strcasecmp(string $str1, string $str2): int
     {
         if (!isset(static::$called[__FUNCTION__])) {
-            require KO7::find_file('utf8', __FUNCTION__);
+            require Core::find_file('utf8', __FUNCTION__);
 
             // Function has been called
             static::$called[__FUNCTION__] = TRUE;
@@ -398,7 +396,7 @@ class UTF8
     public static function str_ireplace($search, $replace, $str, ?int & $count = NULL)
     {
         if (!isset(static::$called[__FUNCTION__])) {
-            require KO7::find_file('utf8', __FUNCTION__);
+            require Core::find_file('utf8', __FUNCTION__);
 
             // Function has been called
             static::$called[__FUNCTION__] = TRUE;
@@ -421,7 +419,7 @@ class UTF8
     public static function stristr(string $str, string $search)
     {
         if (!isset(static::$called[__FUNCTION__])) {
-            require KO7::find_file('utf8', __FUNCTION__);
+            require Core::find_file('utf8', __FUNCTION__);
 
             // Function has been called
             static::$called[__FUNCTION__] = TRUE;
@@ -444,7 +442,7 @@ class UTF8
     public static function strspn(string $str, string $mask, ?int $offset = NULL, ?int $length = NULL): int
     {
         if (!isset(static::$called[__FUNCTION__])) {
-            require KO7::find_file('utf8', __FUNCTION__);
+            require Core::find_file('utf8', __FUNCTION__);
 
             // Function has been called
             static::$called[__FUNCTION__] = TRUE;
@@ -467,7 +465,7 @@ class UTF8
     public static function strcspn(string $str, string $mask, ?int $offset = NULL, ?int $length = NULL): int
     {
         if (!isset(static::$called[__FUNCTION__])) {
-            require KO7::find_file('utf8', __FUNCTION__);
+            require Core::find_file('utf8', __FUNCTION__);
 
             // Function has been called
             UTF8::$called[__FUNCTION__] = TRUE;
@@ -490,7 +488,7 @@ class UTF8
     public static function str_pad(string $str, int $final_str_length, string $pad_str = ' ', int $pad_type = STR_PAD_RIGHT): string
     {
         if (!isset(static::$called[__FUNCTION__])) {
-            require KO7::find_file('utf8', __FUNCTION__);
+            require Core::find_file('utf8', __FUNCTION__);
 
             // Function has been called
             static::$called[__FUNCTION__] = TRUE;
@@ -511,7 +509,7 @@ class UTF8
     public static function str_split(string $str, int $split_length = 1): array
     {
         if (!isset(static::$called[__FUNCTION__])) {
-            require KO7::find_file('utf8', __FUNCTION__);
+            require Core::find_file('utf8', __FUNCTION__);
 
             // Function has been called
             static::$called[__FUNCTION__] = TRUE;
@@ -530,7 +528,7 @@ class UTF8
     public static function strrev(string $str): string
     {
         if (!isset(static::$called[__FUNCTION__])) {
-            require KO7::find_file('utf8', __FUNCTION__);
+            require Core::find_file('utf8', __FUNCTION__);
 
             // Function has been called
             static::$called[__FUNCTION__] = TRUE;
@@ -551,7 +549,7 @@ class UTF8
     public static function trim(string $str, ?string $charlist = NULL): string
     {
         if (!isset(static::$called[__FUNCTION__])) {
-            require KO7::find_file('utf8', __FUNCTION__);
+            require Core::find_file('utf8', __FUNCTION__);
 
             // Function has been called
             static::$called[__FUNCTION__] = TRUE;
@@ -572,7 +570,7 @@ class UTF8
     public static function ltrim(string $str, ?string $charlist = NULL): string
     {
         if (!isset(static::$called[__FUNCTION__])) {
-            require KO7::find_file('utf8', __FUNCTION__);
+            require Core::find_file('utf8', __FUNCTION__);
 
             // Function has been called
             static::$called[__FUNCTION__] = TRUE;
@@ -593,7 +591,7 @@ class UTF8
     public static function rtrim(string $str, ?string $charlist = NULL): string
     {
         if (!isset(static::$called[__FUNCTION__])) {
-            require KO7::find_file('utf8', __FUNCTION__);
+            require Core::find_file('utf8', __FUNCTION__);
 
             // Function has been called
             static::$called[__FUNCTION__] = TRUE;
@@ -613,7 +611,7 @@ class UTF8
     public static function ord(string $chr): int
     {
         if (!isset(static::$called[__FUNCTION__])) {
-            require KO7::find_file('utf8', __FUNCTION__);
+            require Core::find_file('utf8', __FUNCTION__);
 
             // Function has been called
             static::$called[__FUNCTION__] = TRUE;
@@ -640,7 +638,7 @@ class UTF8
     public static function to_unicode(string $str)
     {
         if (!isset(static::$called[__FUNCTION__])) {
-            require KO7::find_file('utf8', __FUNCTION__);
+            require Core::find_file('utf8', __FUNCTION__);
 
             // Function has been called
             static::$called[__FUNCTION__] = TRUE;
@@ -667,7 +665,7 @@ class UTF8
     public static function from_unicode(array $arr)
     {
         if (!isset(static::$called[__FUNCTION__])) {
-            require KO7::find_file('utf8', __FUNCTION__);
+            require Core::find_file('utf8', __FUNCTION__);
 
             // Function has been called
             static::$called[__FUNCTION__] = TRUE;

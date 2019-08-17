@@ -15,8 +15,6 @@
 
 namespace KO7;
 
-use KO7;
-
 class Response implements HTTP\Response
 {
 
@@ -465,12 +463,12 @@ class Response implements HTTP\Response
                 // Create a text version of the exception
                 $error = Exception::text($e);
 
-                if (is_object(KO7::$log)) {
+                if (is_object(Core::$log)) {
                     // Add this exception to the log
-                    KO7::$log->add(Log::ERROR, $error);
+                    Core::$log->add(Log::ERROR, $error);
 
                     // Make sure the logs are written
-                    KO7::$log->write();
+                    Core::$log->write();
                 }
 
                 // Do NOT display the exception, it will corrupt the output!
@@ -583,15 +581,15 @@ class Response implements HTTP\Response
     {
         if (!$this->_header->offsetExists('content-type')) {
             // Add the default Content-Type header if required
-            $this->_header['content-type'] = KO7::$content_type . '; charset=' . KO7::$charset;
+            $this->_header['content-type'] = Core::$content_type . '; charset=' . Core::$charset;
         }
 
         // Set the content length
         $this->headers('content-length', (string)$this->content_length());
 
         // If KO7 expose, set the user-agent
-        if (KO7::$expose) {
-            $this->headers('user-agent', KO7::version());
+        if (Core::$expose) {
+            $this->headers('user-agent', Core::version());
         }
 
         // Prepare cookies

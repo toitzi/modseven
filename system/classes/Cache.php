@@ -15,7 +15,6 @@
 
 namespace KO7;
 
-use \KO7;
 use \KO7\Cache\Exception;
 
 abstract class Cache
@@ -87,7 +86,7 @@ abstract class Cache
     {
         // If there is no group supplied, try to get it from the config
         if ($group === NULL) {
-            $group = KO7::$config->load('cache.default');
+            $group = Core::$config->load('cache.default');
         }
 
         // If there is no group supplied
@@ -101,7 +100,7 @@ abstract class Cache
             return static::$instances[$group];
         }
 
-        $config = KO7::$config->load('cache');
+        $config = Core::$config->load('cache');
 
         if (!$config->offsetExists($group)) {
             throw new Exception(
@@ -178,7 +177,7 @@ abstract class Cache
     protected function _sanitize_id(string $id): string
     {
         // configuration for the specific cache group
-        $prefix = $this->_config['prefix'] ?? KO7::$config->load('cache.prefix');
+        $prefix = $this->_config['prefix'] ?? Core::$config->load('cache.prefix');
 
         // sha1 the id makes sure name is not too long and has not any not allowed characters
         return $prefix . sha1($id);

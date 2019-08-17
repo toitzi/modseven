@@ -111,11 +111,11 @@ if (isset($_SERVER['SERVER_PROTOCOL'])) {
 
 // Set KO7::$environment if a 'KOSEVEN_ENV' environment variable has been supplied.
 if (isset($_SERVER['KOSEVEN_ENV'])) {
-    KO7::$environment = constant('KO7::' . strtoupper($_SERVER['KOSEVEN_ENV']));
+    \KO7\Core::$environment = constant('KO7::' . strtoupper($_SERVER['KOSEVEN_ENV']));
 }
 
 // Initialize KO7, setting the default options.
-KO7::init([
+\KO7\Core::init([
     'base_url' => $conf['base_url'],
     'index_file' => $conf['index_file'],
     'charset' => $conf['charset'],
@@ -126,10 +126,10 @@ KO7::init([
 ]);
 
 // Attach a new file writer to logging.
-KO7::$log->attach(new \KO7\Log\File(APPPATH . 'logs'));
+\KO7\Core::$log->attach(new \KO7\Log\File(APPPATH . 'logs'));
 
 // Initialize Modules
-KO7::modules($conf['modules']);
+\KO7\Core::modules($conf['modules']);
 
 // Cookie Salt
 \KO7\Cookie::$salt = $conf['cookie']['salt'];
@@ -143,7 +143,7 @@ if ($conf['cookie']['secure']) {
 }
 
 // Set the application name before initializing routes and add it to composer autoloader
-KO7::$app_ns = $conf['name'];
+\KO7\Core::$app_ns = $conf['name'];
 $autoloader->setPsr4($conf['name'] . '\\', APPPATH . DIRECTORY_SEPARATOR . 'classes');
 
 // Bootstrap the application

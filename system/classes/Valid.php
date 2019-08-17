@@ -249,7 +249,7 @@ class Valid
             return FALSE;
         }
 
-        $cards = \KO7::$config->load('credit_cards');
+        $cards = Core::$config->load('credit_cards');
 
         // Check card type
         $type = strtolower($type);

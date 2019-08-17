@@ -15,8 +15,6 @@
 
 namespace KO7;
 
-use \KO7;
-
 class Inflector
 {
 
@@ -74,7 +72,7 @@ class Inflector
 
         if (empty(static::$irregular)) {
             // Cache irregular words
-            static::$irregular = KO7::$config->load('inflector')->irregular;
+            static::$irregular = Core::$config->load('inflector')->irregular;
         }
 
         if ($irregular = array_search($str, static::$irregular, true)) {
@@ -111,7 +109,7 @@ class Inflector
     {
         if (static::$uncountable === NULL) {
             // Cache and Make uncountables mirrored
-            static::$uncountable = array_combine(KO7::$config->load('inflector')->uncountable, static::$uncountable);
+            static::$uncountable = array_combine(Core::$config->load('inflector')->uncountable, static::$uncountable);
         }
 
         return isset(static::$uncountable[strtolower($str)]);
@@ -159,7 +157,7 @@ class Inflector
 
         if (empty(static::$irregular)) {
             // Cache irregular words
-            static::$irregular = KO7::$config->load('inflector')->irregular;
+            static::$irregular = Core::$config->load('inflector')->irregular;
         }
 
         if (isset(static::$irregular[$str])) {

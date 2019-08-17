@@ -27,8 +27,6 @@
 
 namespace KO7;
 
-use \KO7;
-
 class I18n
 {
 
@@ -132,14 +130,14 @@ class I18n
         // Loop through Paths
         foreach ([$parts[0], implode(DIRECTORY_SEPARATOR, $parts)] as $path) {
             // Load files
-            $files = KO7::find_file('i18n', $path);
+            $files = Core::find_file('i18n', $path);
 
             // Loop through files
             if (!empty($files)) {
                 $t = [[]];
                 foreach ($files as $file) {
                     // Merge the language strings into the sub table
-                    $t[] = KO7::load($file);
+                    $t[] = Core::load($file);
                 }
                 $table[] = $t;
             }

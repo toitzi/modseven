@@ -16,7 +16,7 @@
 
 namespace KO7\HTTP;
 
-use \KO7;
+use \KO7\Core;
 use \KO7\Cookie;
 use \KO7\Text;
 use \KO7\Response;
@@ -294,7 +294,7 @@ class Header extends \ArrayObject
 
         // If not a real mime, try and find it in config
         if (strpos($type, '/') === FALSE) {
-            $mime = KO7::$config->load('mimes.' . $type);
+            $mime = Core::$config->load('mimes.' . $type);
 
             if ($mime === NULL) {
                 return false;
@@ -761,11 +761,11 @@ class Header extends \ArrayObject
         }
 
         if (!isset($headers['content-type'])) {
-            $processed_headers[] = 'Content-Type: ' . KO7::$content_type . '; charset=' . KO7::$charset;
+            $processed_headers[] = 'Content-Type: ' . Core::$content_type . '; charset=' . Core::$charset;
         }
 
-        if (KO7::$expose && !isset($headers['x-powered-by'])) {
-            $processed_headers[] = 'X-Powered-By: ' . KO7::version();
+        if (Core::$expose && !isset($headers['x-powered-by'])) {
+            $processed_headers[] = 'X-Powered-By: ' . Core::version();
         }
 
         // Get the cookies and apply

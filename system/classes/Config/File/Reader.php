@@ -2,7 +2,7 @@
 
 namespace KO7\Config\File;
 
-use \KO7;
+use \KO7\Core;
 use \KO7\Arr;
 use \KO7\Config\Reader as Config_Reader;
 use \KO7\Exception;
@@ -58,12 +58,12 @@ class Reader implements Config_Reader
     public function load($group): array
     {
         // Check caches and start Profiling
-        if (KO7::$caching && isset(self::$_cache[$group])) {
+        if (Core::$caching && isset(self::$_cache[$group])) {
             // This group has been cached
             return self::$_cache[$group];
         }
 
-        if (KO7::$profiling && class_exists('Profiler', false)) {
+        if (Core::$profiling && class_exists('Profiler', false)) {
             // Start a new benchmark
             $benchmark = Profiler::start('Config', __FUNCTION__);
         }
@@ -72,14 +72,14 @@ class Reader implements Config_Reader
         $config = [];
 
         // Loop through paths. Notice: array_reverse, so system files get overwritten by app files
-        foreach (array_reverse(KO7::include_paths()) as $path) {
+        foreach (array_reverse(Core::include_paths()) as $path) {
             // Build path
             $file = $path . 'config' . DIRECTORY_SEPARATOR . $group;
             $value = false;
 
             // Try .php .json and .yaml extensions and parse contents with PHP support
             if (file_exists($path = $file . '.php')) {
-                $value = KO7::load($path);
+                $value = Core::load($path);
             } elseif (file_exists($path = $file . '.json')) {
                 $value = json_decode($this->read_from_ob($path), true);
             } elseif (file_exists($path = $file . '.yaml')) {
@@ -95,7 +95,7 @@ class Reader implements Config_Reader
             }
         }
 
-        if (KO7::$caching) {
+        if (Core::$caching) {
             self::$_cache[$group] = $config;
         }
 
@@ -120,7 +120,7 @@ class Reader implements Config_Reader
         // Start output buffer
         ob_start();
 
-        KO7::load($path);
+        Core::load($path);
 
         return ob_get_clean();
     }

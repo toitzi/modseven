@@ -12,7 +12,6 @@
 
 namespace KO7;
 
-use \KO7;
 use Exception;
 
 
@@ -557,7 +556,7 @@ class Text
             // Extra data will be captured
             $info = [];
 
-            foreach (KO7::$config->load('user_agents')->browser as $search => $name) {
+            foreach (Core::$config->load('user_agents')->browser as $search => $name) {
                 if (stripos($agent, $search) !== FALSE) {
                     // Set the browser name
                     $info['browser'] = $name;
@@ -575,7 +574,7 @@ class Text
             }
         } else {
             // Load the search group for this type
-            $group = KO7::$config->load('user_agents')->$value;
+            $group = Core::$config->load('user_agents')->$value;
 
             foreach ($group as $search => $name) {
                 if (stripos($agent, $search) !== FALSE) {

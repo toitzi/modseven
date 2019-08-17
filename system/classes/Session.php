@@ -12,7 +12,6 @@
 
 namespace KO7;
 
-use \KO7;
 use Exception;
 
 abstract class Session
@@ -166,7 +165,7 @@ abstract class Session
 
         if (!isset(static::$instances[$type])) {
             // Load the configuration for this type
-            $config = KO7::$config->load('session')->get($type);
+            $config = Core::$config->load('session')->get($type);
 
             // Set the session class name
             $class = 'Session_' . ucfirst($type);
@@ -369,7 +368,7 @@ abstract class Session
             return $this->_write();
         } catch (Exception $e) {
             // Log & ignore all errors when a write fails
-            KO7::$log->add(Log::ERROR, KO7\Exception::text($e))->write();
+            Core::$log->add(Log::ERROR, KO7\Exception::text($e))->write();
 
             return FALSE;
         }

@@ -12,9 +12,6 @@
 
 namespace KO7;
 
-
-use \KO7;
-
 class File
 {
 
@@ -69,7 +66,7 @@ class File
     public static function mime_by_ext(string $extension)
     {
         // Load all of the mime types
-        $mimes = KO7::$config->load('mimes');
+        $mimes = Core::$config->load('mimes');
 
         return isset($mimes[$extension]) ? $mimes[$extension][0] : FALSE;
     }
@@ -83,7 +80,7 @@ class File
     public static function mimes_by_ext(string $extension): array
     {
         // Load all of the mime types
-        $mimes = KO7::$config->load('mimes');
+        $mimes = Core::$config->load('mimes');
 
         return isset($mimes[$extension]) ? ((array)$mimes[$extension]) : [];
     }
@@ -117,7 +114,7 @@ class File
 
         // Fill the static array
         if (empty($types)) {
-            foreach (KO7::$config->load('mimes') as $ext => $mimes) {
+            foreach (Core::$config->load('mimes') as $ext => $mimes) {
                 foreach ($mimes as $mime) {
                     if ($mime === 'application/octet-stream') {
                         // octet-stream is a generic binary

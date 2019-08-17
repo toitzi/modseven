@@ -12,8 +12,6 @@
 
 namespace KO7;
 
-use \KO7;
-
 class Debug
 {
 
@@ -78,7 +76,7 @@ class Debug
                         }
                     }
 
-                    return '<small>resource</small><span>(' . $type . ')</span> ' . htmlspecialchars($file, ENT_NOQUOTES, KO7::$charset);
+                    return '<small>resource</small><span>(' . $type . ')</span> ' . htmlspecialchars($file, ENT_NOQUOTES, Core::$charset);
                 }
             } else {
                 return '<small>resource</small><span>(' . $type . ')</span>';
@@ -87,14 +85,14 @@ class Debug
             // Clean invalid multibyte characters. iconv is only invoked
             // if there are non ASCII characters in the string, so this
             // isn't too much of a hit.
-            $var = UTF8::clean($var, KO7::$charset);
+            $var = UTF8::clean($var, Core::$charset);
 
             if (UTF8::strlen($var) > $length) {
                 // Encode the truncated string
-                $str = htmlspecialchars(UTF8::substr($var, 0, $length), ENT_NOQUOTES, KO7::$charset) . '&nbsp;&hellip;';
+                $str = htmlspecialchars(UTF8::substr($var, 0, $length), ENT_NOQUOTES, Core::$charset) . '&nbsp;&hellip;';
             } else {
                 // Encode the string
-                $str = htmlspecialchars($var, ENT_NOQUOTES, KO7::$charset);
+                $str = htmlspecialchars($var, ENT_NOQUOTES, Core::$charset);
             }
 
             return '<small>string</small><span>(' . strlen($var) . ')</span> "' . $str . '"';
@@ -124,7 +122,7 @@ class Debug
                         continue;
                     }
                     if (!is_int($key)) {
-                        $key = '"' . htmlspecialchars($key, ENT_NOQUOTES, KO7::$charset) . '"';
+                        $key = '"' . htmlspecialchars($key, ENT_NOQUOTES, Core::$charset) . '"';
                     }
 
                     $output[] = "$space$s$key => " . self::_dump($val, $length, $limit, $level + 1);
@@ -183,7 +181,7 @@ class Debug
 
             return '<small>object</small> <span>' . get_class($var) . '(' . count($array) . ')</span> ' . implode("\n", $output);
         } else {
-            return '<small>' . gettype($var) . '</small> ' . htmlspecialchars(print_r($var, TRUE), ENT_NOQUOTES, KO7::$charset);
+            return '<small>' . gettype($var) . '</small> ' . htmlspecialchars(print_r($var, TRUE), ENT_NOQUOTES, Core::$charset);
         }
 
         return null;
@@ -366,7 +364,7 @@ class Debug
 
             if ($line >= $range['start']) {
                 // Make the row safe for output
-                $row = htmlspecialchars($row, ENT_NOQUOTES, KO7::$charset);
+                $row = htmlspecialchars($row, ENT_NOQUOTES, Core::$charset);
 
                 // Trim whitespace and sanitize the row
                 $row = '<span class="number">' . sprintf($format, $line) . '</span> ' . $row;

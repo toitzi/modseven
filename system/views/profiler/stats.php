@@ -1,5 +1,5 @@
 <style type="text/css">
-    <?php include KO7::find_file('views', 'profiler/style', 'css') ?>
+    <?php include \KO7\Core::find_file('views', 'profiler/style', 'css') ?>
 </style>
 
 <?php

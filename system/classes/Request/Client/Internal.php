@@ -13,7 +13,7 @@
 
 namespace KO7\Request\Client;
 
-use \KO7;
+use \KO7\Core;
 use \KO7\Profiler;
 use \KO7\Request;
 use \KO7\Request\Exception;
@@ -39,7 +39,7 @@ class Internal extends \KO7\Request\Client
         // Namespace
         $namespace = $request->namesp();
 
-        if (KO7::$profiling) {
+        if (Core::$profiling) {
             // Set the benchmark name
             $benchmark = '"' . $request->uri() . '"';
 

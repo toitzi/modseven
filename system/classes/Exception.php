@@ -12,8 +12,6 @@
 
 namespace KO7;
 
-use \KO7;
-
 class Exception extends \Exception
 {
 
@@ -109,7 +107,7 @@ class Exception extends \Exception
             ob_get_level() AND ob_clean();
 
             // Set the Status code to 500, and Content-Type to text/plain.
-            header('Content-Type: text/plain; charset=' . KO7::$charset, TRUE, 500);
+            header('Content-Type: text/plain; charset=' . Core::$charset, TRUE, 500);
 
             echo self::text($e);
 
@@ -126,15 +124,15 @@ class Exception extends \Exception
      */
     public static function log(\Throwable $t, int $level = Log::EMERGENCY): void
     {
-        if (is_object(KO7::$log)) {
+        if (is_object(Core::$log)) {
             // Create a text version of the exception
             $error = self::text($t);
 
             // Add this exception to the log
-            KO7::$log->add($level, $error, NULL, ['exception' => $t]);
+            Core::$log->add($level, $error, NULL, ['exception' => $t]);
 
             // Make sure the logs are written
-            KO7::$log->write();
+            Core::$log->write();
         }
     }
 
@@ -229,7 +227,7 @@ class Exception extends \Exception
             $response->status(($t instanceof HTTP\Exception) ? $t->getCode() : 500);
 
             // Set the response headers
-            $response->headers('Content-Type', static::$error_view_content_type . '; charset=' . KO7::$charset);
+            $response->headers('Content-Type', static::$error_view_content_type . '; charset=' . Core::$charset);
 
             // Set the response body
             $response->body($view->render());

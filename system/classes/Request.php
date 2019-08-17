@@ -13,8 +13,6 @@
 
 namespace KO7;
 
-use \KO7;
-
 class Request implements HTTP\Request
 {
 
@@ -369,16 +367,16 @@ class Request implements HTTP\Request
             }
 
             // Get the path from the base URL, including the index file
-            $base_url = parse_url(KO7::$base_url, PHP_URL_PATH);
+            $base_url = parse_url(Core::$base_url, PHP_URL_PATH);
 
             if (strpos($uri, $base_url) === 0) {
                 // Remove the base URL from the URI
                 $uri = (string)substr($uri, strlen($base_url));
             }
 
-            if (KO7::$index_file && strpos($uri, KO7::$index_file) === 0) {
+            if (Core::$index_file && strpos($uri, Core::$index_file) === 0) {
                 // Remove the index file from the URI
-                $uri = (string)substr($uri, strlen(KO7::$index_file));
+                $uri = (string)substr($uri, strlen(Core::$index_file));
             }
         }
 
@@ -668,15 +666,15 @@ class Request implements HTTP\Request
         } else {
             $body = http_build_query($post, NULL, '&');
             $this->body($body)
-                ->headers('content-type', 'application/x-www-form-urlencoded; charset=' . KO7::$charset);
+                ->headers('content-type', 'application/x-www-form-urlencoded; charset=' . Core::$charset);
         }
 
         // Set the content length
         $this->headers('content-length', (string)$this->content_length());
 
         // If KO7 expose, set the user-agent
-        if (KO7::$expose) {
-            $this->headers('user-agent', KO7::version());
+        if (Core::$expose) {
+            $this->headers('user-agent', Core::version());
         }
 
         // Prepare cookies
@@ -1008,7 +1006,7 @@ class Request implements HTTP\Request
                 }
 
                 // Store the namespace
-                $this->_namespace = $params['namespace'] ?? KO7::$app_ns;
+                $this->_namespace = $params['namespace'] ?? Core::$app_ns;
 
                 // Store the controller
                 $this->_controller = $params['controller'];

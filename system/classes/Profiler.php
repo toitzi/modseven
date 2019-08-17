@@ -15,8 +15,6 @@
 
 namespace KO7;
 
-use \KO7;
-
 class Profiler
 {
 
@@ -278,7 +276,7 @@ class Profiler
     public static function application(): array
     {
         // Load the stats from cache, which is valid for 1 day
-        $stats = KO7::cache('profiler_application_stats', NULL, 3600 * 24);
+        $stats = Core::cache('profiler_application_stats', NULL, 3600 * 24);
 
         if (!is_array($stats) || $stats['count'] > static::$rollover) {
             // Initialize the stats array
@@ -336,7 +334,7 @@ class Profiler
             'memory' => $stats['total']['memory'] / $stats['count']];
 
         // Cache the new stats
-        KO7::cache('profiler_application_stats', $stats);
+        Core::cache('profiler_application_stats', $stats);
 
         // Set the current application execution time and memory
         // Do NOT cache these, they are specific to the current request only
