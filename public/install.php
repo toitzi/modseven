@@ -152,7 +152,7 @@
         </tr>
         <tr>
             <th>System Directory</th>
-            <?php if (is_dir(SYSPATH) AND is_file(SYSPATH . 'classes/KO7.php')): ?>
+            <?php if (is_dir(SYSPATH) AND is_file(SYSPATH . 'classes/Core.php')): ?>
                 <td class="pass">
                     <?php echo SYSPATH ?>
                 </td>

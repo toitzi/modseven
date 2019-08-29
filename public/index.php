@@ -64,8 +64,6 @@ if (!defined('KO7_START_MEMORY')) {
 ///////////////////////////////////////////////////////////////////
 
 // Load the core KO7 class
-require SYSPATH . 'classes/KO7.php';
-
 // Check if composer has been initialized
 if (!is_file(DOCROOT . '/vendor/autoload.php')) {
     die('RuntimeError: Please run `composer install` inside your project root.');
