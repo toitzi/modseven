@@ -189,7 +189,7 @@ class Core
             set_exception_handler([Exception::class, 'handler']);
 
             // Enable KO7 error handling, converts all PHP errors to exceptions.
-            set_error_handler(['Core', 'error_handler']);
+            set_error_handler(['\KO7\Core', 'error_handler']);
         }
 
         /**
@@ -200,7 +200,7 @@ class Core
         }
 
         // Enable the KO7 shutdown handler, which catches E_FATAL errors.
-        register_shutdown_function(['Core', 'shutdown_handler']);
+        register_shutdown_function(['\KO7\Core', 'shutdown_handler']);
 
         if (isset($settings['expose'])) {
             static::$expose = (bool)$settings['expose'];
