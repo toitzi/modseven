@@ -125,6 +125,12 @@ class Core
     public static $config;
 
     /**
+     * Composer Autoloader Object
+     * @var \Composer\Autoload\ClassLoader
+     */
+    public static $autoloader;
+
+    /**
      * @var  boolean  Has [KO7::init] been called?
      */
     protected static $_init = false;
@@ -819,5 +825,17 @@ class Core
         $log = static::$log;
         $log->add(Log::WARNING, $msg);
         $log->write();
+    }
+
+    /**
+     * Register a module(s) namespace
+     *
+     * @param string $namespace  Namespace the module uses
+     * @param string $path       Path to `classes` folder
+     * @param bool   $prepend    Prepend (in case the namespace already exists)
+     */
+    public static function register_module(string $namespace, string $path, bool $prepend = false) : void
+    {
+        static::$autoloader->addPsr4($namespace, $path, $prepend);
     }
 }

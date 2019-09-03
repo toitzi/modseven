@@ -70,16 +70,16 @@ if (!is_file(DOCROOT . '/vendor/autoload.php')) {
 }
 
 // Require composer autoloader
-$autoloader = require DOCROOT . '/vendor/autoload.php';
+\KO7\Core::$autoloader = require DOCROOT . '/vendor/autoload.php';
 
 // Enable autoloader for unserialization
 ini_set('unserialize_callback_func', 'spl_autoload_call');
 
 // Attach Configuration Reader and Load App Configuration
-$conf = new \KO7\Config;
-$conf->attach(new \KO7\Config\File);
+$config = new \KO7\Config;
+$config->attach(new \KO7\Config\File);
 try {
-    $conf = $conf->load('app')->as_array();
+    $conf = $config->load('app')->as_array();
 } catch (\KO7\Exception $e) {
     die('RuntimeError: Could not initialize Configuration ' . $e->getMessage());
 }
@@ -112,6 +112,9 @@ if (isset($_SERVER['KOSEVEN_ENV'])) {
     \KO7\Core::$environment = constant('KO7::' . strtoupper($_SERVER['KOSEVEN_ENV']));
 }
 
+// Set the current configuration class
+\KO7\Core::$config = $config;
+
 // Initialize KO7, setting the default options.
 \KO7\Core::init([
     'base_url' => $conf['base_url'],
@@ -142,7 +145,7 @@ if ($conf['cookie']['secure']) {
 
 // Set the application name before initializing routes and add it to composer autoloader
 \KO7\Core::$app_ns = $conf['name'];
-$autoloader->setPsr4($conf['name'] . '\\', APPPATH . DIRECTORY_SEPARATOR . 'classes');
+\KO7\Core::register_module($conf['name'] . '\\', APPPATH . DIRECTORY_SEPARATOR . 'classes');
 
 // Bootstrap the application
 require APPPATH . 'routes.php';

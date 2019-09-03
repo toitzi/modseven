@@ -24,6 +24,6 @@ interface Reader extends Source
      * @param string $group Configuration group
      * @return boolean|array
      */
-    public function load($group);
+    public function load(string $group);
 
 }

@@ -54,6 +54,8 @@ abstract class Session
      *
      * @param array $config configuration
      * @param string $id session id
+     *
+     * @throws Session\Exception
      */
     public function __construct(array $config = NULL, ?string $id = NULL)
     {

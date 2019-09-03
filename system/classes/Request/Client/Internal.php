@@ -39,6 +39,9 @@ class Internal extends \KO7\Request\Client
         // Namespace
         $namespace = $request->namesp();
 
+        // Directory
+        $directory = $request->directory();
+
         if (Core::$profiling) {
             // Set the benchmark name
             $benchmark = '"' . $request->uri() . '"';
@@ -62,7 +65,16 @@ class Internal extends \KO7\Request\Client
         $controller = str_replace('_', '\\', ltrim($controller, '\\'));
 
         // Convert Controller to full PSR-4 namespaced class
-        $controller = $namespace . '\\Controller\\' . $controller;
+        $fqns = $namespace . '\\Controller\\';
+
+        // Support directories
+        if ($directory)
+        {
+            $fqns .= $directory . '\\';
+        }
+
+        // Full Controller Class with correct namespace
+        $controller = $fqns . $controller;
 
         try {
             if (!class_exists($controller)) {

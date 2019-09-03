@@ -14,7 +14,6 @@ namespace KO7;
 
 abstract class Model
 {
-
     /**
      * Create a new model instance.
      *
