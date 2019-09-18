@@ -123,7 +123,7 @@ class Log extends LogLevel {
         {
             if (empty($writer['levels']) || in_array($level, $writer['levels'], true))
             {
-                $writer['object']->write($writer['object']->format_message($obj));
+                $writer['object']->write($writer['object']->formatMessage($obj));
             }
         }
     }

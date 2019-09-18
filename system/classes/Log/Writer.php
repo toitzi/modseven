@@ -61,7 +61,7 @@ abstract class Writer {
      *
      * @return  string
      */
-    public function format_message(array $message, string $format = 'time --- level: body in file:line') : string
+    public function formatMessage(array $message, string $format = 'time --- level: body in file:line') : string
     {
         $message['time'] = Date::formatted_time('@'.$message['time'], static::$timestamp, static::$timezone);
 
