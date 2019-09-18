@@ -62,7 +62,7 @@ class Internal extends \KO7\Request\Client
         Request::$current = $request;
 
         // Transform the controller name according to PSR-4
-        $controller = str_replace('_', '\\', ltrim($controller, '\\'));
+        $controller = ucfirst(str_replace('_', '\\', ltrim($controller, '\\')));
 
         // Convert Controller to full PSR-4 namespaced class
         $fqns = $namespace . '\\Controller\\';

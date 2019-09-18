@@ -1,5 +1,4 @@
 <?php
-
 /**
  * The group wrapper acts as an interface to all the config directives
  * gathered from across the system.
@@ -11,8 +10,6 @@
  * @copyright  (c) 2007-2016  Kohana Team
  * @copyright  (c) since 2016 Koseven Team
  * @license        https://koseven.ga/LICENSE
- *
- * @package        KO7\Config
  */
 
 namespace KO7\Config;
@@ -22,30 +19,27 @@ use ArrayObject;
 
 class Group extends ArrayObject
 {
-
     /**
      * Reference the config object that created this group
      * Used when updating config
-     *
      * @var Config
      */
-    protected $_parent_instance = null;
+    protected Config $_parent_instance;
 
     /**
      * The group this config is for
      * Used when updating config items
-     *
      * @var string
      */
-    protected $_group_name = '';
+    protected string $_group_name = '';
 
     /**
-     * Constructs the group object.  KO7_Config passes the config group
-     * and its config items to the object here.
+     * Constructs the group object.
+     * Config class passes the config group and its config items to the object here.
      *
-     * @param Config $instance "Owning" instance of KO7_Config
-     * @param string $group The group name
-     * @param array $config Group's config
+     * @param Config $instance  "Owning" instance of KO7_Config
+     * @param string $group     The group name
+     * @param array  $config    Group's config
      */
     public function __construct(Config $instance, string $group, array $config = [])
     {
@@ -62,7 +56,7 @@ class Group extends ArrayObject
      */
     public function __toString(): string
     {
-        return serialize($this->getArrayCopy());
+        return serialize($this->as_array());
     }
 
     /**
@@ -88,12 +82,10 @@ class Group extends ArrayObject
     /**
      * Get a variable from the configuration or return the default value.
      *
-     *     $value = $config->get($key);
+     * @param string $key       Array key
+     * @param null   $default   Default value
      *
-     * @param string $key array key
-     * @param mixed $default default value
-     *
-     * @return  mixed
+     * @return mixed
      */
     public function get(string $key, $default = null)
     {
@@ -103,12 +95,10 @@ class Group extends ArrayObject
     /**
      * Sets a value in the configuration array.
      *
-     *     $config->set($key, $new_value);
+     * @param string $key   Array key
+     * @param mixed  $value Array value
      *
-     * @param string $key array key
-     * @param mixed $value array value
-     *
-     * @return  self
+     * @return self
      */
     public function set(string $key, $value): self
     {
@@ -120,8 +110,8 @@ class Group extends ArrayObject
     /**
      * Overrides ArrayObject::offsetSet()
      *
-     * @param string $key The key of the config item we're changing
-     * @param mixed $value The new array value
+     * @param mixed $key     The key of the config item we're changing
+     * @param mixed $value   The new array value
      */
     public function offsetSet($key, $value): void
     {
@@ -129,5 +119,4 @@ class Group extends ArrayObject
 
         parent::offsetSet($key, $value);
     }
-
 }

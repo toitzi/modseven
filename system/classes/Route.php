@@ -465,12 +465,7 @@ class Route
                 $params[$key] = $value;
             }
         }
-
-        if (!empty($params['controller'])) {
-            // PSR-0: Replace underscores with spaces, run ucwords, then replace underscore
-            $params['controller'] = str_replace(' ', '_', ucwords(str_replace('_', ' ', $params['controller'])));
-        }
-
+        
         if ($this->_filters) {
             foreach ($this->_filters as $callback) {
                 // Execute the filter giving it the route, params, and request

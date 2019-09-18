@@ -2,8 +2,7 @@
 /**
  * KO7 Cache Exception
  *
- * @package    KO7/Cache
- * @category   Base
+ * Throw this on Cache Error
  *
  * @copyright  (c) 2007-2016  Kohana Team
  * @copyright  (c) since 2016 Koseven Team
@@ -12,6 +11,4 @@
 
 namespace KO7\Cache;
 
-class Exception extends \KO7\Exception
-{
-}
+class Exception extends \KO7\Exception {}

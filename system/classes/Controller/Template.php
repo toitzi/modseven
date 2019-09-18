@@ -2,9 +2,6 @@
 /**
  * Abstract controller class for automatic templating.
  *
- * @package    KO7
- * @category   Controller
- *
  * @copyright  (c) 2007-2016  Kohana Team
  * @copyright  (c) since 2016 Koseven Team
  * @license    https://koseven.ga/LICENSE
@@ -17,36 +14,39 @@ use \KO7\View;
 
 abstract class Template extends Controller
 {
-
     /**
-     * @var  mixed  page template
+     * Page template
+     * @var mixed
      */
     public $template = 'template';
 
     /**
-     * @var  boolean  auto render template
+     * Auto render template
+     * @var bool
      **/
-    public $auto_render = true;
+    public bool $auto_render = true;
 
     /**
-     * Loads the template [View] object.
+     * Loads the template View object.
      */
     public function before(): void
     {
         parent::before();
 
-        if ($this->auto_render === TRUE) {
+        if ($this->auto_render === true)
+        {
             // Load the template
             $this->template = View::factory($this->template);
         }
     }
 
     /**
-     * Assigns the template [View] as the request response.
+     * Assigns the template View as the request response.
      */
     public function after(): void
     {
-        if ($this->auto_render === TRUE) {
+        if ($this->auto_render === true)
+        {
             $this->response->body($this->template->render());
         }
 

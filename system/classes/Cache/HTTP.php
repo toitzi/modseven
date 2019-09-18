@@ -1,24 +1,18 @@
 <?php
 /**
  * HTTP Caching adaptor class that provides caching services to the
- * [Request_Client] class, using HTTP cache control logic as defined in
+ * Request Client class, using HTTP cache control logic as defined in
  * RFC 2616.
- *
- * @package    Kohana
- * @category   Base
  *
  * @copyright  (c) 2007-2016  Kohana Team
  * @copyright  (c) since 2016 Koseven Team
  * @license    https://koseven.ga/LICENSE
- * @since      3.2.0
  */
 
 namespace KO7\Cache;
 
 use \KO7\Arr;
 use \KO7\Cache;
-use \KO7\Cache\Arithmetic;
-use \KO7\Exception;
 use \KO7\Request;
 use \KO7\Request\Client;
 use \KO7\Response;
@@ -27,50 +21,70 @@ use \KO7\HTTP\Request as HTTP_Request;
 
 class HTTP
 {
-
+    /**
+     * Status keys
+     * @var string
+     */
     public const CACHE_STATUS_KEY = 'x-cache-status';
     public const CACHE_STATUS_SAVED = 'SAVED';
     public const CACHE_STATUS_HIT = 'HIT';
     public const CACHE_STATUS_MISS = 'MISS';
     public const CACHE_HIT_KEY = 'x-cache-hits';
+
     /**
-     * @var     Cache    cache driver to use for HTTP caching
+     * Cache driver to use for HTTP caching
+     * @var Cache
      */
-    protected $_cache;
+    protected Cache $_cache;
+
     /**
-     * @var    callable  Cache key generator callback
+     * Cache key generator callback
+     * @var callable
      */
     protected $_cache_key_callback;
+
     /**
-     * @var    boolean   Defines whether this client should cache `private` cache directives
-     * @link   http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9
+     * Defines whether this client should cache `private` cache directives
+     *
+     * @link    http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9
+     *
+     * @var bool
      */
-    protected $_allow_private_cache = false;
+    protected bool $_allow_private_cache = FALSE;
+
     /**
-     * @var    int       The timestamp of the request
+     * The timestamp of the request
+     * @var int
      */
-    protected $_request_time;
+    protected int $_request_time;
+
     /**
-     * @var    int       The timestamp of the response
+     * The timestamp of the response
+     * @var int
      */
-    protected $_response_time;
+    protected int $_response_time;
 
     /**
      * Constructor method for this class. Allows dependency injection of the
      * required components such as `Cache` and the cache key generator.
      *
-     * @param array $options
+     * @param array $options Caching Options
+     *
+     * @throws  Exception
      */
     public function __construct(array $options = [])
     {
-        foreach ($options as $key => $value) {
-            if (method_exists($this, $key)) {
+        foreach ($options as $key => $value)
+        {
+            if (method_exists($this, $key))
+            {
                 $this->$key($value);
             }
         }
 
-        if ($this->_cache_key_callback === NULL) {
-            $this->cache_key_callback('HTTP_Cache::basic_cache_key_generator');
+        if ($this->_cache_key_callback === null)
+        {
+            $this->cache_key_callback('\KO7\Cache\HTTP::basic_cache_key_generator');
         }
     }
 
@@ -79,23 +93,26 @@ class HTTP
      * class. The cache key generator provides a unique hash based on the
      * `Request` object passed to it.
      *
-     * The default generator is [HTTP_Cache::basic_cache_key_generator()], which
-     * serializes the entire `HTTP_Request` into a unique sha1 hash. This will
+     * The default generator is \KO7\Cache\HTTP::basic_cache_key_generator(), which
+     * serializes the entire HTTP Request into a unique sha1 hash. This will
      * provide basic caching for static and simple dynamic pages. More complex
-     * algorithms can be defined and then passed into `HTTP_Cache` using this
-     * method.
+     * algorithms can be defined and then passed into this class using this method.
      *
      * @param callback $callback
-     * @return  mixed
+     *
      * @throws  Exception
+     *
+     * @return  mixed
      */
-    public function cache_key_callback($callback = NULL)
+    public function cache_key_callback($callback = null)
     {
-        if ($callback === NULL) {
+        if ($callback === null)
+        {
             return $this->_cache_key_callback;
         }
 
-        if (!is_callable($callback)) {
+        if (!is_callable($callback))
+        {
             throw new Exception('cache_key_callback must be callable!');
         }
 
@@ -104,17 +121,20 @@ class HTTP
     }
 
     /**
-     * Factory method for HTTP_Cache that provides a convenient dependency
+     * Factory method for this class that provides a convenient dependency
      * injector for the Cache library.
      *
-     * @param mixed $cache cache engine to use
-     * @param array $options options to set to this class
-     * @return  self
-     * @uses    Cache
+     * @param mixed $cache   Cache engine to use
+     * @param array $options Options to set to this class
+     *
+     * @throws Exception
+     *
+     * @return self
      */
     public static function factory($cache, array $options = []): self
     {
-        if (!$cache instanceof Cache) {
+        if (!$cache instanceof Cache)
+        {
             $cache = Cache::instance($cache);
         }
 
@@ -124,27 +144,34 @@ class HTTP
     }
 
     /**
-     * Executes the supplied [Request] with the supplied [Request_Client].
-     * Before execution, the HTTP_Cache adapter checks the request type,
+     * Executes the supplied Request with the supplied Request Client.
+     * Before execution, the HTTP Cache adapter checks the request type,
      * destructive requests such as `POST`, `PUT` and `DELETE` will bypass
      * cache completely and ensure the response is not cached. All other
      * Request methods will allow caching, if the rules are met.
      *
-     * @param Client $client client to execute with Cache-Control
-     * @param Request $request request to execute with client
-     * @return  [Response]
+     * @param Client   $client    Client to execute with Cache-Control
+     * @param Request  $request   Request to execute with client
+     * @param Response $response  Response to execute with client
+     *
+     * @throws Exception
+     *
+     * @return Response
      */
-    public function execute(Client $client, Request $request, Response $response)
+    public function execute(Client $client, Request $request, Response $response) : Response
     {
         if (!$this->_cache instanceof Cache)
+        {
             return $client->execute_request($request, $response);
+        }
 
         // If this is a destructive request, by-pass cache completely
         if (in_array($request->method(), [
             HTTP_Request::POST,
             HTTP_Request::PUT,
             HTTP_Request::DELETE
-        ], true)) {
+        ], true))
+        {
             // Kill existing caches for this request
             $this->invalidate_cache($request);
 
@@ -164,7 +191,9 @@ class HTTP
 
         // Try and return cached version
         if (($cached_response = $this->cache_response($cache_key, $request)) instanceof Response)
+        {
             return $cached_response;
+        }
 
         // Start request time
         $this->_request_time = time();
@@ -178,39 +207,38 @@ class HTTP
         // Cache the response
         $this->cache_response($cache_key, $request, $response);
 
-        $response->headers(static::CACHE_STATUS_KEY,
-            static::CACHE_STATUS_MISS);
+        $response->headers(static::CACHE_STATUS_KEY, static::CACHE_STATUS_MISS);
 
         return $response;
     }
 
     /**
-     * Invalidate a cached response for the [Request] supplied.
+     * Invalidate a cached response for the Request supplied.
      * This has the effect of deleting the response from the
-     * [Cache] entry.
+     * Cache entry.
      *
      * @param Request $request Response to remove from cache
-     * @return  void
      */
     public function invalidate_cache(Request $request): void
     {
-        if (($cache = $this->cache()) instanceof Cache) {
+        if (($cache = $this->cache()) instanceof Cache)
+        {
             $cache->delete($this->create_cache_key($request, $this->_cache_key_callback));
         }
-
-        return;
     }
 
     /**
      * Getter and setter for the internal caching engine,
      * used to cache responses if available and valid.
      *
-     * @param Cache $cache engine to use for caching
-     * @return  Cache|self
+     * @param Cache|null $cache
+     *
+     * @return self|Cache
      */
-    public function cache(?Cache $cache = NULL)
+    public function cache(?Cache $cache = null)
     {
-        if ($cache === NULL) {
+        if ($cache === null)
+        {
             return $this->_cache;
         }
 
@@ -220,22 +248,23 @@ class HTTP
 
     /**
      * Creates a cache key for the request to use for caching
-     * [KO7_Response] returned by [Request::execute].
+     * Response returned by Request::execute.
      *
      * This is the default cache key generating logic, but can be overridden
-     * by setting [HTTP_Cache::cache_key_callback()].
+     * by setting \KO7\Cache\HTTP::cache_key_callback()
      *
-     * @param Request $request request to create key for
-     * @param callback $callback optional callback to use instead of built-in method
-     * @return  string
+     * @param Request  $request  Request to create key for
+     * @param callback $callback Optional callback to use instead of built-in method
+     *
+     * @return string
      */
-    public function create_cache_key(Request $request, $callback = NULL): string
+    public function create_cache_key(Request $request, $callback = null): string
     {
-        if (is_callable($callback)) {
+        if (is_callable($callback))
+        {
             return $callback($request);
         }
         return self::basic_cache_key_generator($request);
-
     }
 
     /**
@@ -243,8 +272,9 @@ class HTTP
      * it. This is fine for static content, or dynamic content where user
      * specific information is encoded into the request.
      *
-     * @param Request $request
-     * @return  string
+     * @param Request $request Request to hash
+     *                         
+     * @return string
      */
     public static function basic_cache_key_generator(Request $request): string
     {
@@ -253,7 +283,7 @@ class HTTP
         $headers = $request->headers()->getArrayCopy();
         $body = $request->body();
 
-        return sha1($uri . '?' . http_build_query($query, NULL, '&') . '~' . implode('~', $headers) . '~' . $body);
+        return sha1($uri . '?' . http_build_query($query, null, '&') . '~' . implode('~', $headers) . '~' . $body);
     }
 
     /**
@@ -263,57 +293,67 @@ class HTTP
      * If not response is supplied, the cache will be checked for an existing
      * one that is available.
      *
-     * @param string $key the cache key to use
-     * @param Request $request the HTTP Request
-     * @param Response $response the HTTP Response
-     * @return  mixed
+     * @param string        $key        The cache key to use
+     * @param Request       $request    The HTTP Request
+     * @param Response|null $response   The HTTP Response
+     *
+     * @throws Exception
+     *
+     * @return bool|Response
      */
-    public function cache_response(string $key, Request $request, Response $response = NULL)
+    public function cache_response(string $key, Request $request, Response $response = null)
     {
-        if (!$this->_cache instanceof Cache) {
+        if (!$this->_cache instanceof Cache)
+        {
             return false;
         }
 
         // Check for Pragma: no-cache
-        if ($pragma = $request->headers('pragma')) {
-            if ($pragma === 'no-cache') {
+        if ($pragma = $request->headers('pragma'))
+        {
+            if ($pragma === 'no-cache')
+            {
                 return false;
             }
-            if (is_array($pragma) AND in_array('no-cache', $pragma)) {
+            if (is_array($pragma) && in_array('no-cache', $pragma, true))
+            {
                 return false;
             }
         }
 
         // If there is no response, lookup an existing cached response
-        if ($response === NULL) {
-            $response = $this->_cache->get($key);
-
-            if (!$response instanceof Response) {
+        if ($response === null)
+        {
+            if (($response = $this->_cache->get($key, null)) === null)
+            {
                 return false;
             }
 
             // Do cache hit arithmetic, using fast arithmetic if available
-            if ($this->_cache instanceof Arithmetic) {
+            if ($this->_cache instanceof Arithmetic)
+            {
                 $hit_count = $this->_cache->increment(static::CACHE_HIT_KEY . $key);
-            } else {
+            }
+            else
+            {
                 $hit_count = $this->_cache->get(static::CACHE_HIT_KEY . $key);
                 $this->_cache->set(static::CACHE_HIT_KEY . $key, ++$hit_count);
             }
 
             // Update the header to have correct HIT status and count
-            $response->headers(static::CACHE_STATUS_KEY,
-                static::CACHE_STATUS_HIT)
+            $response
+                ->headers(static::CACHE_STATUS_KEY, static::CACHE_STATUS_HIT)
                 ->headers(static::CACHE_HIT_KEY, $hit_count);
 
             return $response;
         }
 
-        if (($ttl = $this->cache_lifetime($response)) === FALSE) {
+        if (($ttl = $this->cache_lifetime($response)) === false)
+        {
             return false;
         }
 
-        $response->headers(static::CACHE_STATUS_KEY,
-            static::CACHE_STATUS_SAVED);
+        $response->headers(static::CACHE_STATUS_KEY, static::CACHE_STATUS_SAVED);
 
         // Set the hit count to zero
         $this->_cache->set(static::CACHE_HIT_KEY . $key, 0);
@@ -326,26 +366,34 @@ class HTTP
      * RFC 2616 cache lifetime rules.
      *
      * @param Response $response Response to evaluate
-     * @return  mixed  TTL value or false if the response should not be cached
+     *
+     * @return int|bool TTL value or false if the response should not be cached
      */
     public function cache_lifetime(Response $response)
     {
         // Get out of here if this cannot be cached
-        if (!$this->set_cache($response)) {
+        if (!$this->set_cache($response))
+        {
             return false;
         }
 
         // Calculate apparent age
-        if ($date = $response->headers('date')) {
+        if ($date = $response->headers('date'))
+        {
             $apparent_age = max(0, $this->_response_time - strtotime($date));
-        } else {
+        }
+        else
+        {
             $apparent_age = max(0, $this->_response_time);
         }
 
         // Calculate corrected received age
-        if ($age = $response->headers('age')) {
-            $corrected_received_age = max($apparent_age, intval($age));
-        } else {
+        if ($age = $response->headers('age'))
+        {
+            $corrected_received_age = max($apparent_age, (int)$age);
+        }
+        else
+        {
             $corrected_received_age = $apparent_age;
         }
 
@@ -359,7 +407,7 @@ class HTTP
         $current_age = $corrected_initial_age + $resident_time;
 
         // Prepare the cache freshness lifetime
-        $ttl = NULL;
+        $ttl = null;
 
         // Cache control overrides
         if ($cache_control = $response->headers('cache-control')) {
@@ -380,15 +428,17 @@ class HTTP
         }
 
         // If we have a TTL at this point, return
-        if ($ttl !== NULL) {
+        if ($ttl !== null)
+        {
             return $ttl;
         }
 
-        if ($expires = $response->headers('expires')) {
+        if ($expires = $response->headers('expires'))
+        {
             return strtotime($expires) - $current_age;
         }
 
-        return FALSE;
+        return false;
     }
 
     /**
@@ -396,25 +446,31 @@ class HTTP
      * protocol to determine whether the response can be cached.
      *
      * @link    http://www.w3.org/Protocols/rfc2616/rfc2616.html RFC 2616
+     *
      * @param Response $response The Response
-     * @return  boolean
+     *
+     * @return bool
      */
     public function set_cache(Response $response): bool
     {
         $headers = $response->headers()->getArrayCopy();
 
-        if ($cache_control = Arr::get($headers, 'cache-control')) {
+        if ($cache_control = Arr::get($headers, 'cache-control'))
+        {
             // Parse the cache control
             $cache_control = Header::parse_cache_control($cache_control);
 
             // If the no-cache or no-store directive is set, return
-            if (array_intersect($cache_control, ['no-cache', 'no-store'])) {
+            if (array_intersect($cache_control, ['no-cache', 'no-store']))
+            {
                 return false;
             }
 
             // Check for private cache and get out of here if invalid
-            if (!$this->_allow_private_cache && in_array('private', $cache_control, true)) {
-                if (!isset($cache_control['s-maxage'])) {
+            if (!$this->_allow_private_cache && in_array('private', $cache_control, true))
+            {
+                if (!isset($cache_control['s-maxage']))
+                {
                     return false;
                 }
 
@@ -423,7 +479,8 @@ class HTTP
             }
 
             // Check that max-age has been set and if it is valid for caching
-            if (isset($cache_control['max-age']) && $cache_control['max-age'] < 1) {
+            if (isset($cache_control['max-age']) && $cache_control['max-age'] < 1)
+            {
                 return false;
             }
         }
@@ -436,15 +493,13 @@ class HTTP
 
     /**
      * Returns the duration of the last request execution.
-     * Either returns the time of completed requests or
-     * `FALSE` if the request hasn't finished executing, or
-     * is yet to be run.
      *
-     * @return  mixed
+     * @return int|bool Returns false if the request hasn't finished executing, or is yet to be run.
      */
     public function request_execution_time()
     {
-        if ($this->_request_time === NULL OR $this->_response_time === NULL) {
+        if ($this->_request_time === NULL || $this->_response_time === null)
+        {
             return false;
         }
 
@@ -452,22 +507,22 @@ class HTTP
     }
 
     /**
-     * Gets or sets the [Request_Client::allow_private_cache] setting.
+     * Gets or sets the [Client::allow_private_cache] setting.
      * If set to `TRUE`, the client will also cache cache-control directives
      * that have the `private` setting.
      *
-     * @link    http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9
-     * @param boolean $setting allow caching of privately marked responses
-     * @return  boolean|self
+     * @param bool|null $setting Allow caching of privately marked responses
+     *
+     * @return self|bool
      */
-    public function allow_private_cache(?bool $setting = NULL)
+    public function allow_private_cache(?bool $setting = null)
     {
-        if ($setting === NULL) {
+        if ($setting === null)
+        {
             return $this->_allow_private_cache;
         }
 
         $this->_allow_private_cache = (bool)$setting;
         return $this;
     }
-
 }
