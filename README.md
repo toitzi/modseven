@@ -13,6 +13,30 @@
 Initially this was for personal use only. But it happens that there were more and more requests if original "Koseven" would support 
 namespaces and PSR. As it does not since it needs to be compatible with "Kohana" this repo was created.
 
+## Current State
+
+__In development__, removing deprecated functions and fix code style.
+
+PSR Standards:
+
+| PSR | Description                 | Status                       |
+|-----|-----------------------------|------------------------------|
+|  1  | Basic Coding Standard       | Implemented but not verified |
+|  3  | Logger Interface            | Implemented and verified     |
+|  4  | Autoloading Standard        | Implemented and verified     |
+|  6  | Caching Interface           | In Progress                  |
+|  7  | HTTP Message Interface      | In Progress                  |
+|  11 | Container Interface         | In Review                    |
+|  12 | Extended Coding Style Guide | Implemented but not verified |
+|  13 | Hypermedia Links            | Not implemented but planned  |
+|  14 | Event Dispatcher            | In Review                    |
+|  15 | HTTP Handlers               | In Review                    |
+|  16 | Simple Cache                | In Progress                  |
+|  17 | HTTP Factories              | In Review                    |
+|  18 | HTTP Client                 | In Review                    |
+
+*Legend: In Review = check if will be implemented, In Progress = currently beeing worked on*
+
 ## When should i use this Project instead of Koseven
 
 If you create a new Application and are familiar with Kohana/Koseven or just love how those frameworks work, chances are high
