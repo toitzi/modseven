@@ -119,20 +119,17 @@ class Exception extends \Exception
      * Logs an exception.
      *
      * @param \Throwable $t
-     * @param int $level
+     * @param string $level
      * @return  void
      */
-    public static function log(\Throwable $t, int $level = Log::EMERGENCY): void
+    public static function log(\Throwable $t, string $level = Log::EMERGENCY): void
     {
         if (is_object(Core::$log)) {
             // Create a text version of the exception
             $error = self::text($t);
 
             // Add this exception to the log
-            Core::$log->add($level, $error, NULL, ['exception' => $t]);
-
-            // Make sure the logs are written
-            Core::$log->write();
+            Core::$log->log($level, $error, ['exception' => $t]);
         }
     }
 

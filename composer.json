@@ -29,14 +29,19 @@
     "issues": "https://github.com/toitzi/modseven/issues"
   },
   "require": {
-    "php": ">=7.3",
-    "ext-dom": "*"
+    "php": ">=7.4",
+    "ext-dom": "*",
+    "psr/log": "1.1.*",
+    "ext-json": "*",
+    "ext-yaml": "*"
   },
   "autoload": {
     "psr-4": {
       "KO7\\": "system/classes"
     }
   },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
   "conflict": {
     "kohana/core": "3.3.*"
   },

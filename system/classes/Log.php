@@ -1,63 +1,45 @@
 <?php
 /**
- * Message logging with observer-based log writing.
- *
- * [!!] This class does not support extensions, only additional writers.
- *
- * @package    KO7
- * @category   Logging
+ * Message Logging according to PSR-3 and RFC 5424
  *
  * @copyright  (c) 2007-2016  Kohana Team
  * @copyright  (c) since 2016 Koseven Team
- * @license    https://koseven.ga/LICENSE
+ * @license        https://koseven.ga/LICENSE
  */
 
 namespace KO7;
 
-class Log
-{
+use \Psr\Log\LogLevel;
+use \Psr\Log\LoggerTrait;
+use \Psr\Log\InvalidArgumentException;
 
-    // Log message levels - Windows users see PHP Bug #18090
-    public const EMERGENCY = LOG_EMERG;    // 0
-    public const ALERT = LOG_ALERT;    // 1
-    public const CRITICAL = LOG_CRIT;     // 2
-    public const ERROR = LOG_ERR;      // 3
-    public const WARNING = LOG_WARNING;  // 4
-    public const NOTICE = LOG_NOTICE;   // 5
-    public const INFO = LOG_INFO;     // 6
-    public const DEBUG = LOG_DEBUG;    // 7
+class Log extends LogLevel {
+
+    use LoggerTrait;
 
     /**
-     * @var  boolean  immediately write when logs are added
+     * Singleton instance container
+     * @var Log
      */
-    public static $write_on_add = false;
+    protected static ?Log $_instance = null;
 
     /**
-     * @var  Log  Singleton instance container
+     * List of Log Writer
+     * @var array
      */
-    protected static $_instance;
-    /**
-     * @var  array  list of added messages
-     */
-    protected $_messages = [];
-    /**
-     * @var  array  list of log writers
-     */
-    protected $_writers = [];
+    protected array $_writers = [];
 
     /**
      * Get the singleton instance of this class and enable writing at shutdown.
      *
      * @return  Log
      */
-    public static function instance(): Log
+    public static function instance() : Log
     {
-        if (static::$_instance === NULL) {
+        if (static::$_instance === null)
+        {
             // Create a new instance
             static::$_instance = new self;
-
-            // Write the logs at shutdown
-            register_shutdown_function([static::$_instance, 'write']);
         }
 
         return static::$_instance;
@@ -67,17 +49,13 @@ class Log
      * Attaches a log writer, and optionally limits the levels of messages that
      * will be written by the writer.
      *
-     * @param Log\Writer $writer instance
-     * @param mixed $levels array of messages levels to write OR max level to write
-     * @param integer $min_level min level to write IF $levels is not an array
+     * @param Log\Writer $writer Instance of the Writer
+     * @param mixed      $levels Array of messages levels to write (empty for all)
+     *
      * @return  self
      */
-    public function attach(Log\Writer $writer, $levels = [], int $min_level = 0): self
+    public function attach(Log\Writer $writer, array $levels = []) : self
     {
-        if (!is_array($levels)) {
-            $levels = range($min_level, $levels);
-        }
-
         $this->_writers[(string)$writer] = [
             'object' => $writer,
             'levels' => $levels
@@ -89,55 +67,46 @@ class Log
     /**
      * Detaches a log writer. The same writer object must be used.
      *
-     * @param Log\Writer $writer instance
+     * @param Log\Writer $writer Instance of Writer
+     *
      * @return  self
      */
-    public function detach(Log\Writer $writer): self
+    public function detach(Log\Writer $writer) : self
     {
-        // Remove the writer
         unset($this->_writers[(string)$writer]);
-
         return $this;
     }
 
     /**
-     * Adds a message to the log. Replacement values must be passed in to be
-     * replaced using [strtr](http://php.net/strtr).
+     * Logs with an arbitrary level.
      *
-     * @param integer $level level of message
-     * @param string $message message body
-     * @param array $values values to replace in the message
-     * @param array $additional additional custom parameters to supply to the log writer
-     * @return  self
+     * @param string $level     Log Level (must be valid RFC 5424)
+     * @param mixed  $message   Message to log, either string or object with __toString
+     * @param array  $context   Contextual Array
      */
-    public function add(int $level, string $message, ?array $values = NULL, ?array $additional = NULL): self
+    public function log(string $level, $message, array $context = []) : void
     {
-        if ($values) {
-            // Insert the values into the message
-            $message = strtr($message, $values);
+        // Check if log level is in RFC 5424, if not throw an Exception (PSR-3)
+        if ( ! defined('static::'.strtoupper($level)))
+        {
+            throw new InvalidArgumentException('Invalid Logging Level supplied.');
         }
 
-        // Grab a copy of the trace
-        if (isset($additional['exception'])) {
-            $trace = $additional['exception']->getTrace();
-        } else {
-            // Older php version don't have 'DEBUG_BACKTRACE_IGNORE_ARGS', so manually remove the args from the backtrace
-            if (!defined('DEBUG_BACKTRACE_IGNORE_ARGS')) {
-                $trace = array_map(static function ($item) {
-                    unset($item['args']);
-                    return $item;
-                }, array_slice(debug_backtrace(FALSE), 1));
-            } else {
-                $trace = array_slice(debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS), 1);
-            }
+        // Replace placeholder inside message
+        $message = $this->interpolate($message, $context);
+
+        // Get stack trace
+        if (isset($context['exception']) && ($ex = $context['exception']) instanceof Exception)
+        {
+            $trace = $ex->getTrace();
+        }
+        else
+        {
+            $trace = array_slice(debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS), 1);
         }
 
-        if ($additional === NULL) {
-            $additional = [];
-        }
-
-        // Create a new message
-        $this->_messages[] = [
+        // Create Logging array
+        $obj = [
             'time' => time(),
             'level' => $level,
             'body' => $message,
@@ -146,54 +115,42 @@ class Log
             'line' => $trace[0]['line'] ?? null,
             'class' => $trace[0]['class'] ?? null,
             'function' => $trace[0]['function'] ?? null,
-            'additional' => $additional,
+            'context' => $context,
         ];
 
-        if (static::$write_on_add) {
-            // Write logs as they are added
-            $this->write();
-        }
-
-        return $this;
-    }
-
-    /**
-     * Write and clear all of the messages.
-     *
-     * @return  void
-     */
-    public function write(): void
-    {
-        if (empty($this->_messages)) {
-            // There is nothing to write, move along
-            return;
-        }
-
-        // Import all messages locally
-        $messages = $this->_messages;
-
-        // Reset the messages array
-        $this->_messages = [];
-
-        foreach ($this->_writers as $writer) {
-            if (empty($writer['levels'])) {
-                // Write all of the messages
-                $writer['object']->write($messages);
-            } else {
-                // Filtered messages
-                $filtered = [];
-
-                foreach ($messages as $message) {
-                    if (in_array($message['level'], $writer['levels'], true)) {
-                        // Writer accepts this kind of message
-                        $filtered[] = $message;
-                    }
-                }
-
-                // Write the filtered messages
-                $writer['object']->write($filtered);
+        // Loop through the writers and write the message
+        foreach ($this->_writers as $writer)
+        {
+            if (empty($writer['levels']) || in_array($level, $writer['levels'], true))
+            {
+                $writer['object']->write($writer['object']->format_message($obj));
             }
         }
     }
 
+    /**
+     * Interpolate Context into the message according to PSR-3
+     *
+     * @param mixed $message    Message as string or Object with __toString method
+     * @param array $context    Context array
+     *
+     * @return string
+     */
+    protected function interpolate($message, array $context) : string
+    {
+        // build a replacement array with braces around the context keys
+        $replace = [];
+
+        foreach ($context as $key => $val)
+        {
+            // check that the value can be casted to string
+            if ( ! is_array($val) && ( ! is_object($val) || method_exists($val, '__toString')))
+            {
+                $replace['{'.$key.'}'] = $val;
+            }
+        }
+
+        // interpolate replacement values into the message and return
+        return strtr($message, $replace);
+    }
 }

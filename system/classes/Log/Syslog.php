@@ -2,31 +2,33 @@
 /**
  * Syslog log writer.
  *
- * @package    KO7
- * @category   Logging
- * @author     Jeremy Bush
+ * @author         Jeremy Bush
  * @copyright  (c) 2007-2016  Kohana Team
  * @copyright  (c) since 2016 Koseven Team
- * @license    https://koseven.ga/LICENSE
+ * @license        https://koseven.ga/LICENSE
  */
 
 namespace KO7\Log;
 
-class Syslog extends Writer
-{
+class Syslog extends Writer {
 
     /**
-     * @var  string  The syslog identifier
+     * The syslog identifier
+     * @var string
      */
-    protected $_ident;
+    protected string $_ident;
+
+    /**
+     * Holds the original message array
+     * @var array
+     */
+    protected array $_original;
 
     /**
      * Creates a new syslog logger.
      *
-     * @link    http://www.php.net/manual/function.openlog
-     *
-     * @param string $ident syslog identifier
-     * @param int $facility facility to log to
+     * @param string $ident    Syslog identifier
+     * @param int    $facility Facility to log to
      */
     public function __construct(string $ident = 'KO7PHP', int $facility = LOG_USER)
     {
@@ -37,20 +39,33 @@ class Syslog extends Writer
     }
 
     /**
-     * Writes each of the messages into the syslog.
+     * Writes the message into the syslog.
      *
-     * @param array $messages
-     * @return  void
+     * @param string $message
      */
-    public function write(array $messages): void
+    public function write(string $message) : void
     {
-        foreach ($messages as $message) {
-            syslog($message['level'], $message['body']);
+        $original = $this->_original;
+        syslog($original['level'], $message);
 
-            if (isset($message['additional']['exception'])) {
-                syslog(static::$strace_level, $message['additional']['exception']->getTraceAsString());
-            }
+        if (isset($original['context']['exception']))
+        {
+            syslog(static::$strace_level, $original['context']['exception']->getTraceAsString());
         }
+    }
+
+    /**
+     * Extend the format message method, as we do not need to format it for syslog
+     *
+     * @param array  $message
+     * @param string $format
+     *
+     * @return string
+     */
+    public function format_message(array $message, string $format = 'time --- level: body in file:line') : string
+    {
+        $this->_original = $message;
+        return $message['body'];
     }
 
     /**
@@ -61,5 +76,4 @@ class Syslog extends Writer
         // Close connection to syslog
         closelog();
     }
-
 }

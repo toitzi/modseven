@@ -370,8 +370,7 @@ abstract class Session
             return $this->_write();
         } catch (Exception $e) {
             // Log & ignore all errors when a write fails
-            Core::$log->add(Log::ERROR, KO7\Exception::text($e))->write();
-
+            Core::$log->error(\KO7\Exception::text($e));
             return FALSE;
         }
     }

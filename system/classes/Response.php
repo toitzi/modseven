@@ -465,10 +465,7 @@ class Response implements HTTP\Response
 
                 if (is_object(Core::$log)) {
                     // Add this exception to the log
-                    Core::$log->add(Log::ERROR, $error);
-
-                    // Make sure the logs are written
-                    Core::$log->write();
+                    Core::$log->error($error);
                 }
 
                 // Do NOT display the exception, it will corrupt the output!

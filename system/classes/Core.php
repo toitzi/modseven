@@ -823,8 +823,7 @@ class Core
 
         // Log the deprecation
         $log = static::$log;
-        $log->add(Log::WARNING, $msg);
-        $log->write();
+        $log->warning($msg);
     }
 
     /**
