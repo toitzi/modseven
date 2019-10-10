@@ -29,7 +29,7 @@
     "issues": "https://github.com/toitzi/modseven/issues"
   },
   "require": {
-    "php": ">=7.3",
+    "php": ">=7.4",
     "ext-dom": "*",
     "psr/log": "1.1.*",
     "ext-json": "*"
