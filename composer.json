@@ -29,11 +29,10 @@
     "issues": "https://github.com/toitzi/modseven/issues"
   },
   "require": {
-    "php": ">=7.4",
+    "php": ">=7.3",
     "ext-dom": "*",
     "psr/log": "1.1.*",
-    "ext-json": "*",
-    "ext-yaml": "*"
+    "ext-json": "*"
   },
   "autoload": {
     "psr-4": {
