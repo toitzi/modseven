@@ -203,9 +203,6 @@ class Debug
         if (strpos($file, SYSPATH) === 0) {
             return 'SYSPATH' . DIRECTORY_SEPARATOR . substr($file, strlen(SYSPATH));
         }
-        if (strpos($file, MODPATH) === 0) {
-            return 'MODPATH' . DIRECTORY_SEPARATOR . substr($file, strlen(MODPATH));
-        }
         if (strpos($file, DOCROOT) === 0) {
             return 'DOCROOT' . DIRECTORY_SEPARATOR . substr($file, strlen(DOCROOT));
         }

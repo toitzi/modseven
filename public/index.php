@@ -3,9 +3,6 @@
 // The directory in which your application specific resources are located.
 $application = 'application';
 
-// The directory in which your modules are located.
-$modules = 'modules';
-
 // The directory in which the Koseven core resources are located.
 $system = 'system';
 
@@ -20,11 +17,6 @@ if (!is_dir($application) && is_dir(DOCROOT . $application)) {
     $application = DOCROOT . $application;
 }
 
-// Make the modules relative to the docroot, for symlink'd index.php
-if (!is_dir($modules) && is_dir(DOCROOT . $modules)) {
-    $modules = DOCROOT . $modules;
-}
-
 // Make the system relative to the docroot, for symlink'd index.php
 if (!is_dir($system) && is_dir(DOCROOT . $system)) {
     $system = DOCROOT . $system;
@@ -37,12 +29,11 @@ if (!is_dir($public) && is_dir(DOCROOT . $public)) {
 
 // Define the absolute paths for configured directories
 define('APPPATH', realpath($application) . DIRECTORY_SEPARATOR);
-define('MODPATH', realpath($modules) . DIRECTORY_SEPARATOR);
 define('SYSPATH', realpath($system) . DIRECTORY_SEPARATOR);
 define('PUBPATH', realpath($public) . DIRECTORY_SEPARATOR);
 
 // Clean up the configuration vars
-unset($application, $modules, $system, $public);
+unset($application, $system, $public);
 
 // Load the installation check
 if (file_exists('install.php')) {
