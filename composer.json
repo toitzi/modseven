@@ -32,8 +32,7 @@
     "php": ">=7.4",
     "ext-dom": "*",
     "psr/log": "1.1.*",
-    "ext-json": "*",
-    "ext-yaml": "*"
+    "ext-json": "*"
   },
   "autoload": {
     "psr-4": {
