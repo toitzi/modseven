@@ -104,13 +104,12 @@ class Config
      *
      * See [KO7_Config_Group] for more info
      *
-     * @param string $group configuration group name
-     * @return  Group
+     * @param   string $group configuration group name
+     * @return  mixed
      * @throws  Exception
      */
-    public function load(string $group): Group
+    public function load(string $group)
     {
-
         if (!count($this->_sources)) {
             throw new Exception('No configuration sources attached');
         }
@@ -126,7 +125,7 @@ class Config
 
         if (isset($this->_groups[$group])) {
             if (isset($path)) {
-                return Arr::path($this->_groups[$group], $path, NULL, '.');
+                return Arr::path((array)$this->_groups[$group], $path, NULL, '.');
             }
             return $this->_groups[$group];
         }
