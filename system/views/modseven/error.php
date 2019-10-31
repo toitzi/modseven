@@ -178,7 +178,7 @@ use Modseven\I18n;
                     </p>
                     <?php if (isset($args_id)): ?>
                         <div id="<?php echo $args_id ?>" class="collapsed">
-                            <table cellspacing="0">
+                            <table>
                                 <?php foreach ($step['args'] as $name => $arg): ?>
                                     <tr>
                                         <td><code><?php echo $name ?></code></td>
@@ -213,7 +213,7 @@ use Modseven\I18n;
             (<?php echo count($included) ?>)
         </h3>
         <div id="<?php echo $env_id ?>" class="collapsed">
-            <table cellspacing="0">
+            <table>
                 <?php foreach ($included as $file): ?>
                     <tr>
                         <td><code><?php echo Debug::path($file) ?></code></td>
@@ -228,7 +228,7 @@ use Modseven\I18n;
             (<?php echo count($included) ?>)
         </h3>
         <div id="<?php echo $env_id ?>" class="collapsed">
-            <table cellspacing="0">
+            <table>
                 <?php foreach ($included as $file): ?>
                     <tr>
                         <td><code><?php echo Debug::path($file) ?></code></td>
@@ -243,7 +243,7 @@ use Modseven\I18n;
                    onclick="return toggle('<?php echo $env_id ?>')">$<?php echo $var ?></a>
             </h3>
             <div id="<?php echo $env_id ?>" class="collapsed">
-                <table cellspacing="0">
+                <table>
                     <?php foreach ($GLOBALS[$var] as $key => $value): ?>
                         <tr>
                             <td>
