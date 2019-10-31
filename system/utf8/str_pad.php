@@ -27,13 +27,13 @@ use Modseven\UTF8\Exception;
  */
 function _str_pad($str, $final_str_length, $pad_str = ' ', $pad_type = STR_PAD_RIGHT)
 {
-    if (UTF8::is_ascii($str) AND UTF8::is_ascii($pad_str)) {
+    if (UTF8::is_ascii($str) && UTF8::is_ascii($pad_str)) {
         return str_pad($str, $final_str_length, $pad_str, $pad_type);
     }
 
     $str_length = UTF8::strlen($str);
 
-    if ($final_str_length <= 0 OR $final_str_length <= $str_length) {
+    if ($final_str_length <= 0 || $final_str_length <= $str_length) {
         return $str;
     }
 
@@ -62,7 +62,7 @@ function _str_pad($str, $final_str_length, $pad_str = ' ', $pad_type = STR_PAD_R
         return $pad_left . $str . $pad_right;
     }
 
-    throw new Exception("UTF8::str_pad: Unknown padding type (:pad_type)", [
+    throw new Exception('UTF8::str_pad: Unknown padding type (:pad_type)', [
         ':pad_type' => $pad_type,
     ]);
 }

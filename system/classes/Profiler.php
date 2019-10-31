@@ -200,7 +200,7 @@ class Profiler
 
         foreach ($tokens as $token) {
             // Get the total time and memory for this benchmark
-            [$time, $memory] = Profiler::total($token);
+            [$time, $memory] = self::total($token);
 
             if ($max['time'] === NULL || $time > $max['time']) {
                 // Set the maximum time

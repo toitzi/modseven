@@ -153,7 +153,7 @@ class Date
 
         switch ($ampm) {
             case 'am':
-                if ($hour == 12) {
+                if ($hour === 12) {
                     $hour = 0;
                 }
                 break;
@@ -173,9 +173,10 @@ class Date
      *
      * @param integer $month number of month
      * @param integer $year number of year to check month, defaults to the current year
+     *
      * @return  array   A mirrored (foo => foo) array of the days.
      */
-    public static function days(int $month, ?int $year = NULL)
+    public static function days(int $month, ?int $year = NULL) : array
     {
         static $months;
 
@@ -427,9 +428,10 @@ class Date
      * Converting the other direction is done using {@link Date::dos2unix}.
      *
      * @param integer $timestamp UNIX timestamp
+     *
      * @return  integer
      */
-    public static function unix2dos(?int $timestamp = NULL)
+    public static function unix2dos(?int $timestamp = NULL) : int
     {
         $timestamp = ($timestamp === NULL) ? getdate() : getdate($timestamp);
 
@@ -483,7 +485,7 @@ class Date
         $timestamp_format = $timestamp_format ?? static::$timestamp_format;
         $timezone = $timezone ?? static::$timezone;
 
-        $tz = new DateTimeZone($timezone ? $timezone : date_default_timezone_get());
+        $tz = new DateTimeZone($timezone ?: date_default_timezone_get());
         $time = new DateTime($datetime_str, $tz);
 
         // Convert the time back to the expected timezone if required (in case the datetime_str provided a timezone,

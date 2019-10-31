@@ -177,16 +177,17 @@ class Num
         $size = trim($size);
 
         // Construct an OR list of byte units for the regex
-        $accepted = implode('|', array_keys(Num::$byte_units));
+        $accepted = implode('|', array_keys(static::$byte_units));
 
         // Construct the regex pattern for verifying the size format
         $pattern = '/^([0-9]+(?:\.[0-9]+)?)(' . $accepted . ')?$/Di';
 
         // Verify the size format and store the matching parts
-        if (!preg_match($pattern, $size, $matches))
+        if (!preg_match($pattern, $size, $matches)) {
             throw new Exception('The byte unit size, ":size", is improperly formatted.', [
                 ':size' => $size,
             ]);
+        }
 
         // Find the float value of the size
         $size = (float)$matches[1];
@@ -195,7 +196,7 @@ class Num
         $unit = Arr::get($matches, 2, 'B');
 
         // Convert the size into bytes
-        return $size * (2 ** Num::$byte_units[$unit]);
+        return $size * (2 ** static::$byte_units[$unit]);
     }
 
 }

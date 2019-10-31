@@ -278,7 +278,7 @@ class Valid
         }
 
         // No Luhn check required
-        if ($cards[$type]['luhn'] == FALSE) {
+        if ($cards[$type]['luhn'] === FALSE) {
             return true;
         }
 
@@ -484,7 +484,7 @@ class Valid
         // Get the decimal point for the current locale
         [$decimal] = array_values(localeconv());
 
-        return (bool)preg_match('/^[+-]?[0-9]' . $digits . preg_quote($decimal, null) . '[0-9]{' . ((int)$places) . '}$/D', $str);
+        return (bool)preg_match('/^[+-]?[0-9]' . $digits . preg_quote($decimal, null) . '[0-9]{' . ($places) . '}$/D', $str);
     }
 
     /**

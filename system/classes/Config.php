@@ -124,7 +124,7 @@ class Config
         }
 
         if (empty($group)) {
-            throw new Exception("Need to specify a config group");
+            throw new Exception('Need to specify a config group');
         }
 
         if (strpos($group, '.') !== FALSE) {
@@ -143,10 +143,8 @@ class Config
 
         // We search from the "lowest" source and work our way up
         foreach (array_reverse($this->_sources) as $source) {
-            if ($source instanceof Reader) {
-                if ($source_config = $source->load($group)) {
-                    $config = Arr::merge($config, $source_config);
-                }
+            if (($source instanceof Reader) && $source_config = $source->load($group)) {
+                $config = Arr::merge($config, $source_config);
             }
         }
 

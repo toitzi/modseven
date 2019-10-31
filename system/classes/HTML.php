@@ -314,7 +314,7 @@ class HTML
      */
     public static function image(string $file, ?array $attributes = NULL, $protocol = NULL, bool $index = FALSE): string
     {
-        if (strpos($file, '://') === FALSE AND strncmp($file, '//', 2) && strncmp($file, 'data:', 5)) {
+        if (strpos($file, '://') === FALSE && strncmp($file, '//', 2) && strncmp($file, 'data:', 5)) {
             // Add the base URL
             $file = URL::site($file, $protocol, $index);
         }

@@ -29,7 +29,7 @@ function _stristr($str, $search)
         return stristr($str, $search);
     }
 
-    if ($search == '') {
+    if ($search === '') {
         return $str;
     }
 

@@ -86,49 +86,46 @@ function _to_unicode(string $str)
                 trigger_error('UTF8::to_unicode: Illegal sequence identifier in UTF-8 at byte ' . $i, E_USER_WARNING);
                 return FALSE;
             }
-        } else {
-            // When m_state is non-zero, we expect a continuation of the multi-octet sequence
-            if (0x80 === (0xC0 & $in)) {
-                // Legal continuation
-                $shift = ($m_state - 1) * 6;
-                $tmp = $in;
-                $tmp = ($tmp & 0x0000003F) << $shift;
-                $m_ucs4 |= $tmp;
+        } elseif (0x80 === (0xC0 & $in)) {
+            // Legal continuation
+            $shift = ($m_state - 1) * 6;
+            $tmp = $in;
+            $tmp = ($tmp & 0x0000003F) << $shift;
+            $m_ucs4 |= $tmp;
 
-                // End of the multi-octet sequence. mUcs4 now contains the final Unicode codepoint to be output
-                if (0 === --$m_state) {
-                    // Check for illegal sequences and codepoints
+            // End of the multi-octet sequence. mUcs4 now contains the final Unicode codepoint to be output
+            if (0 === --$m_state) {
+                // Check for illegal sequences and codepoints
 
-                    // From Unicode 3.1, non-shortest form is illegal
-                    if (((2 === $m_bytes) && ($m_ucs4 < 0x0080)) ||
-                        ((3 === $m_bytes) && ($m_ucs4 < 0x0800)) ||
-                        ((4 === $m_bytes) && ($m_ucs4 < 0x10000)) ||
-                        (4 < $m_bytes) ||
-                        // From Unicode 3.2, surrogate characters are illegal
-                        (($m_ucs4 & 0xFFFFF800) === 0xD800) ||
-                        // Codepoints outside the Unicode range are illegal
-                        ($m_ucs4 > 0x10FFFF)) {
-                        trigger_error('UTF8::to_unicode: Illegal sequence or codepoint in UTF-8 at byte ' . $i, E_USER_WARNING);
-                        return FALSE;
-                    }
-
-                    if (0xFEFF !== $m_ucs4) {
-                        // BOM is legal but we don't want to output it
-                        $out[] = $m_ucs4;
-                    }
-
-                    // Initialize UTF-8 cache
-                    $m_state = 0;
-                    $m_ucs4 = 0;
-                    $m_bytes = 1;
+                // From Unicode 3.1, non-shortest form is illegal
+                if (((2 === $m_bytes) && ($m_ucs4 < 0x0080)) ||
+                    ((3 === $m_bytes) && ($m_ucs4 < 0x0800)) ||
+                    ((4 === $m_bytes) && ($m_ucs4 < 0x10000)) ||
+                    (4 < $m_bytes) ||
+                    // From Unicode 3.2, surrogate characters are illegal
+                    (($m_ucs4 & 0xFFFFF800) === 0xD800) ||
+                    // Codepoints outside the Unicode range are illegal
+                    ($m_ucs4 > 0x10FFFF)) {
+                    trigger_error('UTF8::to_unicode: Illegal sequence or codepoint in UTF-8 at byte ' . $i, E_USER_WARNING);
+                    return FALSE;
                 }
-            } else {
-                // ((0xC0 & (*in) != 0x80) AND (m_state != 0))
-                // Incomplete multi-octet sequence
-                throw new Exception("UTF8::to_unicode: Incomplete multi-octet sequence in UTF-8 at byte ':byte'", [
-                    ':byte' => $i,
-                ]);
+
+                if (0xFEFF !== $m_ucs4) {
+                    // BOM is legal but we don't want to output it
+                    $out[] = $m_ucs4;
+                }
+
+                // Initialize UTF-8 cache
+                $m_state = 0;
+                $m_ucs4 = 0;
+                $m_bytes = 1;
             }
+        } else {
+            // ((0xC0 & (*in) != 0x80) AND (m_state != 0))
+            // Incomplete multi-octet sequence
+            throw new Exception("UTF8::to_unicode: Incomplete multi-octet sequence in UTF-8 at byte ':byte'", [
+                ':byte' => $i,
+            ]);
         }
     }
 

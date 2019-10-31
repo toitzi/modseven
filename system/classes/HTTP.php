@@ -122,15 +122,12 @@ abstract class HTTP
                     // Apply the header directly
                     $headers[$matches[1][$key]] = $matches[2][$key];
                 } // Otherwise there is an existing entry
+                elseif (is_array($headers[$matches[1][$key]])) {
+                    // Apply the new entry to the array
+                    $headers[$matches[1][$key]][] = $matches[2][$key];
+                } // Otherwise create a new array with the entries
                 else {
-                    // If the entry is an array
-                    if (is_array($headers[$matches[1][$key]])) {
-                        // Apply the new entry to the array
-                        $headers[$matches[1][$key]][] = $matches[2][$key];
-                    } // Otherwise create a new array with the entries
-                    else {
-                        $headers[$matches[1][$key]] = [$headers[$matches[1][$key]], $matches[2][$key],];
-                    }
+                    $headers[$matches[1][$key]] = [$headers[$matches[1][$key]], $matches[2][$key],];
                 }
             }
         }

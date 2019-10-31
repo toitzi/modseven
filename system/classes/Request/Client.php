@@ -103,7 +103,7 @@ abstract class Client
      *
      * @throws Exception
      */
-    public static function on_header_location(Request $request, Response $response, Client $client)
+    public static function on_header_location(Request $request, Response $response, Client $client): ?Request
     {
         // Do we need to follow a Location header ?
         if ($client->follow() && in_array($response->status(), [201, 301, 302, 303, 307], true)) {
@@ -362,8 +362,9 @@ abstract class Client
      */
     public function follow(?bool $follow = NULL)
     {
-        if ($follow === NULL)
+        if ($follow === NULL) {
             return $this->_follow;
+        }
 
         $this->_follow = $follow;
 

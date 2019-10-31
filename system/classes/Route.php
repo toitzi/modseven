@@ -230,7 +230,7 @@ class Route
         if ($save === TRUE) {
             try {
                 // Cache all defined routes
-                Core::cache('Route::cache()', Route::$_routes);
+                Core::cache('Route::cache()', static::$_routes);
             } catch (Exception $e) {
                 // We most likely have a lambda in a route, which cannot be cached
                 throw new \Modseven\Exception('One or more routes could not be cached (:message)', [
@@ -480,7 +480,7 @@ class Route
         }
 
         foreach ($this->_defaults as $key => $value) {
-            if (!isset($params[$key]) OR $params[$key] === '') {
+            if (!isset($params[$key]) || $params[$key] === '') {
                 // Set default values for any key that was not matched
                 $params[$key] = $value;
             }

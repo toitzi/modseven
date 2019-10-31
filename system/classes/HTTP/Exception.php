@@ -14,9 +14,10 @@ class Exception extends \Modseven\Exception
 
     /**
      * Request instance that triggered this exception.
-     * @var  \Modseven\Request
+     *
+     * @var Request
      */
-    protected \Modseven\Request $_request;
+    protected Request $_request;
 
     /**
      * Exception constructor.
@@ -50,10 +51,11 @@ class Exception extends \Modseven\Exception
     /**
      * Store the Request that triggered this exception.
      *
-     * @param \Modseven\Request $request Request object that triggered this exception.
+     * @param Request $request Request object that triggered this exception.
+     *
      * @return  self|Request
      */
-    public function request(\Modseven\Request $request = NULL)
+    public function request(Request $request = NULL)
     {
         if ($request === NULL) {
             return $this->_request;

@@ -147,7 +147,7 @@ class Inflector
         $count = ($count === NULL) ? 0.0 : (float)$count;
 
         // Do nothing with singular
-        if ($count == 1) {
+        if ($count === 1) {
             return $str;
         }
 
@@ -177,7 +177,7 @@ class Inflector
             $str = static::$irregular[$str];
         } elseif (in_array($str, static::$irregular, true)) {
             // Do nothing
-        } elseif (preg_match('/[sxz]$/', $str) OR preg_match('/[^aeioudgkprt]h$/', $str)) {
+        } elseif (preg_match('/[sxz]$/', $str) || preg_match('/[^aeioudgkprt]h$/', $str)) {
             $str .= 'es';
         } elseif (preg_match('/[^aeiou]y$/', $str)) {
             // Change "y" to "ies"

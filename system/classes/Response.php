@@ -216,7 +216,7 @@ class Response implements HTTP\Response
             return $this->_status;
         }
         if (array_key_exists($status, static::$messages)) {
-            $this->_status = (int)$status;
+            $this->_status = $status;
             return $this;
         }
         return false;
@@ -236,7 +236,7 @@ class Response implements HTTP\Response
         if ($key === NULL) {
             return $this->_cookies;
         }
-        if (!is_array($key) AND !$value) {
+        if (!is_array($key) && !$value) {
             return Arr::get($this->_cookies, $key);
         }
 
@@ -625,7 +625,7 @@ class Response implements HTTP\Response
             }
         }
 
-        $output = $this->_protocol . ' ' . $this->_status . ' ' . Response::$messages[$this->_status] . "\r\n";
+        $output = $this->_protocol . ' ' . $this->_status . ' ' . static::$messages[$this->_status] . "\r\n";
         $output .= $this->_header;
         $output .= $this->_body;
 

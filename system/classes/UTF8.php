@@ -169,12 +169,13 @@ class UTF8
      * Finds position of first occurrence of a UTF-8 string. This is a
      * UTF8-aware version of [strpos](http://php.net/strpos).
      *
+     * @author  Harry Fuecks <hfuecks@gmail.com>
+     *
      * @param string $str haystack
      * @param string $search needle
      * @param integer $offset offset from which character in haystack to start searching
-     * @return  integer position of needle
-     * @return  boolean FALSE if the needle is not found
-     * @author  Harry Fuecks <hfuecks@gmail.com>
+     *
+     * @return  integer|bool position of needle, FALSE if the needle is not found
      */
     public static function strpos(string $str, string $search, int $offset = 0)
     {
@@ -196,12 +197,13 @@ class UTF8
      * Finds position of last occurrence of a char in a UTF-8 string. This is
      * a UTF8-aware version of [strrpos](http://php.net/strrpos).
      *
+     * @author  Harry Fuecks <hfuecks@gmail.com>
+     *
      * @param string $str haystack
      * @param string $search needle
      * @param integer $offset offset from which character in haystack to start searching
-     * @return  integer position of needle
-     * @return  boolean FALSE if the needle is not found
-     * @author  Harry Fuecks <hfuecks@gmail.com>
+     *
+     * @return  integer|bool position of needle, FALSE if the needle is not found
      */
     public static function strrpos(string $str, string $search, int $offset = 0)
     {
@@ -491,7 +493,7 @@ class UTF8
             require Core::find_file('utf8', __FUNCTION__);
 
             // Function has been called
-            UTF8::$called[__FUNCTION__] = TRUE;
+            static::$called[__FUNCTION__] = TRUE;
         }
 
         return _strcspn($str, $mask, $offset, $length);

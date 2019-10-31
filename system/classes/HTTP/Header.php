@@ -74,7 +74,7 @@ class Header extends ArrayObject
          *
          * HTTP header declarations should be treated as case-insensitive
          */
-        $input = array_change_key_case((array)$input, CASE_LOWER);
+        $input = array_change_key_case($input, CASE_LOWER);
 
         parent::__construct($input, $flags, $iterator_class);
     }
@@ -347,10 +347,8 @@ class Header extends ArrayObject
         if (isset($this->_accept_content[$parts[0]]['*'])) {
             return $this->_accept_content[$parts[0]]['*'];
         }
-        if (isset($this->_accept_content['*']['*'])) {
-            return $this->_accept_content['*']['*'];
-        }
-        return FALSE;
+
+        return $this->_accept_content['*']['*'] ?? false;
     }
 
     /**
@@ -366,8 +364,9 @@ class Header extends ArrayObject
         $accepts = explode(',', (string)$accepts);
 
         // If there is no accept, lets accept everything
-        if ($accepts === NULL)
+        if ($accepts === NULL) {
             return ['*' => ['*' => (float)static::DEFAULT_QUALITY]];
+        }
 
         // Parse the accept header qualities
         $accepts = self::accept_quality($accepts);
@@ -637,7 +636,7 @@ class Header extends ArrayObject
 
         foreach ($this->_accept_language_list as $accept_language) {
             foreach ($languages as $key => $language) {
-                if (($explicit && $accept_language == $language) OR
+                if (($explicit && $accept_language === $language) ||
                     (!$explicit && strpos($accept_language, substr($language, 0, 2)) === 0)) {
                     $new_order[] = $language;
 

@@ -39,9 +39,7 @@ function _str_ireplace($search, $replace, $str, & $count = NULL)
     }
 
     if (is_array($search)) {
-        $keys = array_keys($search);
-
-        foreach ($keys as $k) {
+        foreach (array_keys($search) as $k) {
             if (is_array($replace)) {
                 if (array_key_exists($k, $replace)) {
                     $str = UTF8::str_ireplace($search[$k], $replace[$k], $str, $count);

@@ -130,17 +130,18 @@ class View
      * @param string $key variable name
      *
      * @return  mixed
-     * @throws  \Exception
+     * @throws  Exception
      */
     public function & __get(string $key)
     {
         if (array_key_exists($key, $this->_data)) {
             return $this->_data[$key];
         }
-        if (array_key_exists($key, View::$_global_data)) {
+        if (array_key_exists($key, static::$_global_data)) {
             return static::$_global_data[$key];
         }
-        throw new \Exception('View variable is not set: :var', [':var' => $key]);
+
+        throw new Exception('View variable is not set: :var', [':var' => $key]);
     }
 
     /**

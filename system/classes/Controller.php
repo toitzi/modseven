@@ -30,25 +30,25 @@ abstract class Controller
 
     /**
      * Request that created the controller
-     * @var Request
+     * @var \Modseven\HTTP\Request
      */
-    public Request $request;
+    public \Modseven\HTTP\Request $request;
 
     /**
      * The response that will be returned from controller
-     * @var Response
+     * @var \Modseven\HTTP\Response
      */
-    public Response $response;
+    public \Modseven\HTTP\Response $response;
 
     /**
      * Creates a new controller instance. Each controller must be constructed
      * with the request object that created it.
      *
-     * @param Request $request Request that created the controller
-     * @param Response $response The request's response
+     * @param \Modseven\HTTP\Request $request Request that created the controller
+     * @param \Modseven\HTTP\Response $response The request's response
      * @return  void
      */
-    public function __construct(Request $request, Response $response)
+    public function __construct(\Modseven\HTTP\Request $request, \Modseven\HTTP\Response $response)
     {
         // Assign the request to the controller
         $this->request = $request;
@@ -82,10 +82,10 @@ abstract class Controller
      * 3. After the controller action is called, the [Controller::after] method
      * will be called.
      *
-     * @return  Response
+     * @return  \Modseven\HTTP\Response
      * @throws  HTTP\Exception
      */
-    public function execute(): Response
+    public function execute(): \Modseven\HTTP\Response
     {
         // Execute the "before action" method
         $this->before();

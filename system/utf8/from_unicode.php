@@ -26,11 +26,9 @@ function _from_unicode(array $arr)
 {
     ob_start();
 
-    $keys = array_keys($arr);
-
-    foreach ($keys as $k) {
+    foreach (array_keys($arr) as $k) {
         // ASCII range (including control chars)
-        if (($arr[$k] >= 0) AND ($arr[$k] <= 0x007f)) {
+        if (($arr[$k] >= 0) && ($arr[$k] <= 0x007f)) {
             echo chr($arr[$k]);
         } // 2 byte sequence
         elseif ($arr[$k] <= 0x07ff) {
@@ -40,7 +38,7 @@ function _from_unicode(array $arr)
         elseif ($arr[$k] == 0xFEFF) {
             // nop -- zap the BOM
         } // Test for illegal surrogates
-        elseif ($arr[$k] >= 0xD800 AND $arr[$k] <= 0xDFFF) {
+        elseif ($arr[$k] >= 0xD800 && $arr[$k] <= 0xDFFF) {
             // Found a surrogate
             throw new Exception("UTF8::from_unicode: Illegal surrogate at index: ':index', value: ':value'", [
                 ':index' => $k,
@@ -66,7 +64,7 @@ function _from_unicode(array $arr)
         }
     }
 
-    $result = ob_get_contents();
+    $result = ob_get_clean();
     ob_end_clean();
     return $result;
 }

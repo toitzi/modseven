@@ -376,7 +376,7 @@ abstract class Session
      */
     public function write(): bool
     {
-        if (headers_sent() || $this->_destroyed) {
+        if ($this->_destroyed || headers_sent()) {
             // Session cannot be written when the headers are sent or when
             // the session has been destroyed
             return FALSE;

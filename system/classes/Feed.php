@@ -97,8 +97,7 @@ class Feed
     {
         $info += ['title' => 'Generated Feed', 'link' => '', 'generator' => 'ModsevenPHP'];
 
-        $feed = '<?xml version="1.0" encoding="' . $encoding . '"?><rss version="2.0"><channel></channel></rss>';
-        $feed = simplexml_load_string($feed);
+        $feed = simplexml_load_string('<?xml version="1.0" encoding="' . $encoding . '"?><rss version="2.0"><channel></channel></rss>');
 
         foreach ($info as $name => $value) {
             if ($name === 'image') {

@@ -221,7 +221,7 @@ class Core
             set_exception_handler([Exception::class, 'handler']);
 
             // Enable Modseven error handling, converts all PHP errors to exceptions.
-            set_error_handler(['\Modseven\Core', 'error_handler']);
+            set_error_handler([__CLASS__, 'error_handler']);
         }
 
         /**
@@ -232,7 +232,7 @@ class Core
         }
 
         // Enable the Modseven shutdown handler, which catches E_FATAL errors.
-        register_shutdown_function(['\Modseven\Core', 'shutdown_handler']);
+        register_shutdown_function([__CLASS__, 'shutdown_handler']);
 
         if (isset($settings['expose'])) {
             static::$expose = (bool)$settings['expose'];
@@ -635,8 +635,8 @@ class Core
      * @param string $file file name
      * @param string $path key path to get
      * @param mixed $default default value if the path does not exist
-     * @return  string  message string for the given path
-     * @return  array   complete message list, when no path is specified
+     *
+     * @return  string|array  message string for the given path, complete message list, when no path is specified
      */
     public static function message(string $file, string $path = NULL, $default = NULL)
     {
@@ -677,8 +677,8 @@ class Core
      * @param string $file filename with subdirectory
      * @param string $ext extension to search for
      * @param boolean $array return an array of files?
-     * @return  array   a list of files when $array is TRUE
-     * @return  string  single file path
+     *
+     * @return  array|string   a list of files when $array is TRUE, single file path
      */
     public static function find_file(string $dir, string $file, ?string $ext = NULL, bool $array = FALSE)
     {

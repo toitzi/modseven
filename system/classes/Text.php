@@ -97,8 +97,6 @@ class Text
     {
         $end_char = $end_char ?? '…';
 
-        $limit = (int)$limit;
-
         if (trim($str) === '' || UTF8::strlen($str) <= $limit) {
             return $str;
         }
@@ -215,7 +213,7 @@ class Text
         }
 
         // Make sure alnum strings contain at least one letter and one digit
-        if ($type === 'alnum' AND $length > 1) {
+        if ($type === 'alnum' && $length > 1) {
             if (ctype_alpha($str)) {
                 // Add a random digit
                 $str[random_int(0, $length - 1)] = chr(random_int(48, 57));
@@ -303,7 +301,7 @@ class Text
         for ($i = 0, $max = strlen($word); $i < $max; ++$i) {
             foreach ($words as $w) {
                 // Once a difference is found, break out of the loops
-                if (!isset($w[$i]) OR $w[$i] !== $word[$i]) {
+                if (!isset($w[$i]) || $w[$i] !== $word[$i]) {
                     break 2;
                 }
             }
@@ -474,7 +472,7 @@ class Text
                 $item = '';
 
                 if ($unit < 100) {
-                    if ($last_unit < 100 AND $last_unit >= 20) {
+                    if ($last_unit < 100 && $last_unit >= 20) {
                         $last_item .= '-' . $name;
                     } else {
                         $item = $name;
@@ -579,9 +577,7 @@ class Text
             }
         } else {
             // Load the search group for this type
-            $group = Core::$config->load('user_agents')->$value;
-
-            foreach ($group as $search => $name) {
+            foreach (Core::$config->load('user_agents')->$value as $search => $name) {
                 if (stripos($agent, $search) !== FALSE) {
                     // Set the value name
                     return $name;
@@ -602,7 +598,7 @@ class Text
      *
      * @throws \Modseven\Exception
      */
-    protected static function _auto_link_urls_callback1(array $matches)
+    protected static function _auto_link_urls_callback1(array $matches) : string
     {
         return HTML::anchor($matches[0]);
     }
@@ -616,12 +612,12 @@ class Text
      *
      * @throws \Modseven\Exception
      */
-    protected static function _auto_link_urls_callback2(array $matches)
+    protected static function _auto_link_urls_callback2(array $matches) : string
     {
         return HTML::anchor('http://' . $matches[0], $matches[0]);
     }
 
-    protected static function _auto_link_emails_callback(array $matches)
+    protected static function _auto_link_emails_callback(array $matches) : string
     {
         return HTML::mailto($matches[0]);
     }

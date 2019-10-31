@@ -200,7 +200,7 @@ class Request implements HTTP\Request
         // Detect protocol (if present)
         // $allow_external = FALSE prevents the default index.php from
         // being able to proxy external pages.
-        if (!$allow_external OR (strpos($uri, '://') === FALSE AND strncmp($uri, '//', 2))) {
+        if (!$allow_external || (strpos($uri, '://') === FALSE && strncmp($uri, '//', 2))) {
             // Remove leading and trailing slashes from the URI
             $this->_uri = trim($uri, '/');
 
@@ -254,10 +254,10 @@ class Request implements HTTP\Request
 
             if ((
                     !empty($_SERVER['HTTPS'])
-                    AND filter_var($_SERVER['HTTPS'], FILTER_VALIDATE_BOOLEAN))
-                OR (isset($_SERVER['HTTP_X_FORWARDED_PROTO'])
-                    AND $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https')
-                AND in_array($_SERVER['REMOTE_ADDR'], static::$trusted_proxies, true)) {
+                    && filter_var($_SERVER['HTTPS'], FILTER_VALIDATE_BOOLEAN))
+                || ((isset($_SERVER['HTTP_X_FORWARDED_PROTO'])
+                    && $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https')
+                && in_array($_SERVER['REMOTE_ADDR'], static::$trusted_proxies, true))) {
                 // This request is secure
                 $secure = TRUE;
             }
@@ -277,15 +277,13 @@ class Request implements HTTP\Request
                 $requested_with = $_SERVER['HTTP_X_REQUESTED_WITH'];
             }
 
-            if (isset($_SERVER['HTTP_CF_CONNECTING_IP'])
-                AND isset($_SERVER['REMOTE_ADDR'])
-                AND in_array($_SERVER['REMOTE_ADDR'], static::$trusted_proxies, true)) {
+            if (isset($_SERVER['HTTP_CF_CONNECTING_IP'], $_SERVER['REMOTE_ADDR']) &&
+                in_array($_SERVER['REMOTE_ADDR'], static::$trusted_proxies, true)) {
 
                 // If using CloudFlare, client IP address is sent with this header
                 static::$client_ip = $_SERVER['HTTP_CF_CONNECTING_IP'];
-            } elseif (isset($_SERVER['HTTP_X_FORWARDED_FOR'])
-                AND isset($_SERVER['REMOTE_ADDR'])
-                AND in_array($_SERVER['REMOTE_ADDR'], static::$trusted_proxies, true)) {
+            } elseif (isset($_SERVER['HTTP_X_FORWARDED_FOR'], $_SERVER['REMOTE_ADDR']) &&
+                      in_array($_SERVER['REMOTE_ADDR'], static::$trusted_proxies, true)) {
                 // Use the forwarded IP address, typically set when the
                 // client is using a proxy server.
                 // Format: "X-Forwarded-For: client1, proxy1, proxy2"
@@ -294,9 +292,8 @@ class Request implements HTTP\Request
                 static::$client_ip = array_shift($client_ips);
 
                 unset($client_ips);
-            } elseif (isset($_SERVER['HTTP_CLIENT_IP'])
-                AND isset($_SERVER['REMOTE_ADDR'])
-                AND in_array($_SERVER['REMOTE_ADDR'], static::$trusted_proxies, true)) {
+            } elseif (isset($_SERVER['HTTP_CLIENT_IP'], $_SERVER['REMOTE_ADDR']) &&
+                      in_array($_SERVER['REMOTE_ADDR'], static::$trusted_proxies, true)) {
                 // Use the forwarded IP address, typically set when the
                 // client is using a proxy server.
                 $client_ips = explode(',', $_SERVER['HTTP_CLIENT_IP']);
@@ -574,7 +571,7 @@ class Request implements HTTP\Request
         }
 
         // Act as a setter for a single cookie
-        $this->_cookies[$key] = (string)$value;
+        $this->_cookies[$key] = $value;
 
         return $this;
     }
@@ -807,7 +804,7 @@ class Request implements HTTP\Request
             return $this;
         }
 
-        if ($this->_header->count() === 0 AND $this->is_initial()) {
+        if ($this->_header->count() === 0 && $this->is_initial()) {
             // Lazy load the request headers
             $this->_header = HTTP::request_headers();
         }

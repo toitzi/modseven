@@ -64,7 +64,7 @@ class Upload
             $filename = uniqid('', false) . $file['name'];
         }
 
-        if (Upload::$remove_spaces === TRUE) {
+        if (static::$remove_spaces === TRUE) {
             // Remove spaces from the filename
             $filename = preg_replace('/\s+/u', '_', $filename);
         }
@@ -74,7 +74,7 @@ class Upload
             $directory = static::$default_directory;
         }
 
-        if (!is_dir($directory) OR !is_writable(realpath($directory))) {
+        if (!is_dir($directory) || !is_writable(realpath($directory))) {
             throw new Exception('Directory :dir must be writable',
                 [':dir' => Debug::path($directory)]);
         }

@@ -83,10 +83,8 @@ class Exception extends \Exception
      */
     public static function handler(Throwable $t): void
     {
-        $response = self::_handler($t);
-
         // Send the response to the browser
-        echo $response->send_headers()->body();
+        echo self::_handler($t)->send_headers()->body();
 
         exit(1);
     }
@@ -105,9 +103,7 @@ class Exception extends \Exception
             self::log($t);
 
             // Generate the response
-            $response = self::response($t);
-
-            return $response;
+            return self::response($t);
         } catch (\Exception $e) {
             /**
              * Things are going *really* badly for us, We now have no choice
@@ -195,7 +191,7 @@ class Exception extends \Exception
                         }
 
                         // XDebug also has a different name for the parameters array
-                        if (isset($frame['params']) AND !isset($frame['args'])) {
+                        if (isset($frame['params']) && !isset($frame['args'])) {
                             $frame['args'] = $frame['params'];
                         }
                     }

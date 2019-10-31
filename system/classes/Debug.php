@@ -67,17 +67,15 @@ class Debug
             return '<small>float</small> ' . $var;
         }
         if (is_resource($var)) {
-            if (($type = get_resource_type($var)) === 'stream' AND $meta = stream_get_meta_data($var)) {
+            if (($type = get_resource_type($var)) === 'stream' && $meta = stream_get_meta_data($var)) {
                 $meta = stream_get_meta_data($var);
 
                 if (isset($meta['uri'])) {
                     $file = $meta['uri'];
 
-                    if (function_exists('stream_is_local')) {
-                        // Only exists on PHP >= 5.2.4
-                        if (stream_is_local($file)) {
-                            $file = Debug::path($file);
-                        }
+                    // Only exists on PHP >= 5.2.4
+                    if (function_exists('stream_is_local') && stream_is_local($file)) {
+                        $file = self::path($file);
                     }
 
                     return '<small>resource</small><span>(' . $type . ')</span> ' . htmlspecialchars($file, ENT_NOQUOTES, Core::$charset);
@@ -110,7 +108,7 @@ class Debug
 
             if ($marker === NULL) {
                 // Make a unique marker - force it to be alphanumeric so that it is always treated as a string array key
-                $marker = uniqid("\x00", false) . "x";
+                $marker = uniqid("\x00", false) . 'x';
             }
 
             if (empty($var)) {
@@ -255,7 +253,7 @@ class Debug
                 continue;
             }
 
-            if (isset($step['file']) && isset($step['line'])) {
+            if (isset($step['file'], $step['line'])) {
                 // Include the source of this step
                 $source = self::source($step['file'], $step['line']);
             }
@@ -347,7 +345,7 @@ class Debug
         }
 
         // Open the file and set the line position
-        $file = fopen($file, 'r');
+        $file = fopen($file, 'rb');
         $line = 0;
 
         // Set the reading range

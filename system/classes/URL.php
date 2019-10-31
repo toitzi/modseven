@@ -87,7 +87,7 @@ class URL
         if ($protocol instanceof Request) {
             if (!$protocol->secure()) {
                 // Use the current protocol
-                [$protocol] = explode('/', strtolower($protocol->protocol()));
+                [$protocol] = explode('/', strtolower($protocol->protocol()), 2);
             } else {
                 $protocol = 'https';
             }
@@ -98,7 +98,7 @@ class URL
             $protocol = parse_url($base_url, PHP_URL_SCHEME);
         }
 
-        if ($index === TRUE AND !empty(Core::$index_file)) {
+        if ($index === TRUE && !empty(Core::$index_file)) {
             // Add the index file to the URL
             $base_url .= Core::$index_file . '/';
         }

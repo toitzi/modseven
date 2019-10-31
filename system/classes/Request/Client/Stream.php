@@ -53,7 +53,7 @@ class Stream extends External
             $request->headers('content-type', 'application/x-www-form-urlencoded');
         }
 
-        [$protocol] = explode('/', $request->protocol());
+        [$protocol] = explode('/', $request->protocol(), 2);
 
         // Create the context
         $options = [

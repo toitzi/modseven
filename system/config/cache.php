@@ -1,9 +1,12 @@
 <?php
+
+use Modseven\Cache\Memcached;
+
 return [
     'default' => 'memcached',                            // allows to specify default cache directl from config file
     'prefix'  => 'cache1_',                          //used to avoid duplicates when using _sanitize_id
     'memcached' => [
-        'driver' => '\\Modseven\\Cache\\Memcached',
+        'driver' => Memcached::class,
         'servers' => [
             [
                 'host' => '172.17.215.46',
