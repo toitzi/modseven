@@ -25,7 +25,6 @@ use Modseven\Response;
 
 class HTTP extends External
 {
-
     /**
      * Sends the HTTP message [Request] to a remote server and processes
      * the response.

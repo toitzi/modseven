@@ -18,7 +18,6 @@ namespace Modseven;
 
 class Inflector
 {
-
     /**
      * cached inflections
      * @var array

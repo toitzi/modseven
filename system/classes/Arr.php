@@ -17,7 +17,6 @@ use Traversable;
 
 class Arr
 {
-
     /**
      * default delimiter for path()
      * @var string

@@ -18,7 +18,6 @@ use ErrorException;
 
 class Exception extends \Exception
 {
-
     /**
      *  PHP error code => human readable name
      * @var array

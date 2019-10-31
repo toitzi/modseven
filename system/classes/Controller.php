@@ -27,7 +27,6 @@ namespace Modseven;
 
 abstract class Controller
 {
-
     /**
      * Request that created the controller
      * @var \Modseven\HTTP\Request
@@ -141,11 +140,11 @@ abstract class Controller
      *
      * @param string $etag Resource Etag
      *
-     * @return Response
+     * @return \Modseven\HTTP\Response
      *
      * @throws Exception
      */
-    protected function check_cache(?string $etag = NULL): Response
+    protected function check_cache(?string $etag = NULL): \Modseven\HTTP\Response
     {
         return HTTP::check_cache($this->request, $this->response, $etag);
     }

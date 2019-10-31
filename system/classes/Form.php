@@ -18,7 +18,6 @@ namespace Modseven;
 
 class Form
 {
-
     /**
      * Generates an opening HTML form tag.
      *

@@ -15,10 +15,8 @@ namespace Modseven;
 
 use Exception;
 
-
 class Text
 {
-
     /**
      * number units and text equivalents
      * @var array
@@ -337,10 +335,10 @@ class Text
     public static function auto_link_urls(string $text): string
     {
         // Find and replace all http/https/ftp/ftps links that are not part of an existing html anchor
-        $text = preg_replace_callback('~\b(?<!href="|">)(?:ht|f)tps?://[^<\s]+(?:/|\b)~i', 'Text::_auto_link_urls_callback1', $text);
+        $text = preg_replace_callback('~\b(?<!href="|">)(?:ht|f)tps?://[^<\s]+(?:/|\b)~i', '\Modseven\Text::_auto_link_urls_callback1', $text);
 
         // Find and replace all naked www.links.com (without http://)
-        return preg_replace_callback('~\b(?<!://|">)www(?:\.[a-z0-9][-a-z0-9]*+)+\.[a-z]{2,6}[^<\s]*\b~i', 'Text::_auto_link_urls_callback2', $text);
+        return preg_replace_callback('~\b(?<!://|">)www(?:\.[a-z0-9][-a-z0-9]*+)+\.[a-z]{2,6}[^<\s]*\b~i', '\Modseven\Text::_auto_link_urls_callback2', $text);
     }
 
     /**
@@ -357,7 +355,7 @@ class Text
         // Find and replace all email addresses that are not part of an existing html mailto anchor
         // Note: The "58;" negative lookbehind prevents matching of existing encoded html mailto anchors
         //       The html entity for a colon (:) is &#58; or &#058; or &#0058; etc.
-        return preg_replace_callback('~\b(?<!href="mailto:|58;)(?!\.)[-+_a-z0-9.]++(?<!\.)@(?![-.])[-a-z0-9.]+(?<!\.)\.[a-z]{2,6}\b(?!</a>)~i', 'Text::_auto_link_emails_callback', $text);
+        return preg_replace_callback('~\b(?<!href="mailto:|58;)(?!\.)[-+_a-z0-9.]++(?<!\.)@(?![-.])[-a-z0-9.]+(?<!\.)\.[a-z]{2,6}\b(?!</a>)~i', '\Modseven\Text::_auto_link_emails_callback', $text);
     }
 
     /**

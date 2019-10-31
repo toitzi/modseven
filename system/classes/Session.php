@@ -17,7 +17,6 @@ use Exception;
 
 abstract class Session
 {
-
     /**
      * default session adapter
      * @var string
@@ -137,9 +136,9 @@ abstract class Session
      * Loads the raw session data string and returns it.
      *
      * @param string $id session id
-     * @return  string
+     * @return null|string
      */
-    abstract protected function _read(?string $id = NULL): string;
+    abstract protected function _read(?string $id = NULL): ?string;
 
     /**
      * Decodes the session data using [base64_decode].
@@ -189,7 +188,14 @@ abstract class Session
             $config = Core::$config->load('session')->get($type);
 
             // Set the session class name
-            $class = 'Session_' . ucfirst($type);
+            $class = $config['driver'];
+
+            if (!class_exists($class))
+            {
+                throw new \Modseven\Exception('Session driver class :driver not found.', [
+                   ':driver' => $class
+                ]);
+            }
 
             // Create a new session instance
             static::$instances[$type] = $session = new $class($config, $id);

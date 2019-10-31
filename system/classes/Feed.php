@@ -17,7 +17,6 @@ use function simplexml_load_string;
 
 class Feed
 {
-
     /**
      * Parses a remote feed into an array.
      *

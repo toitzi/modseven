@@ -18,7 +18,6 @@ use Modseven\HTTP\Exception;
 
 class Request implements HTTP\Request
 {
-
     /**
      * client user agent
      * @var string

@@ -59,7 +59,7 @@ class Reader implements \Modseven\Config\Reader
             return self::$_cache[$group];
         }
 
-        if (Core::$profiling && class_exists('Profiler', false))
+        if (Core::$profiling)
         {
             // Start a new benchmark
             $benchmark = Profiler::start('Config', __FUNCTION__);

@@ -20,9 +20,9 @@ class Cookie extends Session
 
     /**
      * @param string $id session id
-     * @return  string
+     * @return null|string
      */
-    protected function _read(?string $id = NULL): string
+    protected function _read(?string $id = NULL): ?string
     {
         return $this->get($this->_name, NULL);
     }

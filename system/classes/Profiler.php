@@ -18,7 +18,6 @@ namespace Modseven;
 
 class Profiler
 {
-
     /**
      * maximum number of application stats to keep
      * @var integer

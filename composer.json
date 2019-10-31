@@ -47,7 +47,7 @@
   },
   "autoload": {
     "psr-4": {
-      "KO7\\": "system/classes"
+      "Modseven\\": "system/classes"
     }
   },
   "minimum-stability": "dev",

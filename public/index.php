@@ -120,9 +120,6 @@ if (isset($_SERVER['KOSEVEN_ENV'])) {
 // Attach a new file writer to logging.
 \Modseven\Core::$log->attach(new \Modseven\Log\File(APPPATH . 'logs'));
 
-// Initialize Modules
-\Modseven\Core::modules($conf['modules']);
-
 // Cookie Salt
 \Modseven\Cookie::$salt = $conf['cookie']['salt'];
 

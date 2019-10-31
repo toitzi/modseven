@@ -24,7 +24,6 @@ namespace Modseven;
 
 class Fragment
 {
-
     /**
      * default number of seconds to cache for
      * @var integer
@@ -97,7 +96,7 @@ class Fragment
         $i18n = ($i18n === TRUE) ? I18n::lang() : '';
 
         // Note: $i18n and $name need to be delimited to prevent naming collisions
-        return 'Fragment::cache(' . $i18n . '+' . $name . ')';
+        return '\Modseven\Fragment::cache(' . $i18n . '+' . $name . ')';
     }
 
     /**

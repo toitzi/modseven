@@ -19,7 +19,6 @@ use ReflectionMethod;
 
 class Debug
 {
-
     /**
      * Returns an HTML string of debugging information about any number of
      * variables, each wrapped in a "pre" tag:

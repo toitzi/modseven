@@ -11,7 +11,6 @@
  * @copyright  (c) 2016-2019  Koseven Team
  * @copyright  (c) since 2019 Modseven Team
  * @license    https://koseven.ga/LICENSE
- * @since      3.1.0
  */
 
 namespace Modseven;

@@ -30,7 +30,6 @@ namespace Modseven;
 
 class I18n
 {
-
     /**
      * Target language: en-us, es-es, zh-cn, etc
      * @var  string

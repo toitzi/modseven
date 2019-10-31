@@ -22,7 +22,6 @@ use Modseven\Response;
 
 class Stream extends External
 {
-
     /**
      * Sends the HTTP message [Request] to a remote server and processes
      * the response.

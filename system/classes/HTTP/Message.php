@@ -6,7 +6,6 @@
  * @package    Modseven
  * @category   HTTP
  *
- * @since      3.1.0
  * @copyright  (c) 2007-2016  Kohana Team
  * @copyright  (c) 2016-2019  Koseven Team
  * @copyright  (c) since 2019 Modseven Team

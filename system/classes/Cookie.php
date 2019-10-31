@@ -15,7 +15,6 @@ namespace Modseven;
 
 class Cookie
 {
-
     /**
      * Magic salt to add to the cookie
      * @var string
@@ -60,11 +59,11 @@ class Cookie
      * @param string $key cookie name
      * @param mixed $default default value to return
      *
-     * @return  string
+     * @return null|string
      *
      * @throws Exception
      */
-    public static function get(string $key, $default = NULL): string
+    public static function get(string $key, $default = NULL): ?string
     {
         if (!isset($_COOKIE[$key])) {
             // The cookie does not exist
@@ -96,14 +95,14 @@ class Cookie
     /**
      * Generates a salt string for a cookie based on the name and value.
      *
-     * @param string $name name of cookie
-     * @param string $value value of cookie
+     * @param string      $name  name of cookie
+     * @param null|string $value value of cookie
      *
      * @return  string
      *
      * @throws Exception if Cookie::$salt is not configured
      */
-    public static function salt(string $name, string $value): string
+    public static function salt(string $name, ?string $value): string
     {
         // Require a valid salt
         if (!static::$salt) {

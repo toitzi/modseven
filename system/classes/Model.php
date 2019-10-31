@@ -18,16 +18,12 @@ abstract class Model
     /**
      * Create a new model instance.
      *
-     *     $model = Model::factory($name);
+     * @param string $class model name
      *
-     * @param string $name model name
      * @return  Model
      */
-    public static function factory(string $name): Model
+    public static function factory(string $class): Model
     {
-        // Add the model prefix
-        $class = 'Model_' . $name;
-
         return new $class;
     }
 

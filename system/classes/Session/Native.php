@@ -18,7 +18,6 @@ use Modseven\Session;
 
 class Native extends Session
 {
-
     /**
      * @return  string
      */
@@ -29,9 +28,9 @@ class Native extends Session
 
     /**
      * @param string $id session id
-     * @return  string
+     * @return null|string
      */
-    protected function _read(?string $id = NULL): string
+    protected function _read(?string $id = NULL): ?string
     {
         /**
          * session_set_cookie_params will override php ini settings

@@ -17,10 +17,10 @@ use ArrayAccess;
 use ReflectionException;
 use ReflectionMethod;
 use ReflectionFunction;
+use Modseven\Valid;
 
 class Validation implements ArrayAccess
 {
-
     protected array $_bound = [];
 
     // Bound values
@@ -302,11 +302,11 @@ class Validation implements ArrayAccess
                     // This is a lambda function, there is no error name (errors must be added manually)
                     $error_name = FALSE;
                     $passed = call_user_func_array($rule, $params);
-                } elseif (method_exists('Valid', $rule)) {
+                } elseif (method_exists(Valid::class, $rule)) {
                     // Use a method in this object
                     try
                     {
-                        $method = new ReflectionMethod('Valid', $rule);
+                        $method = new ReflectionMethod(Valid::class, $rule);
                     }
                     catch (ReflectionException $e)
                     {

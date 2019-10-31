@@ -18,7 +18,6 @@ use DateTimeZone;
 
 class Date
 {
-
     // Second amounts for various time increments
     public const YEAR = 31556926;
     public const MONTH = 2629744;

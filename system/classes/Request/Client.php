@@ -11,7 +11,6 @@
  * @copyright  (c) 2016-2019  Koseven Team
  * @copyright  (c) since 2019 Modseven Team
  * @license    https://koseven.ga/LICENSE
- * @since      3.1.0
  */
 
 namespace Modseven\Request;
@@ -23,12 +22,11 @@ use Modseven\Cache;
 
 abstract class Client
 {
-
     /**
      * Caching library for request caching
-     * @var Cache
+     * @var null|Cache
      */
-    protected Cache $_cache;
+    protected ?Cache $_cache = null;
 
     /**
      * Should redirects be followed?
@@ -53,7 +51,7 @@ abstract class Client
      * @var array
      */
     protected array $_header_callbacks = [
-        'Location' => 'Request_Client::on_header_location'
+        'Location' => '\Modseven\Request\Client::on_header_location'
     ];
 
     /**

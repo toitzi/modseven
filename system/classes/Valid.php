@@ -17,7 +17,6 @@ use ArrayObject;
 
 class Valid
 {
-
     /**
      * Checks a field against a regular expression.
      *

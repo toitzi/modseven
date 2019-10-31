@@ -23,10 +23,9 @@ use Composer\Autoload\ClassLoader;
 
 class Core
 {
-
     // Release version and codename
-    public const VERSION = '3.3.9';
-    public const CODENAME = 'karlsruhe';
+    public const VERSION = '1.0.0';
+    public const CODENAME = 'waehring';
 
     // Common environment type constants for consistency and convenience
     public const PRODUCTION = 10;
@@ -190,7 +189,7 @@ class Core
      * - Converts GET, POST, and COOKIE variables to the global character set
      *
      * @param array $settings Array of settings.  See above.
-     * @return  void
+     *
      * @throws  Exception
      */
     public static function init(?array $settings = NULL): void
@@ -319,111 +318,30 @@ class Core
     }
 
     /**
-     * Cache variables using current cache module if enabled, if not uses Modseven::file_cache
+     * Cache variables using current cache module
      *
      * @param string $name name of the cache
      * @param mixed $data data to cache
      * @param integer $lifetime number of seconds the cache is valid for
+     *
      * @return  mixed    for getting
-     * @return  boolean  for setting
+     *
      * @throws  Exception
      */
     public static function cache(string $name, $data = NULL, ?int $lifetime = NULL)
     {
-        //in case the Modseven_Cache is not yet loaded we need to use the normal cache...sucks but happens onload
-        if (class_exists('\Modseven\Cache')) {
-            //deletes the cache
-            if ($lifetime === 0) {
-                return Cache::instance()->delete($name);
-            }
-
-            //no data provided we read
-            if ($data === NULL) {
-                return Cache::instance()->get($name);
-            }
-            //saves data
-            return Cache::instance()->set($name, $data, $lifetime);
-        }
-        return self::file_cache($name, $data, $lifetime);
-    }
-
-    /**
-     * Provides simple file-based caching for strings and arrays:
-     *
-     * All caches are stored as PHP code, generated with [var_export][ref-var].
-     * Caching objects may not work as expected. Storing references or an
-     * object or array that has recursion will cause an E_FATAL.
-     *
-     * The cache directory and default cache lifetime is set by [Modseven::init]
-     *
-     * [ref-var]: http://php.net/var_export
-     *
-     * @param string $name name of the cache
-     * @param mixed $data data to cache
-     * @param integer $lifetime number of seconds the cache is valid for
-     * @return  mixed    for getting
-     * @return  boolean  for setting
-     * @throws  Exception
-     */
-    public static function file_cache(?string $name, $data = NULL, ?int $lifetime = NULL)
-    {
-        // Cache file is a hash of the name
-        $file = sha1($name) . '.txt';
-
-        // Cache directories are split by keys to prevent filesystem overload
-        $dir = static::$cache_dir . DIRECTORY_SEPARATOR . $file[0] . $file[1] . DIRECTORY_SEPARATOR;
-
-        if ($lifetime === NULL) {
-            // Use the default lifetime
-            $lifetime = static::$cache_life;
+        // deletes cache if lifetime expired
+        if ($lifetime === 0) {
+            return Cache::instance()->delete($name);
         }
 
+        //no data provided we read
         if ($data === NULL) {
-            if (is_file($dir . $file)) {
-                if ((time() - filemtime($dir . $file)) < $lifetime) {
-                    // Return the cache
-                    try {
-                        return unserialize(file_get_contents($dir . $file), null);
-                    } catch (\Exception $e) {
-                        // Cache is corrupt, let return happen normally.
-                    }
-                } else {
-                    try {
-                        // Cache has expired
-                        unlink($dir . $file);
-                    } catch (\Exception $e) {
-                        // Cache has mostly likely already been deleted,
-                        // let return happen normally.
-                    }
-                }
-            }
-
-            // Cache not found
-            return NULL;
+            return Cache::instance()->get($name);
         }
 
-        if (!is_dir($dir)) {
-            // Create the cache directory
-            if (!mkdir($dir, 0777, true) && !is_dir($dir)) {
-                throw new Exception('Directory ":dir" was not created', [
-                    ':dir' => $dir
-                ]);
-            }
-
-            // Set permissions (must be manually set to fix umask issues)
-            chmod($dir, 0777);
-        }
-
-        // Force the data to be a string
-        $data = serialize($data);
-
-        try {
-            // Write the cache
-            return (bool)file_put_contents($dir . $file, $data, LOCK_EX);
-        } catch (\Exception $e) {
-            // Failed to write cache
-            return FALSE;
-        }
+        //saves data
+        return Cache::instance()->set($name, $data, $lifetime);
     }
 
     /**
@@ -487,8 +405,7 @@ class Core
     }
 
     /**
-     * Changes the currently enabled modules. Module paths may be relative
-     * or absolute, but must point to a directory:
+     * Add a custom non-composer module
      *
      * @param array $modules list of module paths
      *
@@ -503,37 +420,25 @@ class Core
             return static::$_modules;
         }
 
-        // Start a new list of include paths, APPPATH first
-        $paths = [APPPATH];
-
-        foreach ($modules as $name => $path) {
+        foreach ($modules as $namespace => $path)
+        {
             if (is_dir($path)) {
                 // Add the module to include paths
-                $paths[] = $modules[$name] = realpath($path) . DIRECTORY_SEPARATOR;
+                self::register_module($namespace, $path);
+
+                // include a modules initialization file
+                $init = $path . 'init.php';
+
+                if (is_file($init)) {
+                    // Include the module initialization file once
+                    require_once $init;
+                }
             } else {
-                // This module is invalid, remove it
+                // This module is invalid
                 throw new Exception('Attempted to load an invalid or missing module \':module\' at \':path\'', [
-                    ':module' => $name,
-                    ':path' => Debug::path($path),
+                    ':module' => $namespace,
+                    ':path' => $path,
                 ]);
-            }
-        }
-
-        // Finish the include paths by adding SYSPATH
-        $paths[] = SYSPATH;
-
-        // Set the new include paths
-        static::$_paths = $paths;
-
-        // Set the current module list
-        static::$_modules = $modules;
-
-        foreach (static::$_modules as $path) {
-            $init = $path . 'init.php';
-
-            if (is_file($init)) {
-                // Include the module initialization file once
-                require_once $init;
             }
         }
 
@@ -701,7 +606,7 @@ class Core
             return static::$_files[$path . ($array ? '_array' : '_path')];
         }
 
-        if (static::$profiling === TRUE && class_exists('Profiler', FALSE)) {
+        if (static::$profiling === TRUE) {
             // Start a new benchmark
             $benchmark = Profiler::start('Modseven', __FUNCTION__);
         }

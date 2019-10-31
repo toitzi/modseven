@@ -28,7 +28,6 @@ namespace Modseven;
 
 class UTF8
 {
-
     /**
      * Does the server support UTF-8 natively?
      * @var null|boolean

@@ -30,7 +30,6 @@ use Modseven\Request\Exception;
 
 abstract class External extends Client
 {
-
     /**
      * Use:
      *  - Request_Client_Stream (default)
@@ -67,21 +66,19 @@ abstract class External extends Client
     public static function factory(array $options = [], ?string $client = NULL): External
     {
         // If no client given determine which one to use (prefer the faster and mature ones)
-        //@codeCoverageIgnoreStart
         if ($client === NULL) {
             if (static::$client === NULL) {
                 if (extension_loaded('curl')) {
-                    static::$client = 'Request_Client_Curl';
+                    static::$client = '\Modseven\Request\Client\Curl';
                 } elseif (extension_loaded('http')) {
-                    static::$client = 'Request_Client_HTTP';
+                    static::$client = '\Modseven\Request\Client\HTTP';
                 } else {
-                    static::$client = 'Request_Client_Stream';
+                    static::$client = '\Modseven\Request\Client\Stream';
                 }
             }
 
             $client = static::$client;
         }
-        //@codeCoverageIgnoreEnd
 
         $client = new $client($options);
 

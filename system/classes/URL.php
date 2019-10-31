@@ -17,7 +17,6 @@ namespace Modseven;
 
 class URL
 {
-
     /**
      * Fetches an absolute site URL based on a URI segment.
      *     echo URL::site('foo/bar');
@@ -38,7 +37,7 @@ class URL
 
         if (!UTF8::is_ascii($path)) {
             // Encode all non-ASCII characters, as per RFC 1738
-            $path = preg_replace_callback('~([^/#]+)~', 'URL::_rawurlencode_callback', $path);
+            $path = preg_replace_callback('~([^/#]+)~', '\Modseven\URL::_rawurlencode_callback', $path);
         }
 
         // Concat the URL

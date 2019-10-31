@@ -11,7 +11,6 @@
  * @copyright  (c) 2016-2019  Koseven Team
  * @copyright  (c) since 2019 Modseven Team
  * @license        https://koseven.ga/LICENSE
- * @since          3.1.0
  *
  * @package        Modseven\HTTP
  */
@@ -23,7 +22,6 @@ use http\Header;
 
 abstract class HTTP
 {
-
     /**
      * The default protocol to use if it cannot be detected
      *
@@ -54,16 +52,15 @@ abstract class HTTP
      * execution will halt and a 304 Not Modified will be sent if the
      * browser cache is up to date.
      *
-     * @param Request $request Request
-     * @param Response $response Response
+     * @param \Modseven\HTTP\Request  $request  Request
+     * @param \Modseven\HTTP\Response $response Response
      * @param string $etag Resource ETag
      *
-     * @return Response
+     * @return \Modseven\HTTP\Response
      *
-     * @throws Request\Exception
      * @throws HTTP\Exception
      */
-    public static function check_cache(Request $request, Response $response, ?string $etag = NULL): Response
+    public static function check_cache(\Modseven\HTTP\Request $request, \Modseven\HTTP\Response $response, ?string $etag = NULL): \Modseven\HTTP\Response
     {
         // Generate an etag if necessary
         if ($etag === NULL) {

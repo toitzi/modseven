@@ -9,7 +9,6 @@
  * @copyright  (c) since 2019 Modseven Team
  * @license        https://koseven.ga/LICENSE
  *
- * @since          3.1.0
  */
 
 namespace Modseven\Request\Client;
@@ -24,7 +23,6 @@ use Modseven\Response;
 
 class Internal extends Client
 {
-
     /**
      * Processes the request, executing the controller action that handles this
      * request, determined by the [Route].

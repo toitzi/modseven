@@ -16,7 +16,6 @@ namespace Modseven;
 
 class Num
 {
-
     public const ROUND_HALF_UP = 1;
     public const ROUND_HALF_DOWN = 2;
     public const ROUND_HALF_EVEN = 3;
@@ -93,7 +92,6 @@ class Num
      * @param integer $places decimal places
      * @param boolean $monetary monetary formatting?
      * @return  string
-     * @since   3.0.2
      */
     public static function format(float $number, int $places, bool $monetary = FALSE): string
     {

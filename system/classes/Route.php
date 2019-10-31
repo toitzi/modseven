@@ -42,7 +42,6 @@ use Exception;
 
 class Route
 {
-
     // Matches a URI group and captures the contents
     public const REGEX_GROUP = '\(((?:(?>[^()]+)|(?R))*)\)';
 
@@ -230,7 +229,7 @@ class Route
         if ($save === TRUE) {
             try {
                 // Cache all defined routes
-                Core::cache('Route::cache()', static::$_routes);
+                Core::cache('\Modseven\Route::cache()', static::$_routes);
             } catch (Exception $e) {
                 // We most likely have a lambda in a route, which cannot be cached
                 throw new \Modseven\Exception('One or more routes could not be cached (:message)', [
@@ -238,7 +237,7 @@ class Route
                 ], 0, $e);
             }
         } else {
-            if ($routes = Core::cache('Route::cache()')) {
+            if ($routes = Core::cache('\Modseven\Route::cache()')) {
                 if ($append) {
                     // Append cached routes
                     static::$_routes += $routes;

@@ -16,7 +16,6 @@ namespace Modseven;
 
 class HTML
 {
-
     /**
      * preferred order of attributes
      * @var array
