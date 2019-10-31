@@ -5,11 +5,10 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Koseven Installation</title>
-    <meta name="title" content="Koseven Installation">
+    <title>Modseven Installation</title>
+    <meta name="title" content="Modseven Installation">
     <meta name="description"
-          content="The following tests have been run to determine if Koseven will work in your environment.">
-    <meta name="author" content="Koseven Team">
+          content="The following tests have been run to determine if Modseven will work in your environment.">
     <style>
         body {
             margin: 0;
@@ -129,8 +128,8 @@
 
     <h1>Environment Tests</h1>
     <p>
-        The following tests have been run to determine if Koseven will work in your environment. If any of the tests
-        have failed, consult the <a href="https://docs.koseven.ga/guide/ko7/install" target="_blank">documentation</a>
+        The following tests have been run to determine if Modseven will work in your environment. If any of the tests
+        have failed, consult the <a href="https://docs.koseven.ga/guide/ko7/install" target="_blank">Koseven documentation</a>
         for more information on how to correct the problem.
     </p>
 
@@ -140,19 +139,29 @@
         <tbody>
         <tr>
             <th>PHP Version</th>
-            <?php if (version_compare(PHP_VERSION, '7', '>=')): ?>
+            <?php if (PHP_VERSION_ID >= 70400): ?>
                 <td class="pass">
                     <?php echo PHP_VERSION ?>
                 </td>
             <?php else: $failed = TRUE ?>
-                <td class="fail">Koseven requires PHP 7 or newer, this version is
+                <td class="fail">Koseven requires PHP 7.4 or newer, this version is
                     <?php echo PHP_VERSION ?>.
                 </td>
             <?php endif ?>
         </tr>
         <tr>
+            <th>Composer initialized</th>
+            <?php if (is_dir(DOCROOT . 'vendor') && is_file(DOCROOT . 'vendor/autoload.php')): ?>
+                <td class="pass">Pass</td>
+            <?php else: $failed = TRUE ?>
+                <td class="fail">The configured <code>vendor</code> directory does not exist or does not contain
+                    required files. Please run <code>composer install</code> and refresh the page.
+                </td>
+            <?php endif ?>
+        </tr>
+        <tr>
             <th>System Directory</th>
-            <?php if (is_dir(SYSPATH) AND is_file(SYSPATH . 'classes/Core.php')): ?>
+            <?php if (is_dir(SYSPATH) && is_file(SYSPATH . 'classes/Core.php')): ?>
                 <td class="pass">
                     <?php echo SYSPATH ?>
                 </td>
@@ -164,7 +173,7 @@
         </tr>
         <tr>
             <th>Application Directory</th>
-            <?php if (is_dir(APPPATH) AND is_file(APPPATH . 'routes.php')): ?>
+            <?php if (is_dir(APPPATH) && is_file(APPPATH . 'routes.php')): ?>
                 <td class="pass">
                     <?php echo APPPATH ?>
                 </td>
@@ -176,7 +185,7 @@
         </tr>
         <tr>
             <th>Cache Directory</th>
-            <?php if (is_dir(APPPATH) AND is_dir(APPPATH . 'cache') AND is_writable(APPPATH . 'cache')): ?>
+            <?php if (is_dir(APPPATH) && is_dir(APPPATH . 'cache') && is_writable(APPPATH . 'cache')): ?>
                 <td class="pass">
                     <?php echo APPPATH . 'cache/' ?>
                 </td>
@@ -186,7 +195,7 @@
         </tr>
         <tr>
             <th>Logs Directory</th>
-            <?php if (is_dir(APPPATH) AND is_dir(APPPATH . 'logs') AND is_writable(APPPATH . 'logs')): ?>
+            <?php if (is_dir(APPPATH) && is_dir(APPPATH . 'logs') && is_writable(APPPATH . 'logs')): ?>
                 <td class="pass">
                     <?php echo APPPATH . 'logs/' ?>
                 </td>
@@ -211,8 +220,7 @@
             <?php if (function_exists('spl_autoload_register')): ?>
                 <td class="pass">Pass</td>
             <?php else: $failed = TRUE ?>
-                <td class="fail">PHP <a href="http://www.php.net/spl">SPL</a> is either not loaded or not compiled in.
-                </td>
+                <td class="fail">PHP <a href="http://www.php.net/spl">SPL</a> is either not loaded or not compiled in.</td>
             <?php endif ?>
         </tr>
         <tr>
@@ -236,36 +244,8 @@
             <?php endif ?>
         </tr>
         <tr>
-            <th>Iconv Extension Loaded</th>
-            <?php if (extension_loaded('iconv')): ?>
-                <td class="pass">Pass</td>
-            <?php else: $failed = TRUE ?>
-                <td class="fail">The <a href="http://php.net/iconv">iconv</a> extension is not loaded.</td>
-            <?php endif ?>
-        </tr>
-        <?php if (extension_loaded('mbstring')): ?>
-            <tr>
-                <th>Mbstring Not Overloaded</th>
-                <?php if (ini_get('mbstring.func_overload') & MB_OVERLOAD_STRING): $failed = TRUE ?>
-                    <td class="fail">The <a href="http://php.net/mbstring">mbstring</a> extension is overloading PHP's
-                        native string functions.
-                    </td>
-                <?php else: ?>
-                    <td class="pass">Pass</td>
-                <?php endif ?>
-            </tr>
-        <?php endif ?>
-        <tr>
-            <th>Character Type (CTYPE) Extension</th>
-            <?php if (!function_exists('ctype_digit')): $failed = TRUE ?>
-                <td class="fail">The <a href="http://php.net/ctype">ctype</a> extension is not enabled.</td>
-            <?php else: ?>
-                <td class="pass">Pass</td>
-            <?php endif ?>
-        </tr>
-        <tr>
             <th>URI Determination</th>
-            <?php if (isset($_SERVER['REQUEST_URI']) OR isset($_SERVER['PHP_SELF']) OR isset($_SERVER['PATH_INFO'])): ?>
+            <?php if (isset($_SERVER['REQUEST_URI']) || isset($_SERVER['PHP_SELF']) || isset($_SERVER['PATH_INFO'])): ?>
                 <td class="pass">Pass</td>
             <?php else: $failed = TRUE ?>
                 <td class="fail">Neither <code>$_SERVER['REQUEST_URI']</code>, <code>$_SERVER['PHP_SELF']</code>, or
@@ -290,7 +270,7 @@
     <h1>Optional Tests</h1>
 
     <p>
-        The following extensions are not required to run the Koseven core, but if enabled can provide access to
+        The following extensions are not required to run the Modseven core, but if enabled can provide access to
         additional classes.
     </p>
 

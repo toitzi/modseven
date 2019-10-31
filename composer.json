@@ -37,6 +37,7 @@
     "ext-yaml": "*",
     "ext-http": "*",
     "ext-ctype": "*",
+    "ext-iconv": "*",
     "ext-mbstring": "*",
     "ext-fileinfo": "*",
     "ext-openssl": "*"
