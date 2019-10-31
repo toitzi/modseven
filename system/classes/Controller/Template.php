@@ -10,8 +10,8 @@
 
 namespace Modseven\Controller;
 
-use \Modseven\Controller;
-use \Modseven\View;
+use Modseven\Controller;
+use Modseven\View;
 
 abstract class Template extends Controller
 {

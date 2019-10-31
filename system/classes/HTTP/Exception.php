@@ -2,6 +2,8 @@
 
 namespace Modseven\HTTP;
 
+use Throwable;
+
 class Exception extends \Modseven\Exception
 {
 
@@ -21,9 +23,9 @@ class Exception extends \Modseven\Exception
      * @param integer $code the http status code
      * @param string $message status message, custom content to display with error
      * @param array $variables translation variables
-     * @param \Throwable|null $previous
+     * @param Throwable|null $previous
      */
-    public function __construct(string $message = '', ?array $variables = NULL, int $code = 0, \Throwable $previous = NULL)
+    public function __construct(string $message = '', ?array $variables = NULL, int $code = 0, Throwable $previous = NULL)
     {
         $this->_code = $code;
         parent::__construct($message, $variables, $code, $previous);

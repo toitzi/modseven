@@ -20,14 +20,15 @@
 
 namespace Modseven\Request\Client;
 
-use \Modseven\Core;
-use \Modseven\Arr;
-use \Modseven\Profiler;
-use \Modseven\Response;
-use \Modseven\Request;
-use \Modseven\Request\Exception;
+use Modseven\Core;
+use Modseven\Arr;
+use Modseven\Profiler;
+use Modseven\Request\Client;
+use Modseven\Response;
+use Modseven\Request;
+use Modseven\Request\Exception;
 
-abstract class External extends \Modseven\Request\Client
+abstract class External extends Client
 {
 
     /**

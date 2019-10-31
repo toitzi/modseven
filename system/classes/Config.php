@@ -20,10 +20,10 @@
 
 namespace Modseven;
 
-use \Modseven\Config\Source;
-use \Modseven\Config\Reader;
-use \Modseven\Config\Writer;
-use \Modseven\Config\Group;
+use Modseven\Config\Source;
+use Modseven\Config\Reader;
+use Modseven\Config\Writer;
+use Modseven\Config\Group;
 
 class Config
 {

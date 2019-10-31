@@ -2,9 +2,9 @@
 // Unique error identifier
 $error_id = uniqid('error', false);
 
-use \Modseven\Core;
-use \Modseven\Debug;
-use \Modseven\I18n;
+use Modseven\Core;
+use Modseven\Debug;
+use Modseven\I18n;
 
 ?>
 <style type="text/css">

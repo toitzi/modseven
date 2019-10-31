@@ -13,6 +13,8 @@
 
 namespace Modseven;
 
+use Traversable;
+
 class Arr
 {
 
@@ -218,7 +220,7 @@ class Arr
         }
 
         // Possibly a Traversable object, functionally the same as an array
-        return (is_object($value) && $value instanceof \Traversable);
+        return (is_object($value) && $value instanceof Traversable);
     }
 
     /**

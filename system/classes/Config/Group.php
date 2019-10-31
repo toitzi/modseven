@@ -15,7 +15,7 @@
 
 namespace Modseven\Config;
 
-use \Modseven\Config;
+use Modseven\Config;
 use ArrayObject;
 
 class Group extends ArrayObject

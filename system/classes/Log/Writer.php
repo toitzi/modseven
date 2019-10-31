@@ -10,8 +10,9 @@
 
 namespace Modseven\Log;
 
-use \Modseven\Log;
-use \Modseven\Date;
+use Exception;
+use Modseven\Log;
+use Modseven\Date;
 
 abstract class Writer {
 
@@ -58,7 +59,7 @@ abstract class Writer {
      * @param array  $message   Message to log
      * @param string $format    Format of the log line
      *
-     * @throws \Exception
+     * @throws Exception
      *
      * @return  string
      */

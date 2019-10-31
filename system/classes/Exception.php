@@ -13,6 +13,9 @@
 
 namespace Modseven;
 
+use Throwable;
+use ErrorException;
+
 class Exception extends \Exception
 {
 
@@ -50,9 +53,9 @@ class Exception extends \Exception
      * @param string $message error message
      * @param array $variables translation variables
      * @param integer|string $code the exception code
-     * @param \Throwable $previous Previous throwable
+     * @param Throwable $previous Previous throwable
      */
-    public function __construct(string $message = '', ?array $variables = NULL, int $code = 0, \Throwable $previous = NULL)
+    public function __construct(string $message = '', ?array $variables = NULL, int $code = 0, Throwable $previous = NULL)
     {
         // Set the message
         $message = I18n::get([$message, $variables]);
@@ -69,10 +72,10 @@ class Exception extends \Exception
      * Inline exception handler, displays the error message, source of the
      * exception, and the stack trace of the error.
      *
-     * @param \Throwable $t
+     * @param Throwable $t
      * @return  void
      */
-    public static function handler(\Throwable $t): void
+    public static function handler(Throwable $t): void
     {
         $response = self::_handler($t);
 
@@ -86,10 +89,10 @@ class Exception extends \Exception
      * Exception handler, logs the exception and generates a Response object
      * for display.
      *
-     * @param \Throwable $t
+     * @param Throwable $t
      * @return  Response
      */
-    public static function _handler(\Throwable $t): Response
+    public static function _handler(Throwable $t): Response
     {
         try {
             // Log the exception
@@ -119,11 +122,11 @@ class Exception extends \Exception
     /**
      * Logs an exception.
      *
-     * @param \Throwable $t
+     * @param Throwable $t
      * @param string $level
      * @return  void
      */
-    public static function log(\Throwable $t, string $level = Log::EMERGENCY): void
+    public static function log(Throwable $t, string $level = Log::EMERGENCY): void
     {
         if (is_object(Core::$log)) {
             // Create a text version of the exception
@@ -137,10 +140,10 @@ class Exception extends \Exception
     /**
      * Get a Response object representing the exception
      *
-     * @param \Throwable $t
+     * @param Throwable $t
      * @return  Response
      */
-    public static function response(\Throwable $t): Response
+    public static function response(Throwable $t): Response
     {
         try {
             // Get the exception information
@@ -161,7 +164,7 @@ class Exception extends \Exception
             }
 
 
-            if ($t instanceof \ErrorException) {
+            if ($t instanceof ErrorException) {
                 /**
                  * If XDebug is installed, and this is a fatal error,
                  * use XDebug to generate the stack trace
@@ -258,10 +261,10 @@ class Exception extends \Exception
      *
      * Error [ Code ]: Message ~ File [ Line ]
      *
-     * @param \Throwable $t
+     * @param Throwable $t
      * @return  string
      */
-    public static function text(\Throwable $t): string
+    public static function text(Throwable $t): string
     {
         return sprintf('%s [ %s ]: %s ~ %s [ %d ]',
             get_class($t), $t->getCode(), strip_tags($t->getMessage()), Debug::path($t->getFile()), $t->getLine());

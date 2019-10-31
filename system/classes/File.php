@@ -13,6 +13,8 @@
 
 namespace Modseven;
 
+use finfo;
+
 class File
 {
 
@@ -41,7 +43,7 @@ class File
         }
 
         if (class_exists('finfo', false) && $info =
-                new \finfo(defined('FILEINFO_MIME_TYPE') ? FILEINFO_MIME_TYPE : FILEINFO_MIME)) {
+                new finfo(defined('FILEINFO_MIME_TYPE') ? FILEINFO_MIME_TYPE : FILEINFO_MIME)) {
             return $info->file($filename);
         }
 

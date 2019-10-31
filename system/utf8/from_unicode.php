@@ -11,7 +11,7 @@
  * @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt
  */
 
-use \Modseven\UTF8\Exception;
+use Modseven\UTF8\Exception;
 
 function _from_unicode($arr)
 {

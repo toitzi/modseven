@@ -14,13 +14,15 @@
 
 namespace Modseven\Request\Client;
 
-use \Modseven\Core;
-use \Modseven\Profiler;
-use \Modseven\Request;
-use \Modseven\Request\Exception;
-use \Modseven\Response;
+use ReflectionClass;
+use Modseven\Core;
+use Modseven\Profiler;
+use Modseven\Request;
+use Modseven\Request\Client;
+use Modseven\Request\Exception;
+use Modseven\Response;
 
-class Internal extends \Modseven\Request\Client
+class Internal extends Client
 {
 
     /**
@@ -85,7 +87,7 @@ class Internal extends \Modseven\Request\Client
             }
 
             // Load the controller using reflection
-            $class = new \ReflectionClass($controller);
+            $class = new ReflectionClass($controller);
 
             if ($class->isAbstract()) {
                 throw new Exception('Cannot create instances of abstract :controller', [

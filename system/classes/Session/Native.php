@@ -13,8 +13,8 @@
 
 namespace Modseven\Session;
 
-use \Modseven\Cookie;
-use \Modseven\Session;
+use Modseven\Cookie;
+use Modseven\Session;
 
 class Native extends Session
 {

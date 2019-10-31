@@ -11,10 +11,11 @@
 
 namespace Modseven\Config\File;
 
-use \Modseven\Core;
-use \Modseven\Arr;
-use \Modseven\Exception;
-use \Modseven\Profiler;
+use JsonException;
+use Modseven\Core;
+use Modseven\Arr;
+use Modseven\Exception;
+use Modseven\Profiler;
 
 class Reader implements \Modseven\Config\Reader
 {
@@ -85,7 +86,7 @@ class Reader implements \Modseven\Config\Reader
                 {
                     $value = json_decode($this->read_from_ob($path), true, 512, JSON_THROW_ON_ERROR);
                 }
-                catch (\JsonException $e)
+                catch (JsonException $e)
                 {
                     throw new Exception('Error parsing JSON configuration file: :file', [
                         ':file' => $path

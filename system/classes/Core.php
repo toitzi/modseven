@@ -18,6 +18,8 @@
 
 namespace Modseven;
 
+use Composer\Autoload\ClassLoader;
+
 class Core
 {
 
@@ -127,7 +129,7 @@ class Core
 
     /**
      * Composer Autoloader Object
-     * @var \Composer\Autoload\ClassLoader
+     * @var ClassLoader
      */
     public static $autoloader;
 

@@ -10,9 +10,9 @@
 
 namespace Modseven;
 
-use \Psr\Log\LogLevel;
-use \Psr\Log\LoggerTrait;
-use \Psr\Log\InvalidArgumentException;
+use Psr\Log\LogLevel;
+use Psr\Log\LoggerTrait;
+use Psr\Log\InvalidArgumentException;
 
 class Log extends LogLevel {
 

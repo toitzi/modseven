@@ -16,10 +16,10 @@
 
 namespace Modseven\Request;
 
-use \Modseven\Arr;
-use \Modseven\Request;
-use \Modseven\Response;
-use \Modseven\Cache;
+use Modseven\Arr;
+use Modseven\Request;
+use Modseven\Response;
+use Modseven\Cache;
 
 abstract class Client
 {

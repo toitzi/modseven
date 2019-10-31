@@ -11,9 +11,18 @@
  * @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt
  */
 
-use \Modseven\UTF8\Exception;
+use Modseven\UTF8\Exception;
 
-function _ord($chr)
+/**
+ * Converts an ASCII value to an integer
+ *
+ * @param string $chr ASCII Character
+ *
+ * @return int
+ *
+ * @throws Exception
+ */
+function _ord(string $chr) : int
 {
     $ord0 = ord($chr);
 
@@ -65,12 +74,16 @@ function _ord($chr)
         throw new Exception('Short sequence - at least 6 bytes expected, only 5 seen');
     }
 
-    if ($ord0 >= 252 && $ord0 <= 253)
-        return ($ord0 - 252) * 1073741824 + ($ord1 - 128) * 16777216 + ($ord2 - 128) * 262144 + ($ord3 - 128) * 4096 + ($ord4 - 128) * 64 + (ord($chr[5]) - 128);
+    if ($ord0 >= 252 && $ord0 <= 253) {
+        return ($ord0 - 252) * 1073741824 + ($ord1 - 128) * 16777216 + ($ord2 - 128) * 262144 + ($ord3 - 128) * 4096 +
+               ($ord4 - 128) * 64 + (ord($chr[5]) - 128);
+    }
 
     if ($ord0 >= 254 && $ord0 <= 255) {
         throw new Exception("Invalid UTF-8 with surrogate ordinal ':ordinal'", [
             ':ordinal' => $ord0,
         ]);
     }
+
+    throw new Exception('Could not convert the ASCII character to an integer.');
 }

@@ -35,7 +35,7 @@
 
 namespace Modseven;
 
-use \Modseven\Cache\Exception;
+use Modseven\Cache\Exception;
 
 abstract class Cache
 {

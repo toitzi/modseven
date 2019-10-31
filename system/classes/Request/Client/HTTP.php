@@ -16,9 +16,12 @@
 
 namespace Modseven\Request\Client;
 
-use \Modseven\Request;
-use \Modseven\Request\Exception;
-use \Modseven\Response;
+use http\Client;
+use http\Exception\RuntimeException;
+
+use Modseven\Request;
+use Modseven\Request\Exception;
+use Modseven\Response;
 
 class HTTP extends External
 {
@@ -37,7 +40,7 @@ class HTTP extends External
     public function _send_message(Request $request, Response $response): Response
     {
         // Instance a new Client
-        $client = new \http\Client;
+        $client = new Client;
 
         // Process cookies
         if ($cookies = $request->cookie()) {
@@ -45,7 +48,7 @@ class HTTP extends External
         }
 
         // Instance HTTP Request Object
-        $http_request = new \http\Client\Request($request->method(), $request->uri());
+        $http_request = new Client\Request($request->method(), $request->uri());
 
         // Set custom cURL options
         if ($this->_options) {
@@ -71,7 +74,7 @@ class HTTP extends External
         // Execute call, will throw an Runtime Exception if a stream is not available
         try {
             $client->enqueue($http_request)->send();
-        } catch (\http\Exception\RuntimeException $e) {
+        } catch (RuntimeException $e) {
             throw new Exception($e->getMessage());
         }
 

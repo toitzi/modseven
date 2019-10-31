@@ -13,6 +13,10 @@
 
 namespace Modseven;
 
+use ReflectionException;
+use ReflectionFunction;
+use ReflectionMethod;
+
 class Debug
 {
 
@@ -232,7 +236,7 @@ class Debug
      * @param array $trace
      *
      * @return  array
-     * @throws \ReflectionException
+     * @throws ReflectionException
      *
      */
     public static function trace(?array $trace = NULL): array
@@ -283,12 +287,12 @@ class Debug
                 } else {
                     if (isset($step['class'])) {
                         if (method_exists($step['class'], $step['function'])) {
-                            $reflection = new \ReflectionMethod($step['class'], $step['function']);
+                            $reflection = new ReflectionMethod($step['class'], $step['function']);
                         } else {
-                            $reflection = new \ReflectionMethod($step['class'], '__call');
+                            $reflection = new ReflectionMethod($step['class'], '__call');
                         }
                     } else {
-                        $reflection = new \ReflectionFunction($step['function']);
+                        $reflection = new ReflectionFunction($step['function']);
                     }
 
                     // Get the function parameters

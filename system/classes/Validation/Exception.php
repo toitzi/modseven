@@ -11,7 +11,7 @@
 
 namespace Modseven\Validation\Exception;
 
-use \Modseven\Validation;
+use Modseven\Validation;
 
 class Exception extends \Modseven\Exception
 {

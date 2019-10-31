@@ -12,13 +12,13 @@
 
 namespace Modseven\Cache;
 
-use \Modseven\Arr;
-use \Modseven\Cache;
-use \Modseven\Request;
-use \Modseven\Request\Client;
-use \Modseven\Response;
-use \Modseven\HTTP\Header;
-use \Modseven\HTTP\Request as HTTP_Request;
+use Modseven\Arr;
+use Modseven\Cache;
+use Modseven\Request;
+use Modseven\Request\Client;
+use Modseven\Response;
+use Modseven\HTTP\Header;
+use Modseven\HTTP\Request as HTTP_Request;
 
 class HTTP
 {

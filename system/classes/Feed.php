@@ -13,6 +13,8 @@
 
 namespace Modseven;
 
+use function simplexml_load_string;
+
 class Feed
 {
 
@@ -43,7 +45,7 @@ class Feed
         }
 
         // Load the feed
-        $feed = \simplexml_load_string($feed, 'SimpleXMLElement', LIBXML_NOCDATA);
+        $feed = simplexml_load_string($feed, 'SimpleXMLElement', LIBXML_NOCDATA);
 
         // Restore error reporting
         error_reporting($error_level);

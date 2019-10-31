@@ -17,12 +17,13 @@
 
 namespace Modseven\HTTP;
 
-use \Modseven\Core;
-use \Modseven\Cookie;
-use \Modseven\Text;
-use \Modseven\Response;
+use ArrayObject;
+use Modseven\Core;
+use Modseven\Cookie;
+use Modseven\Text;
+use Modseven\Response;
 
-class Header extends \ArrayObject
+class Header extends ArrayObject
 {
 
     // Default Accept-* quality value if none supplied

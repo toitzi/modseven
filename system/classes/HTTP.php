@@ -18,6 +18,9 @@
 
 namespace Modseven;
 
+use http\Env;
+use http\Header;
+
 abstract class HTTP
 {
 
@@ -103,7 +106,7 @@ abstract class HTTP
             // Use the fast method to parse header string
             // Ignore Code Coverage in case pecl_http is not loaded
             // @codeCoverageIgnoreStart
-            $headers = (new \http\Header)->parse($header_string);
+            $headers = (new Header)->parse($header_string);
             return new HTTP\Header($headers);
             // @codeCoverageIgnoreEnd
         }
@@ -158,7 +161,7 @@ abstract class HTTP
             // Return the faster method
             // Ignore Code Coverage in case pecl_http is not loaded
             // @codeCoverageIgnoreStart
-            $headers = (new \http\Env)->getRequestHeader();
+            $headers = (new Env)->getRequestHeader();
             return new HTTP\Header($headers);
             // @codeCoverageIgnoreEnd
         }

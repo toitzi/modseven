@@ -16,9 +16,9 @@
 
 namespace Modseven\Request\Client;
 
-use \Modseven\Request;
-use \Modseven\Request\Exception;
-use \Modseven\Response;
+use Modseven\Request;
+use Modseven\Request\Exception;
+use Modseven\Response;
 
 class Curl extends External
 {

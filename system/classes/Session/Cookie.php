@@ -13,7 +13,7 @@
 
 namespace Modseven\Session;
 
-use \Modseven\Session;
+use Modseven\Session;
 
 class Cookie extends Session
 {

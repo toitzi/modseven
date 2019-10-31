@@ -10,8 +10,8 @@
 
 namespace Modseven\Log;
 
-use \Modseven\Debug;
-use \Modseven\Exception;
+use Modseven\Debug;
+use Modseven\Exception;
 
 class File extends Writer {
 

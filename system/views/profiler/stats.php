@@ -4,9 +4,9 @@
 
 <?php
 
-use \Modseven\Profiler;
-use \Modseven\I18n;
-use \Modseven\HTML;
+use Modseven\Profiler;
+use Modseven\I18n;
+use Modseven\HTML;
 
 $group_stats = Profiler::group_stats();
 $group_cols = ['min', 'max', 'average', 'total'];
