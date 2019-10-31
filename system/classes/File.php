@@ -24,7 +24,10 @@ class File
      * determining the mime type of a file.
      *
      * @param string $filename file name or path
+     *
      * @return  string|FALSE  mime type on success
+     *
+     * @throws Exception
      */
     public static function mime(string $filename)
     {
@@ -64,7 +67,10 @@ class File
      * Return the mime type of an extension.
      *
      * @param string $extension php, pdf, txt, etc
+     *
      * @return  string|FALSE  mime type on success
+     *
+     * @throws Exception
      */
     public static function mime_by_ext(string $extension)
     {
@@ -78,7 +84,10 @@ class File
      * Lookup MIME types for a file
      *
      * @param string $extension Extension to lookup
+     *
      * @return array Array of MIMEs associated with the specified extension
+     *
+     * @throws Exception
      */
     public static function mimes_by_ext(string $extension): array
     {
@@ -92,7 +101,10 @@ class File
      * Lookup a single file extension by MIME type.
      *
      * @param string $type MIME type to lookup
+     *
      * @return  string|false   First file extension matching or false
+     *
+     * @throws Exception
      */
     public static function ext_by_mime(string $type)
     {
@@ -109,7 +121,10 @@ class File
      * Lookup file extensions by MIME type
      *
      * @param string $type File MIME type
+     *
      * @return  array|false   File extensions matching MIME type or false if none
+     *
+     * @throws Exception
      */
     public static function exts_by_mime(string $type)
     {

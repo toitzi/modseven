@@ -32,7 +32,14 @@
     "php": ">=7.4",
     "ext-dom": "*",
     "psr/log": "1.1.*",
-    "ext-json": "*"
+    "ext-json": "*",
+    "ext-intl": "*",
+    "ext-yaml": "*",
+    "ext-http": "*",
+    "ext-ctype": "*",
+    "ext-mbstring": "*",
+    "ext-fileinfo": "*",
+    "ext-openssl": "*"
   }
   ,
   "require-dev": {

@@ -252,7 +252,10 @@ class Header extends ArrayObject
      *
      * @param array $types the content types to examine
      * @param boolean $explicit only allow explicit references, no wildcards
+     *
      * @return  string  name of the preferred content type
+     *
+     * @throws Exception
      */
     public function preferred_accept(array $types, bool $explicit = FALSE): string
     {
@@ -279,7 +282,10 @@ class Header extends ArrayObject
      *
      * @param string $type
      * @param boolean $explicit explicit check, excludes `*`
+     *
      * @return  mixed
+     *
+     * @throws Exception
      */
     public function accepts_at_quality(string $type, bool $explicit = FALSE)
     {
@@ -296,7 +302,15 @@ class Header extends ArrayObject
 
         // If not a real mime, try and find it in config
         if (strpos($type, '/') === FALSE) {
-            $mime = Core::$config->load('mimes.' . $type);
+
+            try
+            {
+                $mime = Core::$config->load('mimes.' . $type);
+            }
+            catch (\Modseven\Exception $e)
+            {
+                throw new Exception($e->getMessage(), null, $e->getCode(), $e);
+            }
 
             if ($mime === NULL) {
                 return false;
@@ -741,7 +755,10 @@ class Header extends ArrayObject
      * @param Response $response header to send
      * @param boolean $replace replace existing value
      * @param callback $callback optional callback to replace PHP header function
+     *
      * @return  mixed
+     *
+     * @throws \Modseven\Exception
      */
     public function send_headers(Response $response, bool $replace = FALSE, $callback = NULL)
     {
@@ -790,7 +807,10 @@ class Header extends ArrayObject
      *
      * @param array $headers headers to send to php
      * @param boolean $replace replace existing headers
+     *
      * @return  self
+     *
+     * @throws \Modseven\Exception
      */
     protected function _send_headers_to_php(array $headers, bool $replace): self
     {

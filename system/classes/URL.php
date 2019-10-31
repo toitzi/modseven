@@ -15,7 +15,7 @@
 
 namespace Modseven;
 
-use Exception;
+use \Modseven\Exception;
 
 class URL
 {
@@ -29,7 +29,10 @@ class URL
      * @param mixed $protocol Protocol string or [Request] class to use protocol from
      * @param boolean $index Include the index_page in the URL
      * @param string $subdomain Subdomain string
+     *
      * @return  string
+     *
+     * @throws \Modseven\Exception
      */
     public static function site(string $uri = '', $protocol = NULL, bool $index = TRUE, ?string $subdomain = NULL): string
     {
@@ -69,7 +72,10 @@ class URL
      * @param mixed $protocol Protocol string, [Request], or boolean
      * @param boolean $index Add index file to URL?
      * @param string $subdomain Subdomain string
+     *
      * @return  string
+     *
+     * @throws \Modseven\Exception
      */
     public static function base($protocol = NULL, bool $index = FALSE, ?string $subdomain = NULL): string
     {
@@ -159,7 +165,10 @@ class URL
      *
      * @param string $host
      * @param array $trusted_hosts
+     *
      * @return boolean TRUE if $host is trustworthy
+     *
+     * @throws \Modseven\Exception
      */
     public static function is_trusted_host(string $host, ?array $trusted_hosts = NULL): bool
     {
@@ -234,7 +243,10 @@ class URL
      * @param string $title Phrase to convert
      * @param string $separator Word separator (any single character)
      * @param boolean $ascii_only Transliterate to ASCII?
+     *
      * @return  string
+     *
+     * @throws \Modseven\Exception
      */
     public static function title(string $title, string $separator = '-', bool $ascii_only = FALSE): string
     {

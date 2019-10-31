@@ -46,8 +46,10 @@ class Upload
      * @param string $filename new filename
      * @param string $directory new directory
      * @param integer $chmod chmod mask
-     * @return  string  on success, full path to new file
-     * @return  FALSE   on failure
+     *
+     * @return  string|false  on success, full path to new file, on failure
+     *
+     * @throws Exception
      */
     public static function save(array $file, ?string $filename = NULL, ?string $directory = NULL, int $chmod = 0644)
     {
@@ -129,7 +131,10 @@ class Upload
      *
      * @param array $file $_FILES item
      * @param string $size maximum file size allowed
+     *
      * @return  bool
+     *
+     * @throws Exception
      */
     public static function size(array $file, string $size): bool
     {
@@ -162,12 +167,9 @@ class Upload
     public static function image(array $file, ?int $max_width = NULL, ?int $max_height = NULL, bool $exact = FALSE): bool
     {
         if (self::not_empty($file)) {
-            try {
-                // Get the width and height from the uploaded image
-                [$width, $height] = getimagesize($file['tmp_name']);
-            } catch (Error\Exception $e) {
-                // Ignore read errors
-            }
+
+            // Get the width and height from the uploaded image
+            [$width, $height] = getimagesize($file['tmp_name']);
 
             if (empty($width) || empty($height)) {
                 // Cannot get image size, cannot validate

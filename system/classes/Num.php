@@ -165,7 +165,10 @@ class Num
      * Num::$byte_units
      *
      * @param string $size file size in SB format
+     *
      * @return  float
+     *
+     * @throws Exception
      */
     public static function bytes(string $size): float
     {

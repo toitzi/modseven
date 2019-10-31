@@ -14,6 +14,17 @@
 use Modseven\UTF8;
 use Modseven\UTF8\Exception;
 
+/**
+ * UTF8 str_pad function
+ * @param        $str
+ * @param        $final_str_length
+ * @param string $pad_str
+ * @param int    $pad_type
+ *
+ * @return string
+ *
+ * @throws Exception
+ */
 function _str_pad($str, $final_str_length, $pad_str = ' ', $pad_type = STR_PAD_RIGHT)
 {
     if (UTF8::is_ascii($str) AND UTF8::is_ascii($pad_str)) {

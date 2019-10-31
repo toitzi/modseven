@@ -468,7 +468,10 @@ class Core
      * or absolute, but must point to a directory:
      *
      * @param array $modules list of module paths
+     *
      * @return  array   enabled modules
+     *
+     * @throws Exception
      */
     public static function modules(?array $modules = NULL): array
     {
@@ -759,7 +762,8 @@ class Core
 
     /**
      * Catches errors that are not caught by the error handler, such as E_PARSE.
-     * @return  void
+     *
+     * @throws Exception
      */
     public static function shutdown_handler(): void
     {

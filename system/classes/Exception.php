@@ -73,7 +73,10 @@ class Exception extends \Exception
      * exception, and the stack trace of the error.
      *
      * @param Throwable $t
+     *
      * @return  void
+     *
+     * @throws Exception
      */
     public static function handler(Throwable $t): void
     {

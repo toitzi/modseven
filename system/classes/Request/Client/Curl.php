@@ -31,8 +31,9 @@ class Curl extends External
      * @param Response $response response to send
      *
      * @return  Response
-     * @throws Exception
      *
+     * @throws Exception
+     * @throws \Modseven\Exception
      */
     public function _send_message(Request $request, Response $response): Response
     {

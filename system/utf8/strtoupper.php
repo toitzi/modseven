@@ -13,7 +13,16 @@
 
 use Modseven\UTF8;
 
-function _strtoupper($str)
+/**
+ * UTF8 upper string
+ *
+ * @param string $str
+ *
+ * @return bool|string
+ *
+ * @throws \Modseven\Exception
+ */
+function _strtoupper(string $str)
 {
     if (UTF8::is_ascii($str)) {
         return strtoupper($str);

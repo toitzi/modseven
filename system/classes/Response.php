@@ -542,7 +542,10 @@ class Response implements HTTP\Response
      *
      * @param boolean $replace replace existing headers
      * @param callback $callback function to handle header output
+     *
      * @return  mixed
+     *
+     * @throws Exception
      */
     public function send_headers(bool $replace = FALSE, $callback = NULL)
     {

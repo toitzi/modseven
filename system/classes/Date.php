@@ -54,7 +54,10 @@ class Date
      * @param string $remote timezone that to find the offset of
      * @param string $local timezone used as the baseline
      * @param mixed $now UNIX timestamp or date string
+     *
      * @return  integer
+     *
+     * @throws Exception
      */
     public static function offset(string $remote, ?string $local = NULL, $now = NULL): int
     {
@@ -73,8 +76,16 @@ class Date
         $zone_local = new DateTimeZone($local);
 
         // Create date objects from timezones
-        $time_remote = new DateTime($now, $zone_remote);
-        $time_local = new DateTime($now, $zone_local);
+        try
+        {
+            $time_remote = new DateTime($now, $zone_remote);
+            $time_local = new DateTime($now, $zone_local);
+        }
+        catch (\Exception $e)
+        {
+            throw new Exception($e->getMessage(), null, $e->getCode(), $e);
+        }
+
 
         // Find the offset
         $offset = $zone_remote->getOffset($time_remote) - $zone_local->getOffset($time_local);

@@ -45,7 +45,10 @@ class Inflector
      *
      * @param string $str word to make singular
      * @param int|float $count count of thing
+     *
      * @return  string
+     *
+     * @throws Exception
      */
     public static function singular(string $str, $count = NULL): string
     {
@@ -104,7 +107,10 @@ class Inflector
      * case, please report an issue.
      *
      * @param string $str word to check
+     *
      * @return  boolean
+     *
+     * @throws Exception
      */
     public static function uncountable(string $str): bool
     {
@@ -127,7 +133,10 @@ class Inflector
      *
      * @param string $str word to pluralize
      * @param int|float $count count of thing
+     *
      * @return  string
+     *
+     * @throws Exception
      */
     public static function plural(string $str, $count = NULL): string
     {

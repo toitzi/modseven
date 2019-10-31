@@ -14,6 +14,7 @@
 namespace Modseven;
 
 use ArrayAccess;
+use ReflectionException;
 use ReflectionMethod;
 use ReflectionFunction;
 
@@ -216,6 +217,8 @@ class Validation implements ArrayAccess
      * typically be called within an if/else block.
      *
      * @return  boolean
+     *
+     * @throws Exception
      */
     public function check(): bool
     {
@@ -303,13 +306,26 @@ class Validation implements ArrayAccess
                     $passed = call_user_func_array($rule, $params);
                 } elseif (method_exists('Valid', $rule)) {
                     // Use a method in this object
-                    $method = new ReflectionMethod('Valid', $rule);
-
+                    try
+                    {
+                        $method = new ReflectionMethod('Valid', $rule);
+                    }
+                    catch (ReflectionException $e)
+                    {
+                        throw new Exception($e->getMessage(), null, $e->getCode(), $e);
+                    }
                     // Call static::$rule($this[$field], $param, ...) with Reflection
                     $passed = $method->invokeArgs(NULL, $params);
                 } elseif (strpos($rule, '::') === FALSE) {
                     // Use a function call
-                    $function = new ReflectionFunction($rule);
+                    try
+                    {
+                        $function = new ReflectionFunction($rule);
+                    }
+                    catch (ReflectionException $e)
+                    {
+                        throw new Exception($e->getMessage(), null, $e->getCode(), $e);
+                    }
 
                     // Call $function($this[$field], $param, ...) with Reflection
                     $passed = $function->invokeArgs($params);
@@ -318,7 +334,14 @@ class Validation implements ArrayAccess
                     [$class, $method] = explode('::', $rule, 2);
 
                     // Use a static method call
-                    $method = new ReflectionMethod($class, $method);
+                    try
+                    {
+                        $method = new ReflectionMethod($class, $method);
+                    }
+                    catch (ReflectionException $e)
+                    {
+                        throw new Exception($e->getMessage(), null, $e->getCode(), $e);
+                    }
 
                     // Call $Class::$method($this[$field], $param, ...) with Reflection
                     $passed = $method->invokeArgs(NULL, $params);

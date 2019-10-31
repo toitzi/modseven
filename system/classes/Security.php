@@ -27,7 +27,10 @@ class Security
      * Check that the given token matches the currently stored security token.
      *
      * @param string $token token to check
+     *
      * @return  boolean
+     *
+     * @throws \Modseven\Exception
      */
     public static function check(string $token): bool
     {
@@ -71,7 +74,10 @@ class Security
      * This provides a basic, but effective, method of preventing CSRF attacks.
      *
      * @param boolean $new force a new token to be generated?
+     *
      * @return  string
+     *
+     * @throws \Modseven\Exception
      */
     public static function token(bool $new = FALSE): string
     {

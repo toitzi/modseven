@@ -11,6 +11,7 @@
 namespace Modseven\Controller;
 
 use Modseven\Controller;
+use Modseven\Exception;
 use Modseven\View;
 
 abstract class Template extends Controller
@@ -29,6 +30,8 @@ abstract class Template extends Controller
 
     /**
      * Loads the template View object.
+     *
+     * @throws Exception
      */
     public function before(): void
     {

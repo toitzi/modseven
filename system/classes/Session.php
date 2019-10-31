@@ -88,7 +88,10 @@ abstract class Session
      * Loads existing session data.
      *
      * @param string $id session id
+     *
      * @return  void
+     *
+     * @throws Session\Exception
      */
     public function read(?string $id = NULL): void
     {
@@ -157,7 +160,10 @@ abstract class Session
      *
      * @param string $type type of session (native, cookie, etc)
      * @param string $id session identifier
+     *
      * @return  Session
+     *
+     * @throws \Modseven\Exception
      */
     public static function instance(?string $type = NULL, ?string $id = NULL): Session
     {

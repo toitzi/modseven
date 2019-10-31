@@ -13,6 +13,18 @@
 
 use Modseven\UTF8;
 
+/**
+ * UTF8 str_ireplace
+ *
+ * @param      $search
+ * @param      $replace
+ * @param      $str
+ * @param null $count
+ *
+ * @return mixed
+ *
+ * @throws \Modseven\Exception
+ */
 function _str_ireplace($search, $replace, $str, & $count = NULL)
 {
     if (UTF8::is_ascii($search) && UTF8::is_ascii($replace) && UTF8::is_ascii($str)) {

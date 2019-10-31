@@ -13,6 +13,16 @@
 
 use Modseven\UTF8;
 
+/**
+ * UTF8 stristr
+ *
+ * @param $str
+ * @param $search
+ *
+ * @return bool|string
+ *
+ * @throws \Modseven\Exception
+ */
 function _stristr($str, $search)
 {
     if (UTF8::is_ascii($str) && UTF8::is_ascii($search)) {

@@ -138,7 +138,10 @@ abstract class Controller
      * browser cache is up to date.
      *
      * @param string $etag Resource Etag
+     *
      * @return Response
+     *
+     * @throws Exception
      */
     protected function check_cache(?string $etag = NULL): Response
     {

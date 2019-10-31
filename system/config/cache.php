@@ -12,7 +12,7 @@ return [
             ],
         ],
         'options' => [
-            \Memcached::OPT_DISTRIBUTION => \Memcached::DISTRIBUTION_CONSISTENT,
+            Memcached::OPT_DISTRIBUTION => Memcached::DISTRIBUTION_CONSISTENT,
         ],
     ],
 ];

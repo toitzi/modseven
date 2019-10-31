@@ -13,6 +13,15 @@
 
 use Modseven\UTF8;
 
+/**
+ * UTF8 string to lower
+ *
+ * @param string $str
+ *
+ * @return bool|string
+ *
+ * @throws \Modseven\Exception
+ */
 function _strtolower($str)
 {
     if (UTF8::is_ascii($str)) {

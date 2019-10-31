@@ -271,9 +271,13 @@ class UTF8
      * Makes a UTF-8 string lowercase. This is a UTF8-aware version
      * of [strtolower](http://php.net/strtolower).
      *
-     * @param string $str mixed case string
-     * @return  string
      * @author  Andreas Gohr <andi@splitbrain.org>
+     *
+     * @param string $str mixed case string
+     *
+     * @return  string
+     *
+     * @throws Exception
      */
     public static function strtolower(string $str): string
     {
@@ -295,9 +299,13 @@ class UTF8
      * Makes a UTF-8 string uppercase. This is a UTF8-aware version
      * of [strtoupper](http://php.net/strtoupper).
      *
-     * @param string $str mixed case string
-     * @return  string
      * @author  Andreas Gohr <andi@splitbrain.org>
+     *
+     * @param string $str mixed case string
+     *
+     * @return  string
+     *
+     * @throws Exception
      */
     public static function strtoupper(string $str): string
     {
@@ -319,9 +327,13 @@ class UTF8
      * Makes a UTF-8 string's first character uppercase. This is a UTF8-aware
      * version of [ucfirst](http://php.net/ucfirst).
      *
-     * @param string $str mixed case string
-     * @return  string
      * @author  Harry Fuecks <hfuecks@gmail.com>
+     *
+     * @param string $str mixed case string
+     *
+     * @return  string
+     *
+     * @throws Exception
      */
     public static function ucfirst(string $str): string
     {
@@ -359,12 +371,14 @@ class UTF8
      * Case-insensitive UTF-8 string comparison. This is a UTF8-aware version
      * of [strcasecmp](http://php.net/strcasecmp).
      *
+     * @author  Harry Fuecks <hfuecks@gmail.com>
+     *
      * @param string $str1 string to compare
      * @param string $str2 string to compare
-     * @return  integer less than 0 if str1 is less than str2
-     * @return  integer greater than 0 if str1 is greater than str2
-     * @return  integer 0 if they are equal
-     * @author  Harry Fuecks <hfuecks@gmail.com>
+     *
+     * @return  integer less than 0 if str1 is less than str2, greater than 0 if str1 is greater than str2,0 if they are equal
+     *
+     * @throws Exception
      */
     public static function strcasecmp(string $str1, string $str2): int
     {
@@ -386,13 +400,16 @@ class UTF8
      * [!!] This function is very slow compared to the native version. Avoid
      * using it when possible.
      *
+     * @author  Harry Fuecks <hfuecks@gmail.com
+     *
      * @param string|array $search text to replace
      * @param string|array $replace replacement text
      * @param string|array $str subject text
      * @param integer $count number of matched and replaced needles will be returned via this parameter which is passed by reference
-     * @return  string  if the input was a string
-     * @return  array   if the input was an array
-     * @author  Harry Fuecks <hfuecks@gmail.com
+     *
+     * @return  string|array  if the input was a string, if the input was an array
+     *
+     * @throws Exception
      */
     public static function str_ireplace($search, $replace, $str, ?int & $count = NULL)
     {
@@ -411,11 +428,14 @@ class UTF8
      * from the first occurrence of needle to the end. This is a UTF8-aware
      * version of [stristr](http://php.net/stristr).
      *
+     * @author  Harry Fuecks <hfuecks@gmail.com>
+     *
      * @param string $str input string
      * @param string $search needle
-     * @return  string  matched substring if found
-     * @return  FALSE   if the substring was not found
-     * @author  Harry Fuecks <hfuecks@gmail.com>
+     *
+     * @return  string|false  matched substring if found, if the substring was not found
+     *
+     * @throws Exception
      */
     public static function stristr(string $str, string $search)
     {
@@ -479,12 +499,16 @@ class UTF8
      * Pads a UTF-8 string to a certain length with another string. This is a
      * UTF8-aware version of [str_pad](http://php.net/str_pad).
      *
+     * @author  Harry Fuecks <hfuecks@gmail.com>
+     *
      * @param string $str input string
      * @param integer $final_str_length desired string length after padding
      * @param string $pad_str string to use as padding
      * @param int $pad_type padding type: STR_PAD_RIGHT, STR_PAD_LEFT, or STR_PAD_BOTH
+     *
      * @return  string
-     * @author  Harry Fuecks <hfuecks@gmail.com>
+     *
+     * @throws Exception
      */
     public static function str_pad(string $str, int $final_str_length, string $pad_str = ' ', int $pad_type = STR_PAD_RIGHT): string
     {
@@ -605,9 +629,13 @@ class UTF8
      * Returns the unicode ordinal for a character. This is a UTF8-aware
      * version of [ord](http://php.net/ord).
      *
-     * @param string $chr UTF-8 encoded character
-     * @return  integer
      * @author  Harry Fuecks <hfuecks@gmail.com>
+     *
+     * @param string $chr UTF-8 encoded character
+     *
+     * @return  integer
+     *
+     * @throws Exception
      */
     public static function ord(string $chr): int
     {
@@ -633,8 +661,10 @@ class UTF8
      * Slight modifications to fit with phputf8 library by Harry Fuecks <hfuecks@gmail.com>
      *
      * @param string $str UTF-8 encoded string
-     * @return  array   unicode code points
-     * @return  FALSE   if the string is invalid
+     *
+     * @return  array|false   unicode code points, false on invalid string
+     *
+     * @throws Exception
      */
     public static function to_unicode(string $str)
     {
@@ -660,8 +690,10 @@ class UTF8
      * Slight modifications to fit with phputf8 library by Harry Fuecks <hfuecks@gmail.com>.
      *
      * @param array $arr unicode code points representing a string
-     * @return  string  utf8 string of characters
-     * @return  boolean FALSE if a code point cannot be found
+     *
+     * @return  string|false  utf8 string of characters, false if code point cannot be found
+     *
+     * @throws Exception
      */
     public static function from_unicode(array $arr)
     {

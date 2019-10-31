@@ -33,7 +33,10 @@ class Form
      *
      * @param mixed $action form action, defaults to the current request URI, or [Request] class to use
      * @param array $attributes html attributes
+     *
      * @return  string
+     *
+     * @throws Exception
      */
     public static function open($action = NULL, ?array $attributes = NULL): string
     {

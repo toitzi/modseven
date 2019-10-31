@@ -13,7 +13,16 @@
 
 use Modseven\UTF8\Exception;
 
-function _from_unicode($arr)
+/**
+ * UTF8 form_unicode function
+ *
+ * @param array $arr
+ *
+ * @return false|string
+ *
+ * @throws Exception
+ */
+function _from_unicode(array $arr)
 {
     ob_start();
 

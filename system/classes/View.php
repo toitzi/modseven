@@ -34,6 +34,8 @@ class View
      *
      * @param string $file view filename
      * @param array $data array of values
+     *
+     * @throws Exception
      */
     public function __construct(string $file = null, array $data = null)
     {
@@ -79,6 +81,8 @@ class View
      * @param array $data array of values
      *
      * @return  View
+     *
+     * @throws Exception
      */
     public static function factory(string $file = null, array $data = null): View
     {
@@ -198,6 +202,8 @@ class View
      * Magic method, returns the output of [View::render].
      *
      * @return  string
+     *
+     * @throws Exception
      */
     public function __toString(): string
     {
@@ -229,8 +235,9 @@ class View
      * @param string $file view filename
      *
      * @return  string
-     * @throws  View\Exception
      *
+     * @throws  View\Exception
+     * @throws Exception
      */
     public function render(string $file = null): string
     {
@@ -255,7 +262,8 @@ class View
      * @param array $modseven_view_data variables
      *
      * @return  string
-     * @throws  \Exception
+     *
+     * @throws  Exception
      */
     protected static function capture(string $modseven_view_filename, array $modseven_view_data): string
     {
@@ -278,7 +286,7 @@ class View
             ob_end_clean();
 
             // Re-throw the exception
-            throw $e;
+            throw new Exception($e->getMessage(), null, $e->getCode(), $e);
         }
 
         // Get the captured output and close the buffer

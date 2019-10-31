@@ -227,7 +227,10 @@ class Valid
      *
      * @param integer $number credit card number
      * @param string|array $type card type, or an array of card types
+     *
      * @return  boolean
+     *
+     * @throws Exception
      */
     public static function credit_card(int $number, $type = NULL): bool
     {

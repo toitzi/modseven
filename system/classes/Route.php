@@ -207,7 +207,10 @@ class Route
      *
      * @param boolean $save cache the current routes
      * @param boolean $append append, rather than replace, cached routes when loading
+     *
      * @return  void|boolean    when saving routes\when loading routes
+     *
+     * @throws \Modseven\Exception
      */
     public static function cache($save = FALSE, $append = FALSE)
     {
@@ -246,7 +249,10 @@ class Route
      * @param string $name route name
      * @param array $params URI parameters
      * @param mixed $protocol protocol string or boolean, adds protocol and domain
+     *
      * @return  string
+     *
+     * @throws \Modseven\Exception
      */
     public static function url(string $name, ?array $params = NULL, $protocol = NULL): string
     {

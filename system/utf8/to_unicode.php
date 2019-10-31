@@ -14,7 +14,16 @@
 use Modseven\UTF8;
 use Modseven\UTF8\Exception;
 
-function _to_unicode($str)
+/**
+ * UTF8 to_unicode function
+ *
+ * @param string $str
+ *
+ * @return array|bool
+ *
+ * @throws Exception
+ */
+function _to_unicode(string $str)
 {
     // Cached expected number of octets after the current octet until the beginning of the next UTF8 character sequence
     $m_state = 0;

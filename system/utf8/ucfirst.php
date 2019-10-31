@@ -13,7 +13,16 @@
 
 use Modseven\UTF8;
 
-function _ucfirst($str)
+/**
+ * UTF8 ucfirst
+ *
+ * @param string $str
+ *
+ * @return string
+ *
+ * @throws \Modseven\Exception
+ */
+function _ucfirst(string $str) : string
 {
     if (UTF8::is_ascii($str)) {
         return ucfirst($str);

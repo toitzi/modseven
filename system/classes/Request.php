@@ -14,6 +14,8 @@
 
 namespace Modseven;
 
+use Modseven\HTTP\Exception;
+
 class Request implements HTTP\Request
 {
 
@@ -194,8 +196,12 @@ class Request implements HTTP\Request
      * @param array $client_params An array of params to pass to the request client
      * @param bool $allow_external Allow external requests? (deprecated in 3.3)
      * @param array $injected_routes An array of routes to use, for testing
+     *
      * @return  void|Request
-     * @throws  Request\Exception
+     *
+     * @throws Exception
+     * @throws Request\Exception
+     * @throws \Exception
      */
     public static function factory($uri = TRUE, array $client_params = [], bool $allow_external = TRUE, array $injected_routes = [])
     {
@@ -559,7 +565,10 @@ class Request implements HTTP\Request
      * Returns information about the initial user agent.
      *
      * @param mixed $value array or string to return: browser, version, robot, mobile, platform
+     *
      * @return  mixed   requested information, FALSE if nothing is found
+     *
+     * @throws \Modseven\Exception
      */
     public static function user_agent($value)
     {
@@ -572,6 +581,8 @@ class Request implements HTTP\Request
      * helps to solve that problem.
      *
      * @return  boolean
+     *
+     * @throws \Modseven\Exception
      */
     public static function post_max_size_exceeded(): bool
     {
@@ -820,7 +831,10 @@ class Request implements HTTP\Request
      * Create a URL string from the current request. This is a shortcut for:
      *
      * @param mixed $protocol protocol string or Request object
+     *
      * @return  string
+     *
+     * @throws \Modseven\Exception
      */
     public function url($protocol = NULL): string
     {
@@ -985,8 +999,9 @@ class Request implements HTTP\Request
      * no headers are sent.
      *
      * @return  Response
+     *
      * @throws  Request\Exception
-     * @throws  HTTP\Exception
+     * @throws \Modseven\Exception
      */
     public function execute(): Response
     {

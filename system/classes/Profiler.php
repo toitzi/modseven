@@ -273,6 +273,8 @@ class Profiler
      * so that it can be compared between requests.
      *
      * @return  array  execution time, memory
+     *
+     * @throws Exception
      */
     public static function application(): array
     {

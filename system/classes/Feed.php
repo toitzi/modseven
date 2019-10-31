@@ -23,7 +23,10 @@ class Feed
      *
      * @param string $feed remote feed URL
      * @param integer $limit item limit to fetch
+     *
      * @return  array
+     *
+     * @throws Exception
      */
     public static function parse(string $feed, int $limit = 0): array
     {
@@ -85,7 +88,10 @@ class Feed
      * @param array $info feed information
      * @param array $items items to add to the feed
      * @param string $encoding define which encoding to use
+     *
      * @return  string
+     *
+     * @throws Exception
      */
     public static function create(array $info, array $items, string $encoding = 'UTF-8'): string
     {

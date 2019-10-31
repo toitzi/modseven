@@ -47,7 +47,10 @@ class Fragment
      * @param string $name fragment name
      * @param integer $lifetime fragment cache lifetime
      * @param boolean $i18n multilingual fragment support
+     *
      * @return  boolean
+     *
+     * @throws Exception
      */
     public static function load(string $name, ?int $lifetime = NULL, ?bool $i18n = NULL): bool
     {
@@ -98,6 +101,8 @@ class Fragment
      * Saves the currently open fragment in the cache.
      *
      * @return  void
+     *
+     * @throws Exception
      */
     public static function save(): void
     {
@@ -124,7 +129,10 @@ class Fragment
      *
      * @param string $name fragment name
      * @param boolean $i18n multilingual fragment support
+     *
      * @return  void
+     *
+     * @throws Exception
      */
     public static function delete(string $name, ?bool $i18n = NULL): void
     {

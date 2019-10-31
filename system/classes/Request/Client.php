@@ -84,15 +84,16 @@ abstract class Client
     /**
      * The default handler for following redirects, triggered by the presence of
      * a Location header in the response.
-     *
      * The client's follow property must be set TRUE and the HTTP response status
      * one of 201, 301, 302, 303 or 307 for the redirect to be followed.
      *
-     * @param Request $request
+     * @param Request  $request
      * @param Response $response
-     * @param Client $client
+     * @param Client   $client
      *
      * @return Request|null
+     *
+     * @throws Exception
      */
     public static function on_header_location(Request $request, Response $response, Client $client)
     {
@@ -124,9 +125,17 @@ abstract class Client
             $follow_header_keys = array_intersect(array_keys($orig_headers), $client->follow_headers());
             $follow_headers = Arr::extract($orig_headers, $follow_header_keys);
 
-            $follow_request = Request::factory($response->headers('Location'))
-                ->method($follow_method)
-                ->headers($follow_headers);
+            try
+            {
+                $follow_request = Request::factory($response->headers('Location'))
+                                         ->method($follow_method)
+                                         ->headers($follow_headers);
+            }
+            catch (\Exception $e)
+            {
+                throw new Exception($e->getMessage(), null, $e->getCode(), $e);
+            }
+
 
             if ($follow_method !== Request::GET) {
                 $follow_request->body($request->body());

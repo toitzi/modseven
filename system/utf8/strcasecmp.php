@@ -13,6 +13,16 @@
 
 use Modseven\UTF8;
 
+/**
+ * UTF8 strcasecmp
+ *
+ * @param $str1
+ * @param $str2
+ *
+ * @return int
+ *
+ * @throws \Modseven\Exception
+ */
 function _strcasecmp($str1, $str2)
 {
     if (UTF8::is_ascii($str1) && UTF8::is_ascii($str2)) {

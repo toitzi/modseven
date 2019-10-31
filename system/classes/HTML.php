@@ -86,7 +86,10 @@ class HTML
      * @param array $attributes HTML anchor attributes
      * @param mixed $protocol protocol to pass to URL::base()
      * @param boolean $index include the index page
+     *
      * @return  string
+     *
+     * @throws Exception
      */
     public static function anchor(string $uri, ?string $title = NULL, ?array $attributes = NULL, $protocol = NULL, bool $index = TRUE): string
     {
@@ -97,7 +100,14 @@ class HTML
 
         if ($uri === '') {
             // Only use the base URL
-            $uri = URL::base($protocol, $index);
+            try
+            {
+                $uri = URL::base($protocol, $index);
+            }
+            catch (\Exception $e)
+            {
+                throw new Exception($e->getMessage(), null, $e->getCode(), $e);
+            }
         } elseif (strpos($uri, '://') !== FALSE || strncmp($uri, '//', 2) === 0) {
             if (static::$windowed_urls === TRUE && empty($attributes['target'])) {
                 // Make the link open in a new window
@@ -191,7 +201,10 @@ class HTML
      * @param array $attributes HTML anchor attributes
      * @param mixed $protocol protocol to pass to URL::base()
      * @param boolean $index include the index page
+     *
      * @return  string
+     *
+     * @throws Exception
      */
     public static function file_anchor(string $file, ?string $title = NULL, ?array $attributes = NULL, $protocol = NULL, bool $index = FALSE): string
     {
@@ -232,7 +245,10 @@ class HTML
      * @param array $attributes default attributes
      * @param mixed $protocol protocol to pass to URL::base()
      * @param boolean $index include the index page
+     *
      * @return  string
+     *
+     * @throws Exception
      */
     public static function style(string $file, ?array $attributes = NULL, $protocol = NULL, bool $index = FALSE): string
     {
@@ -260,7 +276,10 @@ class HTML
      * @param array $attributes default attributes
      * @param mixed $protocol protocol to pass to URL::base()
      * @param boolean $index include the index page
+     *
      * @return  string
+     *
+     * @throws Exception
      */
     public static function script(string $file, ?array $attributes = NULL, $protocol = NULL, bool $index = FALSE): string
     {
@@ -285,7 +304,10 @@ class HTML
      * @param array $attributes default attributes
      * @param mixed $protocol protocol to pass to URL::base()
      * @param boolean $index include the index page
+     *
      * @return  string
+     *
+     * @throws Exception
      */
     public static function image(string $file, ?array $attributes = NULL, $protocol = NULL, bool $index = FALSE): string
     {

@@ -13,6 +13,8 @@
 
 namespace Modseven;
 
+use Modseven\Exception;
+
 class Cookie
 {
 
@@ -53,7 +55,10 @@ class Cookie
      *
      * @param string $key cookie name
      * @param mixed $default default value to return
+     *
      * @return  string
+     *
+     * @throws Exception
      */
     public static function get(string $key, $default = NULL): string
     {
@@ -91,6 +96,7 @@ class Cookie
      * @param string $value value of cookie
      *
      * @return  string
+     *
      * @throws Exception if Cookie::$salt is not configured
      */
     public static function salt(string $name, string $value): string
@@ -151,7 +157,10 @@ class Cookie
      * @param string $name name of cookie
      * @param string $value value of cookie
      * @param integer $lifetime lifetime in seconds
+     *
      * @return  boolean
+     *
+     * @throws Exception
      */
     public static function set(string $name, string $value, ?int $lifetime = NULL): bool
     {

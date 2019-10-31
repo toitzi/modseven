@@ -84,7 +84,10 @@ class Config
      * Copy one configuration group to all of the other writers.
      *
      * @param string $group configuration group name
+     *
      * @return  self
+     *
+     * @throws Exception
      */
     public function copy(string $group): self
     {
