@@ -11,19 +11,20 @@
  * - The [mbstring extension](http://php.net/mbstring) is highly recommended,
  *   but must not be overloading string functions
  *
- * [!!] This file is licensed differently from the rest of KO7. As a port of
+ * [!!] This file is licensed differently from the rest of Modseven. As a port of
  * [phputf8](http://phputf8.sourceforge.net/), this file is released under the LGPL.
  *
- * @package    KO7
+ * @package    Modseven
  * @category   Base
  *
  * @copyright  (c) 2007-2016  Kohana Team
- * @copyright  (c) since 2016 Koseven Team
+ * @copyright  (c) 2016-2019  Koseven Team
+ * @copyright  (c) since 2019 Modseven Team
  * @copyright  (c) 2005 Harry Fuecks
  * @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt
  */
 
-namespace KO7;
+namespace Modseven;
 
 class UTF8
 {
@@ -44,7 +45,7 @@ class UTF8
      * incompatible characters.
      *
      * @param mixed $var variable to clean
-     * @param string $charset character set, defaults to KO7::$charset
+     * @param string $charset character set, defaults to Modseven::$charset
      * @return  mixed
      */
     public static function clean($var, ?string $charset = NULL)

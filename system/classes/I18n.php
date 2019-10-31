@@ -17,15 +17,16 @@
  *     // With parameter replacement in SYSPATH nad MODPATH
  *       echo I18n::get(['Hello, :user', [':user' => $username]]);
  *
- * @package    KO7
+ * @package    Modseven
  * @category   Base
  *
  * @copyright  (c) 2008 - 2016 Kohana Team
- * @copyright  (c) since  2018 Koseven Team
+ * @copyright  (c) 2016-2019  Koseven Team
+ * @copyright  (c) since 2019 Modseven Team
  * @license    https://koseven.ga/LICENSE
  */
 
-namespace KO7;
+namespace Modseven;
 
 class I18n
 {
@@ -152,7 +153,7 @@ class I18n
 
 if (!function_exists('__')) {
     /**
-     * KO7 translation/internationalization function. The PHP function
+     * Modseven translation/internationalization function. The PHP function
      * [strtr](http://php.net/strtr) is used for replacing parameters.
      *
      * @param string $string Text to translate

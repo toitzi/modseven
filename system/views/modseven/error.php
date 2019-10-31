@@ -2,13 +2,13 @@
 // Unique error identifier
 $error_id = uniqid('error', false);
 
-use \KO7\Core;
-use \KO7\Debug;
-use \KO7\I18n;
+use \Modseven\Core;
+use \Modseven\Debug;
+use \Modseven\I18n;
 
 ?>
 <style type="text/css">
-    #koseven_error {
+    #modseven_error {
         background: #ddd;
         font-size: 1em;
         font-family: sans-serif;
@@ -16,8 +16,8 @@ use \KO7\I18n;
         color: #111;
     }
 
-    #koseven_error h1,
-    #koseven_error h2 {
+    #modseven_error h1,
+    #modseven_error h2 {
         margin: 0;
         padding: 1em;
         font-size: 1em;
@@ -26,37 +26,37 @@ use \KO7\I18n;
         color: #fff;
     }
 
-    #koseven_error h1 a,
-    #koseven_error h2 a {
+    #modseven_error h1 a,
+    #modseven_error h2 a {
         color: #fff;
     }
 
-    #koseven_error h2 {
+    #modseven_error h2 {
         background: #222;
     }
 
-    #koseven_error h3 {
+    #modseven_error h3 {
         margin: 0;
         padding: 0.4em 0 0;
         font-size: 1em;
         font-weight: normal;
     }
 
-    #koseven_error p {
+    #modseven_error p {
         margin: 0;
         padding: 0.2em 0;
     }
 
-    #koseven_error a {
+    #modseven_error a {
         color: #1b323b;
     }
 
-    #koseven_error pre {
+    #modseven_error pre {
         overflow: auto;
         white-space: pre-wrap;
     }
 
-    #koseven_error table {
+    #modseven_error table {
         width: 100%;
         display: block;
         margin: 0 0 0.4em;
@@ -65,19 +65,19 @@ use \KO7\I18n;
         background: #fff;
     }
 
-    #koseven_error table td {
+    #modseven_error table td {
         border: solid 1px #ddd;
         text-align: left;
         vertical-align: top;
         padding: 0.4em;
     }
 
-    #koseven_error div.content {
+    #modseven_error div.content {
         padding: 0.4em 1em 1em;
         overflow: hidden;
     }
 
-    #koseven_error pre.source {
+    #modseven_error pre.source {
         margin: 0 0 1em;
         padding: 0.4em;
         background: #fff;
@@ -85,26 +85,26 @@ use \KO7\I18n;
         line-height: 1.2em;
     }
 
-    #koseven_error pre.source span.line {
+    #modseven_error pre.source span.line {
         display: block;
     }
 
-    #koseven_error pre.source span.highlight {
+    #modseven_error pre.source span.highlight {
         background: #f0eb96;
     }
 
-    #koseven_error pre.source span.line span.number {
+    #modseven_error pre.source span.line span.number {
         color: #666;
     }
 
-    #koseven_error ol.trace {
+    #modseven_error ol.trace {
         display: block;
         margin: 0 0 0 2em;
         padding: 0;
         list-style: decimal;
     }
 
-    #koseven_error ol.trace li {
+    #modseven_error ol.trace li {
         margin: 0;
         padding: 0;
     }
@@ -137,7 +137,7 @@ use \KO7\I18n;
 </script>
 <html lang="en-US">
 <body>
-<div id="koseven_error">
+<div id="modseven_error">
     <h1>
                 <span class="type">
                     <?php echo $class ?> [ <?php echo $code ?> ]:

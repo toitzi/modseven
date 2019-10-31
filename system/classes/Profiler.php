@@ -5,15 +5,16 @@
  *
  *     echo View::factory('profiler/stats');
  *
- * @package    KO7
+ * @package    Modseven
  * @category   Helpers
  *
  * @copyright  (c) 2007-2016  Kohana Team
- * @copyright  (c) since 2016 Koseven Team
+ * @copyright  (c) 2016-2019  Koseven Team
+ * @copyright  (c) since 2019 Modseven Team
  * @license    https://koseven.ga/LICENSE
  */
 
-namespace KO7;
+namespace Modseven;
 
 class Profiler
 {
@@ -294,10 +295,10 @@ class Profiler
         }
 
         // Get the application run time
-        $time = microtime(TRUE) - KO7_START_TIME;
+        $time = microtime(TRUE) - Modseven_START_TIME;
 
         // Get the total memory usage
-        $memory = memory_get_usage() - KO7_START_MEMORY;
+        $memory = memory_get_usage() - Modseven_START_MEMORY;
 
         // Calculate max time
         if ($stats['max']['time'] === NULL || $time > $stats['max']['time']) {

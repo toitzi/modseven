@@ -5,15 +5,16 @@
  * attacks that could otherwise be triggered by inserting HTML characters into
  * form fields.
  *
- * @package    KO7
+ * @package    Modseven
  * @category   Helpers
  *
  * @copyright  (c) 2007-2016  Kohana Team
- * @copyright  (c) since 2016 Koseven Team
+ * @copyright  (c) 2016-2019  Koseven Team
+ * @copyright  (c) since 2019 Modseven Team
  * @license    https://koseven.ga/LICENSE
  */
 
-namespace KO7;
+namespace Modseven;
 
 class Form
 {

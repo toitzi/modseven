@@ -1,6 +1,6 @@
 <?php
 
-use KO7\Route;
+use Modseven\Route;
 
 Route::set('default', '(<controller>(/<action>(/<id>)))')
     ->defaults([

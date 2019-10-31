@@ -3,7 +3,7 @@ return [
     'default' => 'memcached',                            // allows to specify default cache directl from config file
     'prefix'  => 'cache1_',                          //used to avoid duplicates when using _sanitize_id
     'memcached' => [
-        'driver' => '\\KO7\\Cache\\Memcached',
+        'driver' => '\\Modseven\\Cache\\Memcached',
         'servers' => [
             [
                 'host' => '172.17.215.46',

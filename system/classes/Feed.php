@@ -2,15 +2,16 @@
 /**
  * RSS and Atom feed helper.
  *
- * @package    KO7
+ * @package    Modseven
  * @category   Helpers
  *
  * @copyright  (c) 2007-2016  Kohana Team
- * @copyright  (c) since 2016 Koseven Team
+ * @copyright  (c) 2016-2019  Koseven Team
+ * @copyright  (c) since 2019 Modseven Team
  * @license    https://koseven.ga/LICENSE
  */
 
-namespace KO7;
+namespace Modseven;
 
 class Feed
 {
@@ -86,7 +87,7 @@ class Feed
      */
     public static function create(array $info, array $items, string $encoding = 'UTF-8'): string
     {
-        $info += ['title' => 'Generated Feed', 'link' => '', 'generator' => 'KO7PHP'];
+        $info += ['title' => 'Generated Feed', 'link' => '', 'generator' => 'ModsevenPHP'];
 
         $feed = '<?xml version="1.0" encoding="' . $encoding . '"?><rss version="2.0"><channel></channel></rss>';
         $feed = simplexml_load_string($feed);

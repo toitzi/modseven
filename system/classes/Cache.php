@@ -1,7 +1,7 @@
 <?php
 /**
- * KO7 Cache provides a common interface to a variety of caching engines. Tags are
- * supported where available natively to the cache system. KO7 Cache supports multiple
+ * Modseven Cache provides a common interface to a variety of caching engines. Tags are
+ * supported where available natively to the cache system. Modseven Cache supports multiple
  * instances of cache engines through a grouped singleton pattern.
  *
  * ### Supported cache engines
@@ -22,19 +22,20 @@
  * file caching.
  *
  * ### Configuration settings
- * KO7 Cache uses configuration groups to create cache instances. A configuration group can
+ * Modseven Cache uses configuration groups to create cache instances. A configuration group can
  * use any supported driver, with successive groups using the same driver type if required.
  * In cases where only one cache group is required, set `Cache::$default` (in your bootstrap,
- * or by extending `KO7_Cache` class) to the name of the group.
+ * or by extending `Modseven_Cache` class) to the name of the group.
  *
  * @copyright  (c) 2007-2016  Kohana Team
- * @copyright  (c) since 2016 Koseven Team
+ * @copyright  (c) 2016-2019  Koseven Team
+ * @copyright  (c) since 2019 Modseven Team
  * @license        https://koseven.ga/LICENSE
  */
 
-namespace KO7;
+namespace Modseven;
 
-use \KO7\Cache\Exception;
+use \Modseven\Cache\Exception;
 
 abstract class Cache
 {
@@ -109,7 +110,7 @@ abstract class Cache
     }
 
     /**
-     * Creates a singleton of a KO7 Cache group. If no group is supplied
+     * Creates a singleton of a Modseven Cache group. If no group is supplied
      * the __default__ cache group is used.
      *
      * @param string $group the name of the cache group to use [Optional]
@@ -126,7 +127,7 @@ abstract class Cache
             {
                 $group = Core::$config->load('cache.default');
             }
-            catch (\KO7\Exception $e)
+            catch (\Modseven\Exception $e)
             {
                 throw new Exception($e->getMessage(), null, $e->getCode(), $e);
             }
@@ -149,7 +150,7 @@ abstract class Cache
         {
             $config = Core::$config->load('cache');
         }
-        catch (\KO7\Exception $e)
+        catch (\Modseven\Exception $e)
         {
             throw new Exception($e->getMessage(), null, $e->getCode(), $e);
         }
@@ -157,7 +158,7 @@ abstract class Cache
         if ( ! $config->offsetExists($group))
         {
             throw new Exception(
-                'Failed to load KO7 Cache group: :group',
+                'Failed to load Modseven Cache group: :group',
                 [':group' => $group]
             );
         }
@@ -188,7 +189,7 @@ abstract class Cache
         {
             $prefix = $this->_config['prefix'] ?? Core::$config->load('cache.prefix');
         }
-        catch (\KO7\Exception $e)
+        catch (\Modseven\Exception $e)
         {
             throw new Exception($e->getMessage(), null, $e->getCode(), $e);
         }

@@ -1,7 +1,7 @@
 <?php
 
-namespace KO7\View;
+namespace Modseven\View;
 
-class Exception extends \KO7\Exception
+class Exception extends \Modseven\Exception
 {
 }

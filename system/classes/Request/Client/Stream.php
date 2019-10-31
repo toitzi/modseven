@@ -5,19 +5,20 @@
  *
  * This is the default driver for all external requests.
  *
- * @package        KO7\Request
+ * @package        Modseven\Request
  *
  * @copyright  (c) 2007-2016  Kohana Team
- * @copyright  (c) since 2016 Koseven Team
+ * @copyright  (c) 2016-2019  Koseven Team
+ * @copyright  (c) since 2019 Modseven Team
  * @license        https://koseven.ga/LICENSE
  *
  */
 
-namespace KO7\Request\Client;
+namespace Modseven\Request\Client;
 
-use \KO7\Request;
-use \KO7\Request\Exception;
-use \KO7\Response;
+use \Modseven\Request;
+use \Modseven\Request\Exception;
+use \Modseven\Response;
 
 class Stream extends External
 {
@@ -36,7 +37,7 @@ class Stream extends External
     public function _send_message(Request $request, Response $response): Response
     {
         // Calculate stream mode
-        $mode = ($request->method() === \KO7\HTTP\Request::GET) ? 'r' : 'r+';
+        $mode = ($request->method() === \Modseven\HTTP\Request::GET) ? 'r' : 'r+';
 
         // Process cookies
         if ($cookies = $request->cookie()) {

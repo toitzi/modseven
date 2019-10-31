@@ -4,18 +4,19 @@
  * used by attaching multiple instances of this class to Config.
  *
  * @copyright  (c) 2007-2016  Kohana Team
- * @copyright  (c) since 2016 Koseven Team
+ * @copyright  (c) 2016-2019  Koseven Team
+ * @copyright  (c) since 2019 Modseven Team
  * @license        https://koseven.ga/LICENSE
  */
 
-namespace KO7\Config\File;
+namespace Modseven\Config\File;
 
-use \KO7\Core;
-use \KO7\Arr;
-use \KO7\Exception;
-use \KO7\Profiler;
+use \Modseven\Core;
+use \Modseven\Arr;
+use \Modseven\Exception;
+use \Modseven\Profiler;
 
-class Reader implements \KO7\Config\Reader
+class Reader implements \Modseven\Config\Reader
 {
     /**
      * Cached Configurations

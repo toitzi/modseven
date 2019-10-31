@@ -1,6 +1,6 @@
 <?php
 /**
- * KO7_Cache_Memcached class
+ * Modseven_Cache_Memcached class
  * LICENSE: THE WORK (AS DEFINED BELOW) IS PROVIDED UNDER THE TERMS OF THIS
  * CREATIVE COMMONS PUBLIC LICENSE ("CCPL" OR "LICENSE"). THE WORK IS PROTECTED
  * BY COPYRIGHT AND/OR OTHER APPLICABLE LAW. ANY USE OF THE WORK OTHER THAN AS
@@ -13,16 +13,17 @@
  * @author         gimpe <gimpehub@intljaywalkers.com>
  * @copyright      2011 International Jaywalkers
  * @copyright  (c) 2007-2016  Kohana Team
- * @copyright  (c) since 2016 Koseven Team
+ * @copyright  (c) 2016-2019  Koseven Team
+ * @copyright  (c) since 2019 Modseven Team
  *
  * @license        http://creativecommons.org/licenses/by/3.0/ CC BY 3.0
- * @link           http://github.com/gimpe/ko7-memcached
+ * @link           http://github.com/gimpe/modseven-memcached
  */
 
-namespace KO7\Cache;
+namespace Modseven\Cache;
 
-use KO7\Arr;
-use KO7\Cache;
+use Modseven\Arr;
+use Modseven\Cache;
 
 class Memcached extends Cache
 {

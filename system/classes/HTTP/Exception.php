@@ -1,8 +1,8 @@
 <?php
 
-namespace KO7\HTTP;
+namespace Modseven\HTTP;
 
-class Exception extends \KO7\Exception
+class Exception extends \Modseven\Exception
 {
 
     /**
@@ -11,7 +11,7 @@ class Exception extends \KO7\Exception
     protected $_code = 0;
 
     /**
-     * @var  \KO7\Request    Request instance that triggered this exception.
+     * @var  \Modseven\Request    Request instance that triggered this exception.
      */
     protected $_request;
 
@@ -45,10 +45,10 @@ class Exception extends \KO7\Exception
     /**
      * Store the Request that triggered this exception.
      *
-     * @param \KO7\Request $request Request object that triggered this exception.
+     * @param \Modseven\Request $request Request object that triggered this exception.
      * @return  self|Request
      */
-    public function request(\KO7\Request $request = NULL)
+    public function request(\Modseven\Request $request = NULL)
     {
         if ($request === NULL) {
             return $this->_request;
@@ -62,11 +62,11 @@ class Exception extends \KO7\Exception
     /**
      * Generate a Response for the current Exception
      *
-     * @return \KO7\Response
+     * @return \Modseven\Response
      */
-    public function get_response(): \KO7\Response
+    public function get_response(): \Modseven\Response
     {
-        return \KO7\Exception::response($this);
+        return \Modseven\Exception::response($this);
     }
 
 }

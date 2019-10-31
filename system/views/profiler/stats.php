@@ -1,19 +1,19 @@
 <style type="text/css">
-    <?php include \KO7\Core::find_file('views', 'profiler/style', 'css') ?>
+    <?php include \Modseven\Core::find_file('views', 'profiler/style', 'css') ?>
 </style>
 
 <?php
 
-use \KO7\Profiler;
-use \KO7\I18n;
-use \KO7\HTML;
+use \Modseven\Profiler;
+use \Modseven\I18n;
+use \Modseven\HTML;
 
 $group_stats = Profiler::group_stats();
 $group_cols = ['min', 'max', 'average', 'total'];
 $application_cols = ['min', 'max', 'average', 'current'];
 ?>
 
-<div class="ko7">
+<div class="modseven">
     <?php foreach (Profiler::groups() as $group => $benchmarks): ?>
         <table class="profiler">
             <tr class="group">

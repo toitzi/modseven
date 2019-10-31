@@ -1,16 +1,17 @@
 <?php
 /**
- * KO7 exception class. Translates exceptions using the [I18n] class.
+ * Modseven exception class. Translates exceptions using the [I18n] class.
  *
- * @package    KO7
+ * @package    Modseven
  * @category   Exceptions
  *
  * @copyright  (c) 2007-2016  Kohana Team
- * @copyright  (c) since 2016 Koseven Team
+ * @copyright  (c) 2016-2019  Koseven Team
+ * @copyright  (c) since 2019 Modseven Team
  * @license    https://koseven.ga/LICENSE
  */
 
-namespace KO7;
+namespace Modseven;
 
 class Exception extends \Exception
 {
@@ -33,7 +34,7 @@ class Exception extends \Exception
     /**
      * @var  string  error rendering view
      */
-    public static $error_view = 'ko7/error';
+    public static $error_view = 'modseven/error';
 
     /**
      * @var  string  error view content type
@@ -43,7 +44,7 @@ class Exception extends \Exception
     /**
      * Creates a new translated exception.
      *
-     *     throw new KO7_Exception('Something went terrible wrong, :user',
+     *     throw new Modseven_Exception('Something went terrible wrong, :user',
      *         array(':user' => $user));
      *
      * @param string $message error message

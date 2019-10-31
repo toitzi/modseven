@@ -9,24 +9,25 @@
  *  - Curl (default if loaded)
  *  - PECL HTTP (default if curl not loaded and pecl_http loaded)
  *
- * @package        KO7\Base
+ * @package        Modseven\Base
  *
  * @copyright  (c) 2007-2016  Kohana Team
- * @copyright  (c) since 2016 Koseven Team
+ * @copyright  (c) 2016-2019  Koseven Team
+ * @copyright  (c) since 2019 Modseven Team
  * @license        https://koseven.ga/LICENSE
  *
  */
 
-namespace KO7\Request\Client;
+namespace Modseven\Request\Client;
 
-use \KO7\Core;
-use \KO7\Arr;
-use \KO7\Profiler;
-use \KO7\Response;
-use \KO7\Request;
-use \KO7\Request\Exception;
+use \Modseven\Core;
+use \Modseven\Arr;
+use \Modseven\Profiler;
+use \Modseven\Response;
+use \Modseven\Request;
+use \Modseven\Request\Exception;
 
-abstract class External extends \KO7\Request\Client
+abstract class External extends \Modseven\Request\Client
 {
 
     /**
@@ -172,7 +173,7 @@ abstract class External extends \KO7\Request\Client
 
         $request->headers('content-length', (string)$request->content_length());
 
-        // If KO7 expose, set the user-agent
+        // If Modseven expose, set the user-agent
         if (Core::$expose) {
             $request->headers('user-agent', Core::version());
         }

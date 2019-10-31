@@ -3,15 +3,16 @@
  * Request. Uses the [Route] class to determine what
  * [Controller] to send the request to.
  *
- * @package    KO7
+ * @package    Modseven
  * @category   Base
  *
  * @copyright  (c) 2007-2016  Kohana Team
- * @copyright  (c) since 2016 Koseven Team
+ * @copyright  (c) 2016-2019  Koseven Team
+ * @copyright  (c) since 2019 Modseven Team
  * @license    https://koseven.ga/LICENSE
  */
 
-namespace KO7;
+namespace Modseven;
 
 class Request implements HTTP\Request
 {
@@ -361,7 +362,7 @@ class Request implements HTTP\Request
             } elseif (isset($_SERVER['REDIRECT_URL'])) {
                 $uri = $_SERVER['REDIRECT_URL'];
             } else {
-                // If you ever see this error, please report an issue at http://koseven.ga/projects/KO7/issues
+                // If you ever see this error, please report an issue.
                 // along with any relevant information about your web server setup. Thanks!
                 throw new Exception('Unable to detect the URI using PATH_INFO, REQUEST_URI, PHP_SELF or REDIRECT_URL');
             }
@@ -654,7 +655,7 @@ class Request implements HTTP\Request
      *  - Headers
      *  - Body
      *
-     *  If there are variables set to the `KO7_Request::$_post`
+     *  If there are variables set to the `Modseven_Request::$_post`
      *  they will override any values set to body.
      *
      * @return  string
@@ -672,7 +673,7 @@ class Request implements HTTP\Request
         // Set the content length
         $this->headers('content-length', (string)$this->content_length());
 
-        // If KO7 expose, set the user-agent
+        // If Modseven expose, set the user-agent
         if (Core::$expose) {
             $this->headers('user-agent', Core::version());
         }
@@ -775,7 +776,7 @@ class Request implements HTTP\Request
     }
 
     /**
-     * Returns whether this request is the initial request KO7 received.
+     * Returns whether this request is the initial request Modseven received.
      * Can be used to test for sub requests.
      *
      * @return  boolean
@@ -1030,7 +1031,7 @@ class Request implements HTTP\Request
         }
 
         if (!$this->_client instanceof Request\Client) {
-            throw new Request\Exception('Unable to execute :uri without a KO7_Request_Client', [
+            throw new Request\Exception('Unable to execute :uri without a Modseven_Request_Client', [
                 ':uri' => $this->_uri,
             ]);
         }

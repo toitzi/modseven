@@ -4,16 +4,17 @@
  * or utility method (i.e. Redirect). Implements standard HTTP
  * response format.
  *
- * @package    KO7
+ * @package    Modseven
  * @category   Base
  *
  * @copyright  (c) 2007-2016  Kohana Team
- * @copyright  (c) since 2016 Koseven Team
+ * @copyright  (c) 2016-2019  Koseven Team
+ * @copyright  (c) since 2019 Modseven Team
  * @license    https://koseven.ga/LICENSE
  * @since      3.1.0
  */
 
-namespace KO7;
+namespace Modseven;
 
 class Response implements HTTP\Response
 {
@@ -287,7 +288,7 @@ class Response implements HTTP\Response
      *
      * Download a file that already exists:
      *
-     *     $request->send_file('media/packages/ko7.zip');
+     *     $request->send_file('media/packages/modseven.zip');
      *
      * Download a generated file:
      *
@@ -584,7 +585,7 @@ class Response implements HTTP\Response
         // Set the content length
         $this->headers('content-length', (string)$this->content_length());
 
-        // If KO7 expose, set the user-agent
+        // If Modseven expose, set the user-agent
         if (Core::$expose) {
             $this->headers('user-agent', Core::version());
         }

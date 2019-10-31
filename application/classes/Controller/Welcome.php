@@ -2,7 +2,7 @@
 
 namespace Application\Controller;
 
-use KO7\Controller;
+use Modseven\Controller;
 
 class Welcome extends Controller
 {

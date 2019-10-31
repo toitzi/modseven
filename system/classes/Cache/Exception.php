@@ -1,14 +1,15 @@
 <?php
 /**
- * KO7 Cache Exception
+ * Modseven Cache Exception
  *
  * Throw this on Cache Error
  *
  * @copyright  (c) 2007-2016  Kohana Team
- * @copyright  (c) since 2016 Koseven Team
+ * @copyright  (c) 2016-2019  Koseven Team
+ * @copyright  (c) since 2019 Modseven Team
  * @license    https://koseven.ga/LICENSE
  */
 
-namespace KO7\Cache;
+namespace Modseven\Cache;
 
-class Exception extends \KO7\Exception {}
+class Exception extends \Modseven\Exception {}

@@ -1,19 +1,20 @@
 <?php
 /**
  * A HTTP Request specific interface that adds the methods required
- * by HTTP requests. Over and above [KO7_HTTP_Interaction], this
+ * by HTTP requests. Over and above [Modseven_HTTP_Interaction], this
  * interface provides method, uri, get and post methods.
  *
- * @package    KO7
+ * @package    Modseven
  * @category   HTTP
  *
  * @since      3.1.0
  * @copyright  (c) 2007-2016  Kohana Team
- * @copyright  (c) since 2016 Koseven Team
+ * @copyright  (c) 2016-2019  Koseven Team
+ * @copyright  (c) since 2019 Modseven Team
  * @license    https://koseven.ga/LICENSE
  */
 
-namespace KO7\HTTP;
+namespace Modseven\HTTP;
 
 interface Request extends Message
 {

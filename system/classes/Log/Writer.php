@@ -3,14 +3,15 @@
  * Log writer abstract class. All [Log] writers must extend this class.
  *
  * @copyright  (c) 2007-2016  Kohana Team
- * @copyright  (c) since 2016 Koseven Team
+ * @copyright  (c) 2016-2019  Koseven Team
+ * @copyright  (c) since 2019 Modseven Team
  * @license        https://koseven.ga/LICENSE
  */
 
-namespace KO7\Log;
+namespace Modseven\Log;
 
-use \KO7\Log;
-use \KO7\Date;
+use \Modseven\Log;
+use \Modseven\Date;
 
 abstract class Writer {
 

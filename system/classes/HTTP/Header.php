@@ -1,25 +1,26 @@
 <?php
 /**
- * The KO7_HTTP_Header class provides an Object-Orientated interface
+ * The Modseven_HTTP_Header class provides an Object-Orientated interface
  * to HTTP headers. This can parse header arrays returned from the
  * PHP functions `apache_request_headers()` or the `http_parse_headers()`
  * function available within the PECL HTTP library.
  *
- * @package    KO7
+ * @package    Modseven
  * @category   HTTP
  *
  * @since      3.1.0
  * @copyright  (c) 2007-2016  Kohana Team
- * @copyright  (c) since 2016 Koseven Team
+ * @copyright  (c) 2016-2019  Koseven Team
+ * @copyright  (c) since 2019 Modseven Team
  * @license    https://koseven.ga/LICENSE
  */
 
-namespace KO7\HTTP;
+namespace Modseven\HTTP;
 
-use \KO7\Core;
-use \KO7\Cookie;
-use \KO7\Text;
-use \KO7\Response;
+use \Modseven\Core;
+use \Modseven\Cookie;
+use \Modseven\Text;
+use \Modseven\Response;
 
 class Header extends \ArrayObject
 {
@@ -48,7 +49,7 @@ class Header extends \ArrayObject
     protected $_accept_language_list;
 
     /**
-     * Constructor method for [KO7_HTTP_Header]. Uses the standard constructor
+     * Constructor method for [Modseven_HTTP_Header]. Uses the standard constructor
      * of the parent `ArrayObject` class.
      *
      * @param array $input Input array

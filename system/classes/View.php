@@ -5,14 +5,15 @@
  * the view.
  *
  * @copyright  (c) 2007-2016  Kohana Team
- * @copyright  (c) since 2016 Koseven Team
+ * @copyright  (c) 2016-2019  Koseven Team
+ * @copyright  (c) since 2019 Modseven Team
  * @license        https://koseven.ga/LICENSE
  * @category       Base
  *
- * @package        KO7
+ * @package        Modseven
  */
 
-namespace KO7;
+namespace Modseven;
 
 use Traversable;
 
@@ -250,16 +251,16 @@ class View
      * The view data will be extracted to make local variables. This method
      * is static to prevent object scope resolution.
      *
-     * @param string $ko7_view_filename filename
-     * @param array $ko7_view_data variables
+     * @param string $modseven_view_filename filename
+     * @param array $modseven_view_data variables
      *
      * @return  string
      * @throws  \Exception
      */
-    protected static function capture(string $ko7_view_filename, array $ko7_view_data): string
+    protected static function capture(string $modseven_view_filename, array $modseven_view_data): string
     {
         // Import the view variables to local namespace
-        extract($ko7_view_data, EXTR_SKIP);
+        extract($modseven_view_data, EXTR_SKIP);
 
         if (static::$_global_data) {
             // Import the global view variables to local namespace
@@ -271,7 +272,7 @@ class View
 
         try {
             // Load the view within the current scope
-            include $ko7_view_filename;
+            include $modseven_view_filename;
         } catch (\Exception $e) {
             // Delete the output buffer
             ob_end_clean();

@@ -41,37 +41,37 @@ if (file_exists('install.php')) {
 }
 
 // Define the start time of the application, used for profiling.
-if (!defined('KO7_START_TIME')) {
-    define('KO7_START_TIME', microtime(true));
+if (!defined('Modseven_START_TIME')) {
+    define('Modseven_START_TIME', microtime(true));
 }
 
 // Define the memory usage at the start of the application, used for profiling.
-if (!defined('KO7_START_MEMORY')) {
-    define('KO7_START_MEMORY', memory_get_usage());
+if (!defined('Modseven_START_MEMORY')) {
+    define('Modseven_START_MEMORY', memory_get_usage());
 }
 
 ///////////////////////////////////////////////////////////////////
 // ------------ Start Bootstrapping the Application ------------ //
 ///////////////////////////////////////////////////////////////////
 
-// Load the core KO7 class
+// Load the core Modseven class
 // Check if composer has been initialized
 if (!is_file(DOCROOT . '/vendor/autoload.php')) {
     die('RuntimeError: Please run `composer install` inside your project root.');
 }
 
 // Require composer autoloader
-\KO7\Core::$autoloader = require DOCROOT . '/vendor/autoload.php';
+\Modseven\Core::$autoloader = require DOCROOT . '/vendor/autoload.php';
 
 // Enable autoloader for unserialization
 ini_set('unserialize_callback_func', 'spl_autoload_call');
 
 // Attach Configuration Reader and Load App Configuration
-$config = new \KO7\Config;
-$config->attach(new \KO7\Config\File);
+$config = new \Modseven\Config;
+$config->attach(new \Modseven\Config\File);
 try {
     $conf = $config->load('app')->as_array();
-} catch (\KO7\Exception $e) {
+} catch (\Modseven\Exception $e) {
     die('RuntimeError: Could not initialize Configuration ' . $e->getMessage());
 }
 
@@ -91,23 +91,23 @@ mb_substitute_character('none');
 
 // Set default language
 $lang = strpos($conf['locale'], '.') !== false ? substr($conf['locale'], 0, strpos($conf['locale'], '.')) : $conf['locale'];
-\KO7\I18n::lang(str_replace('_', '-', strtolower($lang)));
+\Modseven\I18n::lang(str_replace('_', '-', strtolower($lang)));
 
 // Replace the default protocol.
 if (isset($_SERVER['SERVER_PROTOCOL'])) {
-    \KO7\HTTP::$protocol = $_SERVER['SERVER_PROTOCOL'];
+    \Modseven\HTTP::$protocol = $_SERVER['SERVER_PROTOCOL'];
 }
 
-// Set KO7::$environment if a 'KOSEVEN_ENV' environment variable has been supplied.
+// Set Modseven::$environment if a 'KOSEVEN_ENV' environment variable has been supplied.
 if (isset($_SERVER['KOSEVEN_ENV'])) {
-    \KO7\Core::$environment = constant('KO7::' . strtoupper($_SERVER['KOSEVEN_ENV']));
+    \Modseven\Core::$environment = constant('Modseven::' . strtoupper($_SERVER['KOSEVEN_ENV']));
 }
 
 // Set the current configuration class
-\KO7\Core::$config = $config;
+\Modseven\Core::$config = $config;
 
-// Initialize KO7, setting the default options.
-\KO7\Core::init([
+// Initialize Modseven, setting the default options.
+\Modseven\Core::init([
     'base_url' => $conf['base_url'],
     'index_file' => $conf['index_file'],
     'charset' => $conf['charset'],
@@ -118,25 +118,25 @@ if (isset($_SERVER['KOSEVEN_ENV'])) {
 ]);
 
 // Attach a new file writer to logging.
-\KO7\Core::$log->attach(new \KO7\Log\File(APPPATH . 'logs'));
+\Modseven\Core::$log->attach(new \Modseven\Log\File(APPPATH . 'logs'));
 
 // Initialize Modules
-\KO7\Core::modules($conf['modules']);
+\Modseven\Core::modules($conf['modules']);
 
 // Cookie Salt
-\KO7\Cookie::$salt = $conf['cookie']['salt'];
+\Modseven\Cookie::$salt = $conf['cookie']['salt'];
 
 // Cookie HttpOnly directive
-\KO7\Cookie::$httponly = $conf['cookie']['httponly'];
+\Modseven\Cookie::$httponly = $conf['cookie']['httponly'];
 
 // If website runs on secure protocol HTTPS, allows cookies only to be transmitted via HTTPS.
 if ($conf['cookie']['secure']) {
-    \KO7\Cookie::$secure = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on');
+    \Modseven\Cookie::$secure = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on');
 }
 
 // Set the application name before initializing routes and add it to composer autoloader
-\KO7\Core::$app_ns = $conf['name'];
-\KO7\Core::register_module($conf['name'] . '\\', APPPATH . DIRECTORY_SEPARATOR . 'classes');
+\Modseven\Core::$app_ns = $conf['name'];
+\Modseven\Core::register_module($conf['name'] . '\\', APPPATH . DIRECTORY_SEPARATOR . 'classes');
 
 // Bootstrap the application
 require APPPATH . 'routes.php';
@@ -152,7 +152,7 @@ if (PHP_SAPI === 'cli') {
      * Execute the main request. A source of the URI can be passed, eg: $_SERVER['PATH_INFO'].
      * If no source is specified, the URI will be automatically detected.
      */
-    echo \KO7\Request::factory(true, [], false)
+    echo \Modseven\Request::factory(true, [], false)
         ->execute()
         ->send_headers(true)
         ->body();

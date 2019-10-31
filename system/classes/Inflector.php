@@ -5,15 +5,16 @@
  *
  * [!!] Inflection is only tested with English, and is will not work with other languages.
  *
- * @package    KO7
+ * @package    Modseven
  * @category   Helpers
  *
  * @copyright  (c) 2007-2016  Kohana Team
- * @copyright  (c) since 2016 Koseven Team
+ * @copyright  (c) 2016-2019  Koseven Team
+ * @copyright  (c) since 2019 Modseven Team
  * @license    https://koseven.ga/LICENSE
  */
 
-namespace KO7;
+namespace Modseven;
 
 class Inflector
 {
@@ -100,7 +101,7 @@ class Inflector
      *
      * If you find a word is being pluralized improperly, it has probably not
      * been defined as uncountable in `config/inflector.php`. If this is the
-     * case, please report [an issue](http://koseven.ga/projects/KO7/issues).
+     * case, please report an issue.
      *
      * @param string $str word to check
      * @return  boolean

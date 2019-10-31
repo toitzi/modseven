@@ -5,19 +5,20 @@
  * RFC 2616.
  *
  * @copyright  (c) 2007-2016  Kohana Team
- * @copyright  (c) since 2016 Koseven Team
+ * @copyright  (c) 2016-2019  Koseven Team
+ * @copyright  (c) since 2019 Modseven Team
  * @license    https://koseven.ga/LICENSE
  */
 
-namespace KO7\Cache;
+namespace Modseven\Cache;
 
-use \KO7\Arr;
-use \KO7\Cache;
-use \KO7\Request;
-use \KO7\Request\Client;
-use \KO7\Response;
-use \KO7\HTTP\Header;
-use \KO7\HTTP\Request as HTTP_Request;
+use \Modseven\Arr;
+use \Modseven\Cache;
+use \Modseven\Request;
+use \Modseven\Request\Client;
+use \Modseven\Response;
+use \Modseven\HTTP\Header;
+use \Modseven\HTTP\Request as HTTP_Request;
 
 class HTTP
 {
@@ -84,7 +85,7 @@ class HTTP
 
         if ($this->_cache_key_callback === null)
         {
-            $this->cache_key_callback('\KO7\Cache\HTTP::basic_cache_key_generator');
+            $this->cache_key_callback('\Modseven\Cache\HTTP::basic_cache_key_generator');
         }
     }
 
@@ -93,7 +94,7 @@ class HTTP
      * class. The cache key generator provides a unique hash based on the
      * `Request` object passed to it.
      *
-     * The default generator is \KO7\Cache\HTTP::basic_cache_key_generator(), which
+     * The default generator is \Modseven\Cache\HTTP::basic_cache_key_generator(), which
      * serializes the entire HTTP Request into a unique sha1 hash. This will
      * provide basic caching for static and simple dynamic pages. More complex
      * algorithms can be defined and then passed into this class using this method.
@@ -251,7 +252,7 @@ class HTTP
      * Response returned by Request::execute.
      *
      * This is the default cache key generating logic, but can be overridden
-     * by setting \KO7\Cache\HTTP::cache_key_callback()
+     * by setting \Modseven\Cache\HTTP::cache_key_callback()
      *
      * @param Request  $request  Request to create key for
      * @param callback $callback Optional callback to use instead of built-in method

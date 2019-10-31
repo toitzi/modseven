@@ -3,16 +3,17 @@
  * The HTTP Interaction interface providing the core HTTP methods that
  * should be implemented by any HTTP request or response class.
  *
- * @package    KO7
+ * @package    Modseven
  * @category   HTTP
  *
  * @since      3.1.0
  * @copyright  (c) 2007-2016  Kohana Team
- * @copyright  (c) since 2016 Koseven Team
+ * @copyright  (c) 2016-2019  Koseven Team
+ * @copyright  (c) since 2019 Modseven Team
  * @license    https://koseven.ga/LICENSE
  */
 
-namespace KO7\HTTP;
+namespace Modseven\HTTP;
 
 interface Message
 {

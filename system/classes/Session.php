@@ -2,15 +2,16 @@
 /**
  * Base session class.
  *
- * @package    KO7
+ * @package    Modseven
  * @category   Session
  *
  * @copyright  (c) 2007-2016  Kohana Team
- * @copyright  (c) since 2016 Koseven Team
+ * @copyright  (c) 2016-2019  Koseven Team
+ * @copyright  (c) since 2019 Modseven Team
  * @license    https://koseven.ga/LICENSE
  */
 
-namespace KO7;
+namespace Modseven;
 
 use Exception;
 
@@ -370,7 +371,7 @@ abstract class Session
             return $this->_write();
         } catch (Exception $e) {
             // Log & ignore all errors when a write fails
-            Core::$log->error(\KO7\Exception::text($e));
+            Core::$log->error(\Modseven\Exception::text($e));
             return FALSE;
         }
     }

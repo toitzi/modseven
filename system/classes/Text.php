@@ -2,15 +2,16 @@
 /**
  * Text helper class. Provides simple methods for working with text.
  *
- * @package    KO7
+ * @package    Modseven
  * @category   Helpers
  *
  * @copyright  (c) 2007-2016  Kohana Team
- * @copyright  (c) since 2016 Koseven Team
+ * @copyright  (c) 2016-2019  Koseven Team
+ * @copyright  (c) since 2019 Modseven Team
  * @license    https://koseven.ga/LICENSE
  */
 
-namespace KO7;
+namespace Modseven;
 
 use Exception;
 
@@ -238,7 +239,7 @@ class Text
     public static function ucfirst(string $string, string $delimiter = '-'): string
     {
         // Put the keys back the Case-Convention expected
-        return implode($delimiter, array_map('\KO7\UTF8::ucfirst', explode($delimiter, $string)));
+        return implode($delimiter, array_map('\Modseven\UTF8::ucfirst', explode($delimiter, $string)));
     }
 
     /**

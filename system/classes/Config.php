@@ -9,20 +9,21 @@
  * Directives from sources high in the sources list will override ones from those
  * below them.
  *
- * @package    KO7
+ * @package    Modseven
  * @category   Configuration
  *
  * @copyright  (c) 2007-2016  Kohana Team
- * @copyright  (c) since 2016 Koseven Team
+ * @copyright  (c) 2016-2019  Koseven Team
+ * @copyright  (c) since 2019 Modseven Team
  * @license    https://koseven.ga/LICENSE
  */
 
-namespace KO7;
+namespace Modseven;
 
-use \KO7\Config\Source;
-use \KO7\Config\Reader;
-use \KO7\Config\Writer;
-use \KO7\Config\Group;
+use \Modseven\Config\Source;
+use \Modseven\Config\Reader;
+use \Modseven\Config\Writer;
+use \Modseven\Config\Group;
 
 class Config
 {
@@ -102,7 +103,7 @@ class Config
      *
      *     $array = $config->load($name);
      *
-     * See [KO7_Config_Group] for more info
+     * See [Modseven_Config_Group] for more info
      *
      * @param   string $group configuration group name
      * @return  mixed

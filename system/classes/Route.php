@@ -27,15 +27,16 @@
  * Routes also provide a way to generate URIs (called "reverse routing"), which
  * makes them an extremely powerful and flexible way to generate internal links.
  *
- * @package    KO7
+ * @package    Modseven
  * @category   Base
  *
  * @copyright  (c) 2007-2016  Kohana Team
- * @copyright  (c) since 2016 Koseven Team
+ * @copyright  (c) 2016-2019  Koseven Team
+ * @copyright  (c) since 2019 Modseven Team
  * @license    https://koseven.ga/LICENSE
  */
 
-namespace KO7;
+namespace Modseven;
 
 use Exception;
 
@@ -216,7 +217,7 @@ class Route
                 Core::cache('Route::cache()', Route::$_routes);
             } catch (Exception $e) {
                 // We most likely have a lambda in a route, which cannot be cached
-                throw new \KO7\Exception('One or more routes could not be cached (:message)', [
+                throw new \Modseven\Exception('One or more routes could not be cached (:message)', [
                     ':message' => $e->getMessage(),
                 ], 0, $e);
             }
@@ -265,12 +266,12 @@ class Route
      *
      * @param string $name route name
      * @return  Route
-     * @throws  \KO7\Exception
+     * @throws  \Modseven\Exception
      */
     public static function get(string $name): Route
     {
         if (!isset(static::$_routes[$name])) {
-            throw new \KO7\Exception('The requested route does not exist: :route',
+            throw new \Modseven\Exception('The requested route does not exist: :route',
                 [':route' => $name]);
         }
 
@@ -293,7 +294,7 @@ class Route
      *
      * @param array $params URI parameters
      * @return  string
-     * @throws  \KO7\Exception
+     * @throws  \Modseven\Exception
      */
     public function uri(?array $params = NULL): string
     {
@@ -358,7 +359,7 @@ class Route
             }, $portion);
 
             if ($required && $missing) {
-                throw new \KO7\Exception(
+                throw new \Modseven\Exception(
                     'Required route parameter not passed: :param',
                     [':param' => reset($missing)]
                 );
@@ -418,12 +419,12 @@ class Route
      *
      * @param string|array $callback
      * @return  self
-     * @throws  \KO7\Exception
+     * @throws  \Modseven\Exception
      */
     public function filter($callback): self
     {
         if (!is_callable($callback)) {
-            throw new \KO7\Exception('Invalid Route::callback specified');
+            throw new \Modseven\Exception('Invalid Route::callback specified');
         }
 
         $this->_filters[] = $callback;

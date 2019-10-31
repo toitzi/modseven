@@ -3,18 +3,19 @@
  * The group wrapper acts as an interface to all the config directives
  * gathered from across the system.
  *
- * This is the object returned from KO7_Config::load
+ * This is the object returned from Modseven_Config::load
  *
  * Any modifications to configuration items should be done through an instance of this object
  *
  * @copyright  (c) 2007-2016  Kohana Team
- * @copyright  (c) since 2016 Koseven Team
+ * @copyright  (c) 2016-2019  Koseven Team
+ * @copyright  (c) since 2019 Modseven Team
  * @license        https://koseven.ga/LICENSE
  */
 
-namespace KO7\Config;
+namespace Modseven\Config;
 
-use \KO7\Config;
+use \Modseven\Config;
 use ArrayObject;
 
 class Group extends ArrayObject
@@ -37,7 +38,7 @@ class Group extends ArrayObject
      * Constructs the group object.
      * Config class passes the config group and its config items to the object here.
      *
-     * @param Config $instance  "Owning" instance of KO7_Config
+     * @param Config $instance  "Owning" instance of Modseven_Config
      * @param string $group     The group name
      * @param array  $config    Group's config
      */

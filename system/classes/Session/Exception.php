@@ -1,16 +1,17 @@
 <?php
 /**
- * @package    KO7
+ * @package    Modseven
  * @category   Exceptions
  *
  * @copyright  (c) 2007-2016  Kohana Team
- * @copyright  (c) since 2016 Koseven Team
+ * @copyright  (c) 2016-2019  Koseven Team
+ * @copyright  (c) since 2019 Modseven Team
  * @license    https://koseven.ga/LICENSE
  */
 
-namespace KO7\Session;
+namespace Modseven\Session;
 
-class Exception extends \KO7\Exception
+class Exception extends \Modseven\Exception
 {
 
     public const SESSION_CORRUPT = 1;

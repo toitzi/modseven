@@ -4,11 +4,12 @@
  *
  * @author         Jeremy Bush
  * @copyright  (c) 2007-2016  Kohana Team
- * @copyright  (c) since 2016 Koseven Team
+ * @copyright  (c) 2016-2019  Koseven Team
+ * @copyright  (c) since 2019 Modseven Team
  * @license        https://koseven.ga/LICENSE
  */
 
-namespace KO7\Log;
+namespace Modseven\Log;
 
 class Syslog extends Writer {
 
@@ -30,7 +31,7 @@ class Syslog extends Writer {
      * @param string $ident    Syslog identifier
      * @param int    $facility Facility to log to
      */
-    public function __construct(string $ident = 'KO7PHP', int $facility = LOG_USER)
+    public function __construct(string $ident = 'ModsevenPHP', int $facility = LOG_USER)
     {
         $this->_ident = $ident;
 

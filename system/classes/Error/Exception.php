@@ -1,11 +1,11 @@
 <?php
 /**
- * KO7 Error Exception Class
+ * Modseven Error Exception Class
  */
 
-namespace KO7\Error;
+namespace Modseven\Error;
 
-use \KO7\I18n;
+use \Modseven\I18n;
 
 class Exception extends \ErrorException
 {

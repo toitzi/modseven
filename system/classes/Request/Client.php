@@ -4,21 +4,22 @@
  * available. Will usually return a [Response] object as a result of the
  * request unless an unexpected error occurs.
  *
- * @package    KO7
+ * @package    Modseven
  * @category   Base
  *
  * @copyright  (c) 2007-2016  Kohana Team
- * @copyright  (c) since 2016 Koseven Team
+ * @copyright  (c) 2016-2019  Koseven Team
+ * @copyright  (c) since 2019 Modseven Team
  * @license    https://koseven.ga/LICENSE
  * @since      3.1.0
  */
 
-namespace KO7\Request;
+namespace Modseven\Request;
 
-use \KO7\Arr;
-use \KO7\Request;
-use \KO7\Response;
-use \KO7\Cache;
+use \Modseven\Arr;
+use \Modseven\Request;
+use \Modseven\Response;
+use \Modseven\Cache;
 
 abstract class Client
 {
@@ -143,7 +144,7 @@ abstract class Client
      * [!!] HTTP/1.1 specifies that a 302 redirect should be followed using the
      * original request method. However, the vast majority of clients and servers
      * get this wrong, with 302 widely used for 'POST - 302 redirect - GET' patterns.
-     * By default, KO7's client is fully compliant with the HTTP spec. Some
+     * By default, Modseven's client is fully compliant with the HTTP spec. Some
      * non-compliant third party sites may require that strict_redirect is set
      * FALSE to force the client to switch to GET following a 302 response.
      *
@@ -176,7 +177,7 @@ abstract class Client
      *
      * @param Request $request
      * @return  Response
-     * @throws  \KO7\Exception
+     * @throws  \Modseven\Exception
      */
     public function execute(Request $request): Response
     {
