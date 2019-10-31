@@ -26,19 +26,22 @@ class Fragment
 {
 
     /**
-     * @var  integer  default number of seconds to cache for
+     * default number of seconds to cache for
+     * @var integer
      */
-    public static $lifetime = 30;
+    public static int $lifetime = 30;
 
     /**
-     * @var  boolean  use multilingual fragment support?
+     * use multilingual fragment support?
+     * @var boolean
      */
-    public static $i18n = false;
+    public static bool $i18n = false;
 
     /**
-     * @var  array  list of buffer => cache key
+     * list of buffer => cache key
+     * @var array
      */
-    protected static $_caches = [];
+    protected static array $_caches = [];
 
     /**
      * Load a fragment from cache and display it. Multiple fragments can

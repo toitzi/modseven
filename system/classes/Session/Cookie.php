@@ -28,7 +28,7 @@ class Cookie extends Session
     }
 
     /**
-     * @return  null
+     * @return  null|string
      */
     protected function _regenerate(): ?string
     {

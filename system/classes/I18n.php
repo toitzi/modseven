@@ -35,19 +35,19 @@ class I18n
      * Target language: en-us, es-es, zh-cn, etc
      * @var  string
      */
-    public static $lang = 'en-us';
+    public static string $lang = 'en-us';
 
     /**
      * Source language: en-us, es-es, zh-cb, etc
      * @var string
      */
-    public static $source = 'en-us';
+    public static string $source = 'en-us';
 
     /**
      * Cache of loaded languages
      * @var array
      */
-    protected static $_cache = [];
+    protected static array $_cache = [];
 
     /**
      * Get and set the target language.

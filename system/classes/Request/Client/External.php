@@ -39,7 +39,7 @@ abstract class External extends Client
      *
      * @var    string    Defines the external client to use by default
      */
-    public static $client;
+    public static string $client;
 
     /**
      * Request options
@@ -48,7 +48,7 @@ abstract class External extends Client
      * @link    http://www.php.net/manual/function.curl-setopt
      * @link    http://www.php.net/manual/http.request.options
      */
-    protected $_options = [];
+    protected array $_options = [];
 
     /**
      * Factory method to create a new Request_Client_External object based on

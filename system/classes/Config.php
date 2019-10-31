@@ -27,12 +27,17 @@ use Modseven\Config\Group;
 
 class Config
 {
+    /**
+     * Configuration readers
+     * @var array
+     */
+    protected array $_sources = [];
 
-    // Configuration readers
-    protected $_sources = [];
-
-    // Array of config groups
-    protected $_groups = [];
+    /**
+     * Array of config groups
+     * @var array
+     */
+    protected array $_groups = [];
 
     /**
      * Attach a configuration reader. By default, the reader will be added as

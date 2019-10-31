@@ -35,14 +35,14 @@ class Date
      * Default timestamp format for formatted_time
      * @var  string
      */
-    public static $timestamp_format = 'Y-m-d H:i:s';
+    public static string $timestamp_format = 'Y-m-d H:i:s';
 
     /**
      * Timezone for formatted_time
      * @link http://uk2.php.net/manual/en/timezones.php
      * @var  string
      */
-    public static $timezone;
+    public static string $timezone = '';
 
     /**
      * Returns the offset (in seconds) between two time zones. Use this to

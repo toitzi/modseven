@@ -28,26 +28,36 @@ class Header extends ArrayObject
 
     // Default Accept-* quality value if none supplied
     public const DEFAULT_QUALITY = 1;
+
     /**
-     * @var     array    Accept: (content) types
+     * Accept: (content) types
+     * @var null|array
      */
-    protected $_accept_content;
+    protected ?array $_accept_content = null;
+
     /**
-     * @var     array    Accept-Charset: parsed header
+     * Accept-Charset: parsed header
+     * @var array
      */
-    protected $_accept_charset;
+    protected ?array $_accept_charset = null;
+
     /**
-     * @var     array    Accept-Encoding: parsed header
+     * Accept-Encoding: parsed header
+     * @var null|array
      */
-    protected $_accept_encoding;
+    protected ?array $_accept_encoding = null;
+
     /**
-     * @var     array    Accept-Language: parsed header
+     * Accept-Language: parsed header
+     * @var null|array
      */
-    protected $_accept_language;
+    protected ?array $_accept_language = null;
+
     /**
-     * @var     array    Accept-Language: language list of parsed header
+     * Accept-Language: language list of parsed header
+     * @var null|array
      */
-    protected $_accept_language_list;
+    protected ?array $_accept_language_list = null;
 
     /**
      * Constructor method for [Modseven_HTTP_Header]. Uses the standard constructor
@@ -91,10 +101,10 @@ class Header extends ArrayObject
      * Parses the Cache-Control header and returning an array representation of the Cache-Control
      * header.
      *
-     * @param array $cache_control Array of headers
+     * @param string $cache_control Cache Control headers
      * @return  mixed
      */
-    public static function parse_cache_control(array $cache_control)
+    public static function parse_cache_control(string $cache_control)
     {
         $directives = explode(',', strtolower($cache_control));
 

@@ -56,51 +56,61 @@ class Route
     public const REGEX_ESCAPE = '[.\\+*?[^\\]${}=!|]';
 
     /**
-     * @var  string  default protocol for all routes
-     *
-     * @example  'http://'
+     * default protocol for all routes
+     * @var string
      */
-    public static $default_protocol = 'http://';
+    public static string $default_protocol = 'http://';
 
     /**
-     * @var  array   list of valid localhost entries
+     * list of valid localhost entries
+     * @var array
      */
-    public static $localhosts = [false, '', 'local', 'localhost'];
+    public static array $localhosts = [false, '', 'local', 'localhost'];
 
     /**
-     * @var  string  default action for all routes
+     * default action for all routes
+     * @var string
      */
-    public static $default_action = 'index';
+    public static string $default_action = 'index';
 
     /**
-     * @var  bool Indicates whether routes are cached
+     * Indicates whether routes are cached
+     * @var bool
      */
-    public static $cache = false;
+    public static bool $cache = false;
+
+    /**
+     * Routes
+     * @var  array
+     */
+    protected static array $_routes = [];
+
+    /**
+     * route filters
+     * @var  array
+     */
+    protected array $_filters = [];
+
+    /**
+     * route URI
+     * @var string
+     */
+    protected ?string $_uri = '';
+
+    /**
+     * @var array
+     */
+    protected ?array $_regex = [];
 
     /**
      * @var  array
      */
-    protected static $_routes = [];
+    protected array $_defaults = ['action' => 'index', 'host' => false];
+
     /**
-     * @var  array  route filters
+     * @var null|string
      */
-    protected $_filters = [];
-    /**
-     * @var  string  route URI
-     */
-    protected $_uri = '';
-    /**
-     * @var  array
-     */
-    protected $_regex = [];
-    /**
-     * @var  array
-     */
-    protected $_defaults = ['action' => 'index', 'host' => false];
-    /**
-     * @var  string
-     */
-    protected $_route_regex;
+    protected ?string $_route_regex = null;
 
     /**
      * Creates a new route. Sets the URI and regular expressions for keys.
@@ -134,6 +144,9 @@ class Route
     /**
      * Returns the compiled regular expression for the route. This translates
      * keys and optional groups to a proper PCRE regular expression.
+     *
+     * @param string     $uri   Url to compile
+     * @param null|array $regex Regex to use
      *
      * @return  string
      */
@@ -299,8 +312,8 @@ class Route
      * Generates a URI for the current route based on the parameters given.
      *
      * @param array $params URI parameters
+     *
      * @return  string
-     * @throws  \Modseven\Exception
      */
     public function uri(?array $params = NULL): string
     {

@@ -25,16 +25,17 @@ namespace Modseven;
 
 class Upload
 {
+    /**
+     * remove spaces in uploaded files
+     * @var boolean
+     */
+    public static bool $remove_spaces = true;
 
     /**
-     * @var  boolean  remove spaces in uploaded files
+     * default upload directory
+     * @var string
      */
-    public static $remove_spaces = true;
-
-    /**
-     * @var  string  default upload directory
-     */
-    public static $default_directory = 'upload';
+    public static string $default_directory = 'upload';
 
     /**
      * Save an uploaded file to a new location. If no filename is provided,

@@ -20,13 +20,13 @@ use Traversable;
 class View
 {
     // View filename
-    protected static $_global_data = [];
+    protected static array $_global_data = [];
 
     // Array of local variables
     protected $_file;
 
     // Array of global variables
-    protected $_data = [];
+    protected array $_data = [];
 
     /**
      * Sets the initial view filename and local data. Views should almost

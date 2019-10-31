@@ -20,19 +20,22 @@ class Inflector
 {
 
     /**
-     * @var  array  cached inflections
+     * cached inflections
+     * @var array
      */
-    protected static $cache = [];
+    protected static array $cache = [];
 
     /**
-     * @var  array  uncountable words
+     * uncountable words
+     * @var array
      */
-    protected static $uncountable;
+    protected static array $uncountable;
 
     /**
-     * @var  array  irregular words
+     * irregular words
+     * @var array
      */
-    protected static $irregular;
+    protected static array $irregular;
 
     /**
      * Makes a plural word singular.

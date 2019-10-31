@@ -20,111 +20,152 @@ class Request implements HTTP\Request
 {
 
     /**
-     * @var  string  client user agent
+     * client user agent
+     * @var string
      */
-    public static $user_agent = '';
+    public static string $user_agent = '';
 
     /**
-     * @var  string  client IP address
+     * client IP address
+     * @var string
      */
-    public static $client_ip = '0.0.0.0';
+    public static string $client_ip = '0.0.0.0';
 
     /**
-     * @var  array  trusted proxy server IPs
+     * trusted proxy server IPs
+     * @var array
      */
-    public static $trusted_proxies = ['127.0.0.1', 'localhost', 'localhost.localdomain'];
+    public static array $trusted_proxies = ['127.0.0.1', 'localhost', 'localhost.localdomain'];
 
     /**
-     * @var  Request  main request instance
+     * main request instance
+     * @var null|Request
      */
-    public static $initial;
+    public static ?Request $initial = null;
 
     /**
-     * @var  Request  currently executing request instance
+     * currently executing request instance
+     * @var null|Request
      */
-    public static $current;
+    public static ?Request $current = null;
+
     /**
-     * @var  string  the x-requested-with header which most likely
-     *               will be xmlhttprequest
+     * the x-requested-with header which most likely will be xmlhttprequest
+     * @var  string
      */
-    protected $_requested_with;
+    protected string $_requested_with;
+
     /**
-     * @var  string  method: GET, POST, PUT, DELETE, HEAD, etc
+     * method: GET, POST, PUT, DELETE, HEAD, etc
+     * @var string
      */
-    protected $_method = 'GET';
+    protected string $_method = 'GET';
+
     /**
-     * @var  string  protocol: HTTP/1.1, FTP, CLI, etc
+     * protocol: HTTP/1.1, FTP, CLI, etc
+     * @var null|string
      */
-    protected $_protocol;
+    protected ?string $_protocol = null;
+
     /**
-     * @var  boolean
+     * @var boolean
      */
-    protected $_secure = false;
+    protected bool $_secure = false;
+
     /**
-     * @var  string  referring URL
+     * referring URL
+     * @var string
      */
-    protected $_referrer;
+    protected string $_referrer;
+
     /**
-     * @var  Route       route matched for this request
+     * route matched for this request
+     * @var null|Route
      */
-    protected $_route;
+    protected ?Route $_route = null;
+
     /**
-     * @var  array       array of routes to manually look at instead of the global namespace
+     * array of routes to manually look at instead of the global namespace
+     * @var null|array
      */
-    protected $_routes;
+    protected ?array $_routes = null;
+
     /**
-     * @var  HTTP\Header  headers to sent as part of the request
+     * headers to sent as part of the request
+     * @var null|HTTP\Header
      */
-    protected $_header;
+    protected ?HTTP\Header $_header = null;
+
     /**
-     * @var  string the body
+     * the body
+     * @var string
      */
-    protected $_body;
+    protected string $_body = '';
+
     /**
-     * @var  string  controller directory
+     * controller directory
+     * @var string
      */
-    protected $_directory = '';
+    protected string $_directory = '';
+
     /**
      * Namespace
      * @var string
      */
-    protected $_namespace;
+    protected string $_namespace;
+
     /**
-     * @var  string  controller to be executed
+     * controller to be executed
+     * @var string
      */
-    protected $_controller;
+    protected string $_controller;
+
     /**
-     * @var  string  action to be executed in the controller
+     * action to be executed in the controller
+     * @var string
      */
-    protected $_action;
+    protected string $_action;
+
     /**
-     * @var  string  the URI of the request
+     * The URI of the request
+     * @var string
      */
-    protected $_uri;
+    protected ?string $_uri = null;
+
     /**
-     * @var  boolean  external request
+     * external request
+     * @var boolean
      */
-    protected $_external = false;
+    protected bool $_external = false;
+
     /**
-     * @var  array   parameters from the route
+     * parameters from the route
+     * @var  array
      */
-    protected $_params = [];
+    protected array $_params = [];
+
     /**
-     * @var array    query parameters
+     * query parameters
+     * @var array
      */
-    protected $_get = [];
+    protected array $_get = [];
+
     /**
-     * @var array    post parameters
+     * post parameters
+     * @var array
      */
-    protected $_post = [];
+    protected array $_post = [];
+
     /**
-     * @var array    cookies to send with the request
+     * cookies to send with the request
+     * @var array
      */
-    protected $_cookies = [];
+    protected array $_cookies = [];
+
     /**
-     * @var Request\Client
+     * @var null|Request\Client
      */
-    protected $_client;
+    protected ?Request\Client $_client = null;
 
     /**
      * Creates a new request object for the given URI. New requests should be

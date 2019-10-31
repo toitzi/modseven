@@ -19,34 +19,40 @@ class Cookie
 {
 
     /**
-     * @var  string  Magic salt to add to the cookie
+     * Magic salt to add to the cookie
+     * @var string
      */
-    public static $salt;
+    public static string $salt;
 
     /**
-     * @var  integer  Number of seconds before the cookie expires
+     * Number of seconds before the cookie expires
+     * @var integer
      */
-    public static $expiration = 0;
+    public static int $expiration = 0;
 
     /**
-     * @var  string  Restrict the path that the cookie is available to
+     * Restrict the path that the cookie is available to
+     * @var string
      */
-    public static $path = '/';
+    public static string $path = '/';
 
     /**
-     * @var  string  Restrict the domain that the cookie is available to
+     * Restrict the domain that the cookie is available to
+     * @var string
      */
-    public static $domain;
+    public static string $domain;
 
     /**
-     * @var  boolean  Only transmit cookies over secure connections
+     * Only transmit cookies over secure connections
+     * @var boolean
      */
-    public static $secure = false;
+    public static bool $secure = false;
 
     /**
-     * @var  boolean  Only transmit cookies over HTTP, disabling Javascript access
+     * Only transmit cookies over HTTP, disabling Javascript access
+     * @var boolean
      */
-    public static $httponly = false;
+    public static bool $httponly = false;
 
     /**
      * Gets the value of a signed cookie. Cookies without signatures will not

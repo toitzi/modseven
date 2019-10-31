@@ -15,17 +15,18 @@ use Modseven\Validation;
 
 class Exception extends \Modseven\Exception
 {
-
     /**
-     * @var  object  Validation instance
+     * Validation instance
+     * @var Validation
      */
-    public $array;
+    public Validation $array;
 
     /**
-     * @param Validation $array Validation object
-     * @param string $message error message
-     * @param array $values translation variables
-     * @param int $code the exception code
+     * @param Validation      $array    Validation object
+     * @param string          $message  error message
+     * @param array           $values   translation variables
+     * @param int             $code     the exception code
+     * @param null|\Exception $previous Previous Exception
      */
     public function __construct(Validation $array, string $message = 'Failed to validate array', ?array $values = NULL, int $code = 0, \Exception $previous = NULL)
     {

@@ -127,6 +127,8 @@ class Valid
     /**
      * Checks if a field is not empty.
      *
+     * @param mixed $value Object/array to check
+     *
      * @return  boolean
      */
     public static function not_empty($value): bool

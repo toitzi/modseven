@@ -19,34 +19,46 @@ abstract class Session
 {
 
     /**
-     * @var  string  default session adapter
+     * default session adapter
+     * @var string
      */
-    public static $default = 'native';
+    public static string $default = 'native';
 
     /**
-     * @var  array  session instances
+     * session instances
+     * @var array
      */
-    public static $instances = [];
+    public static array $instances = [];
+
     /**
-     * @var  string  cookie name
+     * cookie name
+     * @var string
      */
-    protected $_name = 'session';
+    protected string $_name = 'session';
+
     /**
-     * @var  int  cookie lifetime
+     * cookie lifetime
+     * @var int
      */
-    protected $_lifetime = 0;
+    protected int $_lifetime = 0;
+
     /**
-     * @var  bool  encrypt session data?
+     * encrypt session data?
+     * @var bool
      */
-    protected $_encrypted = FALSE;
+    protected bool $_encrypted = FALSE;
+
     /**
-     * @var  array  session data
+     * session data
+     * @var array
      */
-    protected $_data = [];
+    protected array $_data = [];
+
     /**
-     * @var  bool  session destroyed?
+     * session destroyed?
+     * @var bool
      */
-    protected $_destroyed = false;
+    protected bool $_destroyed = false;
 
     /**
      * Overloads the name, lifetime, and encrypted session settings.

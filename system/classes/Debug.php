@@ -27,7 +27,6 @@ class Debug
      *     // Displays the type and value of each variable
      *     echo Debug::vars($foo, $bar, $baz);
      *
-     * @param mixed $var,... variable to debug
      * @return  string|null
      */
     public static function vars(): ?string

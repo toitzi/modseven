@@ -45,7 +45,6 @@ interface Request extends Message
      * If no parameters are passed, the request will use the
      * default values defined in the Route.
      *
-     * @param array $params Optional parameters to include in uri generation
      * @return  string
      */
     public function uri(): string;

@@ -30,14 +30,16 @@ class UTF8
 {
 
     /**
-     * @var  boolean  Does the server support UTF-8 natively?
+     * Does the server support UTF-8 natively?
+     * @var null|boolean
      */
-    public static $server_utf8;
+    public static ?bool $server_utf8 = null;
 
     /**
-     * @var  array  List of called methods that have had their required file included.
+     * List of called methods that have had their required file included.
+     * @var array
      */
-    public static $called = [];
+    public static array $called = [];
 
     /**
      * Recursively cleans arrays, objects, and strings. Removes ASCII control

@@ -19,9 +19,10 @@ class Arr
 {
 
     /**
-     * @var  string  default delimiter for path()
+     * default delimiter for path()
+     * @var string
      */
-    public static $delimiter = '.';
+    public static string $delimiter = '.';
 
     /**
      * Fill an array with a range of numbers.

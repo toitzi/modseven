@@ -21,24 +21,22 @@ use ReflectionFunction;
 class Validation implements ArrayAccess
 {
 
-    protected $_bound = [];
+    protected array $_bound = [];
 
     // Bound values
-    protected $_rules = [];
+    protected array $_rules = [];
 
     // Field rules
-    protected $_labels = [];
+    protected array $_labels = [];
 
     // Field labels
-    protected $_empty_rules = ['not_empty', 'matches'];
+    protected array $_empty_rules = ['not_empty', 'matches'];
 
     // Rules that are executed even when the value is empty
-    protected $_errors = [];
+    protected array $_errors = [];
 
     // Error list, field => rule
-    protected $_data = [];
-
-    // Array to validate
+    protected array $_data = [];
 
     /**
      * Sets the unique "any field" key and creates an ArrayObject from the

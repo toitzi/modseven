@@ -19,9 +19,10 @@ class Security
 {
 
     /**
-     * @var  string  key name used for token storage
+     * key name used for token storage
+     * @var string
      */
-    public static $token_name = 'security_token';
+    public static string $token_name = 'security_token';
 
     /**
      * Check that the given token matches the currently stored security token.
@@ -43,6 +44,7 @@ class Security
      *
      * @param string $a cryptographic hash
      * @param string $b cryptographic hash
+     *
      * @return boolean
      */
     public static function slow_equals(string $a, string $b): bool

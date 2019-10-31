@@ -18,9 +18,10 @@ class HTML
 {
 
     /**
-     * @var  array  preferred order of attributes
+     * preferred order of attributes
+     * @var array
      */
-    public static $attribute_order = [
+    public static array $attribute_order = [
         'action',
         'method',
         'type',
@@ -52,14 +53,16 @@ class HTML
     ];
 
     /**
-     * @var  boolean  use strict XHTML mode?
+     * use strict XHTML mode?
+     * @var boolean
      */
-    public static $strict = true;
+    public static bool $strict = true;
 
     /**
-     * @var  boolean  automatically target external URLs to a new window?
+     * automatically target external URLs to a new window?
+     * @var boolean
      */
-    public static $windowed_urls = false;
+    public static bool $windowed_urls = false;
 
     /**
      * Convert all applicable characters to HTML entities. All characters

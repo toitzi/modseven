@@ -20,14 +20,16 @@ class Profiler
 {
 
     /**
-     * @var  integer   maximum number of application stats to keep
+     * maximum number of application stats to keep
+     * @var integer
      */
-    public static $rollover = 1000;
+    public static int $rollover = 1000;
 
     /**
-     * @var  array  collected benchmarks
+     * collected benchmarks
+     * @var  array
      */
-    protected static $_marks = [];
+    protected static array $_marks = [];
 
     /**
      * Starts a new benchmark and returns a unique token. The returned token

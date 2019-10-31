@@ -20,29 +20,32 @@ class Exception extends \Exception
 {
 
     /**
-     * @var  array  PHP error code => human readable name
+     *  PHP error code => human readable name
+     * @var array
      */
-    public static $php_errors = [
-        E_ERROR => 'Fatal Error',
-        E_USER_ERROR => 'User Error',
-        E_PARSE => 'Parse Error',
-        E_WARNING => 'Warning',
-        E_USER_WARNING => 'User Warning',
-        E_STRICT => 'Strict',
-        E_NOTICE => 'Notice',
+    public static array $php_errors = [
+        E_ERROR             => 'Fatal Error',
+        E_USER_ERROR        => 'User Error',
+        E_PARSE             => 'Parse Error',
+        E_WARNING           => 'Warning',
+        E_USER_WARNING      => 'User Warning',
+        E_STRICT            => 'Strict',
+        E_NOTICE            => 'Notice',
         E_RECOVERABLE_ERROR => 'Recoverable Error',
-        E_DEPRECATED => 'Deprecated',
+        E_DEPRECATED        => 'Deprecated',
     ];
 
     /**
-     * @var  string  error rendering view
+     * Error rendering view
+     * @var string
      */
-    public static $error_view = 'modseven/error';
+    public static string $error_view = 'modseven/error';
 
     /**
-     * @var  string  error view content type
+     * error view content type
+     * @var string
      */
-    public static $error_view_content_type = 'text/html';
+    public static string $error_view_content_type = 'text/html';
 
     /**
      * Creates a new translated exception.

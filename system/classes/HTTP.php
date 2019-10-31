@@ -29,7 +29,7 @@ abstract class HTTP
      *
      * @var string
      */
-    public static $protocol = 'HTTP/1.1';
+    public static string $protocol = 'HTTP/1.1';
 
     /**
      * Issues a HTTP redirect.
@@ -61,7 +61,6 @@ abstract class HTTP
      * @param string $etag Resource ETag
      *
      * @return Response
-     * @throws HTTP\Exception
      *
      * @throws Request\Exception
      */

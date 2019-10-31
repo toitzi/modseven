@@ -29,14 +29,16 @@ abstract class Controller
 {
 
     /**
-     * @var  Request  Request that created the controller
+     * Request that created the controller
+     * @var Request
      */
-    public $request;
+    public Request $request;
 
     /**
-     * @var  Response The response that will be returned from controller
+     * The response that will be returned from controller
+     * @var Response
      */
-    public $response;
+    public Response $response;
 
     /**
      * Creates a new controller instance. Each controller must be constructed

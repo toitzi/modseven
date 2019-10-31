@@ -11,7 +11,13 @@
  * @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt
  */
 
-function _transliterate_to_ascii($str, $case = 0)
+/**
+ * @param string  $str
+ * @param int $case
+ *
+ * @return mixed
+ */
+function _transliterate_to_ascii(string $str, int $case = 0)
 {
     static $utf8_lower_accents = NULL;
     static $utf8_upper_accents = NULL;

@@ -6,16 +6,17 @@ use Throwable;
 
 class Exception extends \Modseven\Exception
 {
+    /**
+     * http status code
+     * @var int
+     */
+    protected int $_code = 0;
 
     /**
-     * @var  int        http status code
+     * Request instance that triggered this exception.
+     * @var  \Modseven\Request
      */
-    protected $_code = 0;
-
-    /**
-     * @var  \Modseven\Request    Request instance that triggered this exception.
-     */
-    protected $_request;
+    protected \Modseven\Request $_request;
 
     /**
      * Exception constructor.
@@ -34,12 +35,14 @@ class Exception extends \Modseven\Exception
     /**
      * Creates an HTTP_Exception of the specified type.
      *
-     * @param integer $code the http status code
-     * @param string $message status message, custom content to display with error
-     * @param array $variables translation variables
+     * @param integer         $code      the http status code
+     * @param string          $message   status message, custom content to display with error
+     * @param array           $variables translation variables
+     * @param null|\Exception $previous  Previous Exception
+     *
      * @return  Exception
      */
-    public static function factory(int $code, ?string $message = NULL, ?array $variables = NULL, \Exception $previous = NULL): Exception
+    public static function factory(int $code, ?string $message = NULL, ?array $variables = NULL, ?\Exception $previous = NULL): Exception
     {
         return new self($message, $variables, $code, $previous);
     }

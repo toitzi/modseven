@@ -25,46 +25,54 @@ abstract class Client
 {
 
     /**
-     * @var   Cache  Caching library for request caching
+     * Caching library for request caching
+     * @var Cache
      */
-    protected $_cache;
+    protected Cache $_cache;
 
     /**
-     * @var  bool  Should redirects be followed?
+     * Should redirects be followed?
+     * @var bool
      */
-    protected $_follow = false;
+    protected bool $_follow = false;
 
     /**
-     * @var  array  Headers to preserve when following a redirect
+     * Headers to preserve when following a redirect
+     * @var array
      */
-    protected $_follow_headers = ['authorization'];
+    protected array $_follow_headers = ['authorization'];
 
     /**
-     * @var  bool  Follow 302 redirect with original request method?
+     * Follow 302 redirect with original request method?
+     * @var bool
      */
-    protected $_strict_redirect = true;
+    protected bool $_strict_redirect = true;
 
     /**
-     * @var array  Callbacks to use when response contains given headers
+     * Callbacks to use when response contains given headers
+     * @var array
      */
-    protected $_header_callbacks = [
+    protected array $_header_callbacks = [
         'Location' => 'Request_Client::on_header_location'
     ];
 
     /**
-     * @var int  Maximum number of requests that header callbacks can trigger before the request is aborted
+     * Maximum number of requests that header callbacks can trigger before the request is aborted
+     * @var int
      */
-    protected $_max_callback_depth = 5;
+    protected int $_max_callback_depth = 5;
 
     /**
-     * @var int  Tracks the callback depth of the currently executing request
+     * Tracks the callback depth of the currently executing request
+     * @var int
      */
-    protected $_callback_depth = 1;
+    protected int $_callback_depth = 1;
 
     /**
-     * @var array  Arbitrary parameters that are shared with header callbacks through their Request_Client object
+     * Arbitrary parameters that are shared with header callbacks through their Request_Client object
+     * @var array
      */
-    protected $_callback_params = [];
+    protected array $_callback_params = [];
 
     /**
      * Creates a new `Request_Client` object,

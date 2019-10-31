@@ -18,8 +18,11 @@ namespace Modseven;
 
 class Response implements HTTP\Response
 {
-
-    public static $messages = [
+    /**
+     * Response Messages
+     * @var array
+     */
+    public static array $messages = [
         // Informational 1xx
         100 => 'Continue',
         101 => 'Switching Protocols',
@@ -82,27 +85,35 @@ class Response implements HTTP\Response
         509 => 'Bandwidth Limit Exceeded'
     ];
 
-    // HTTP status codes and messages
     /**
-     * @var  integer     The response http status
+     * The response http status
+     * @var  integer
      */
-    protected $_status = 200;
+    protected int $_status = 200;
+
     /**
-     * @var  HTTP\Header  Headers returned in the response
+     * Headers returned in the response
+     * @var null|HTTP\Header
      */
-    protected $_header;
+    protected ?HTTP\Header $_header = null;
+
     /**
-     * @var  string      The response body
+     * The response body
+     * @var string
      */
-    protected $_body = '';
+    protected string $_body = '';
+
     /**
-     * @var  array       Cookies to be returned in the response
+     * Cookies to be returned in the response
+     * @var array
      */
-    protected $_cookies = [];
+    protected array $_cookies = [];
+
     /**
-     * @var  string      The response protocol
+     * The response protocol
+     * @var null|string
      */
-    protected $_protocol;
+    protected ?string $_protocol = null;
 
     /**
      * Sets up the response object
@@ -635,9 +646,11 @@ class Response implements HTTP\Response
     /**
      * Gets or sets the body of the response
      *
+     * @param null|string $content Content to put into the body
+     *
      * @return  mixed
      */
-    public function body(string $content = NULL)
+    public function body(?string $content = NULL)
     {
         if ($content === NULL) {
             return $this->_body;
