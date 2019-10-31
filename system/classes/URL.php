@@ -15,14 +15,11 @@
 
 namespace Modseven;
 
-use \Modseven\Exception;
-
 class URL
 {
 
     /**
      * Fetches an absolute site URL based on a URI segment.
-     *
      *     echo URL::site('foo/bar');
      *
      * @param string $uri Site URI to convert
@@ -32,7 +29,7 @@ class URL
      *
      * @return  string
      *
-     * @throws \Modseven\Exception
+     * @throws Exception
      */
     public static function site(string $uri = '', $protocol = NULL, bool $index = TRUE, ?string $subdomain = NULL): string
     {
@@ -75,7 +72,7 @@ class URL
      *
      * @return  string
      *
-     * @throws \Modseven\Exception
+     * @throws Exception
      */
     public static function base($protocol = NULL, bool $index = FALSE, ?string $subdomain = NULL): string
     {
@@ -168,7 +165,7 @@ class URL
      *
      * @return boolean TRUE if $host is trustworthy
      *
-     * @throws \Modseven\Exception
+     * @throws Exception
      */
     public static function is_trusted_host(string $host, ?array $trusted_hosts = NULL): bool
     {
@@ -246,7 +243,7 @@ class URL
      *
      * @return  string
      *
-     * @throws \Modseven\Exception
+     * @throws Exception
      */
     public static function title(string $title, string $separator = '-', bool $ascii_only = FALSE): string
     {

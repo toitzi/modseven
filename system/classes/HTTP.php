@@ -46,9 +46,7 @@ abstract class HTTP
             throw HTTP\Exception::factory(500, 'Invalid redirect code \':code\'', [':code' => $code]);
         }
 
-        $e = HTTP\Exception::factory($code);
-
-        throw $e->location($uri);
+        // @Todo Redirect request
     }
 
     /**
@@ -63,6 +61,7 @@ abstract class HTTP
      * @return Response
      *
      * @throws Request\Exception
+     * @throws HTTP\Exception
      */
     public static function check_cache(Request $request, Response $response, ?string $etag = NULL): Response
     {
@@ -85,7 +84,8 @@ abstract class HTTP
         // Check if we have a matching etag
         if ($request->headers('if-none-match') && (string)$request->headers('if-none-match') === $etag) {
             // No need to send data again
-            throw HTTP\Exception::factory(304)->headers('etag', $etag);
+            $response->headers('etag', $etag);
+            throw HTTP\Exception::factory(304);
         }
 
         return $response;

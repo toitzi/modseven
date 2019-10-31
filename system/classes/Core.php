@@ -18,6 +18,7 @@
 
 namespace Modseven;
 
+use DirectoryIterator;
 use Composer\Autoload\ClassLoader;
 
 class Core

@@ -13,8 +13,6 @@
 
 namespace Modseven;
 
-use Modseven\Exception;
-
 class Cookie
 {
 
